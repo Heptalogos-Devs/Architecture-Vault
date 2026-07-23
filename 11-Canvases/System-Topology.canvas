@@ -1,0 +1,28 @@
+{
+	"nodes":[
+		{"id":"n1","type":"file","file":"01-Foundations/Problem-Space.md","x":0,"y":0,"width":360,"height":220},
+		{"id":"n2","type":"file","file":"02-Requirements/Requirements-MOC.md","x":440,"y":0,"width":360,"height":220},
+		{"id":"n3","type":"file","file":"03-Domain-Model/Domain-MOC.md","x":880,"y":0,"width":360,"height":220},
+		{"id":"n4","type":"file","file":"04-Architecture/Architecture-Baseline.md","x":1320,"y":0,"width":400,"height":240},
+		{"id":"n5","type":"file","file":"05-Components/Conversation-Mailbox.md","x":900,"y":320,"width":340,"height":210},
+		{"id":"n6","type":"file","file":"05-Components/Memory-Lifecycle.md","x":1280,"y":320,"width":340,"height":210},
+		{"id":"n7","type":"file","file":"05-Components/Behavior-Policy.md","x":1660,"y":320,"width":340,"height":210},
+		{"id":"n8","type":"file","file":"07-Delivery/MVP-Definition.md","x":1320,"y":650,"width":360,"height":220},
+		{"id":"n9","type":"file","file":"06-Research/Experiment-Program.md","x":1740,"y":650,"width":360,"height":220},
+		{"id":"n10","type":"file","file":"08-ADR/ADR-MOC.md","x":2160,"y":650,"width":340,"height":220}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"n1","fromSide":"right","toNode":"n2","toSide":"left","label":"推导"},
+		{"id":"e2","fromNode":"n2","fromSide":"right","toNode":"n3","toSide":"left","label":"约束"},
+		{"id":"e3","fromNode":"n3","fromSide":"right","toNode":"n4","toSide":"left","label":"组织"},
+		{"id":"e4","fromNode":"n4","fromSide":"right","toNode":"n5","toSide":"left"},
+		{"id":"e5","fromNode":"n4","fromSide":"right","toNode":"n6","toSide":"left"},
+		{"id":"e6","fromNode":"n4","fromSide":"right","toNode":"n7","toSide":"left"},
+		{"id":"e7","fromNode":"n5","fromSide":"right","toNode":"n8","toSide":"left"},
+		{"id":"e8","fromNode":"n6","fromSide":"right","toNode":"n8","toSide":"left"},
+		{"id":"e9","fromNode":"n7","fromSide":"right","toNode":"n8","toSide":"left"},
+		{"id":"e10","fromNode":"n8","fromSide":"right","toNode":"n9","toSide":"left","label":"验证"},
+		{"id":"e11","fromNode":"n9","fromSide":"right","toNode":"n10","toSide":"left","label":"形成决策"},
+		{"id":"e12","fromNode":"n10","fromSide":"right","toNode":"n4","toSide":"left","label":"修订"}
+	]
+}
