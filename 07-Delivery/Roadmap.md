@@ -15,11 +15,11 @@ tags:
 
 ## Phase 1：事实与回放
 
-事件 schema、身份、Ledger、投影、虚拟时钟和模拟平台。
+Canonical Interaction Event schema、Raw/Canonical Ledger、身份、投影、虚拟时钟和 Fake Adapter；建立 Python/TypeScript 契约生成与兼容性检查。
 
 ## Phase 2：反应式消息处理
 
-Mailbox、窗口、唤醒门、打断和 Outbox。
+Mailbox、窗口、唤醒门、打断、Outbox，以及 LLBot + Milky / NapCat + OneBot 11 的 QQ 边缘对照实验和故障注入。
 
 ## Phase 3：最小角色与关系
 

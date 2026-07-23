@@ -51,3 +51,9 @@ flowchart LR
 - 工具结果不能绕过事件库；
 - 关系状态不能直接授权高风险能力；
 - 评估必须覆盖系统组合而非只测模型。
+
+## 技术与协议基线
+
+- Python 是早期认知运行时和实验主语言，TypeScript 用于控制面，SQL 是可追溯数据基础；参见 [[08-ADR/ADR-0009-Programming-Language-and-Runtime-Policy]]。
+- 平台协议实现先进入 Raw Event Ledger，再转换为 Canonical Interaction Event；参见 [[08-ADR/ADR-0010-Platform-Adapter-Boundary-and-Canonical-Interaction-Events]]。
+- LLBot + Milky 仅是 QQ 个人号接入的 proposed 实验基线，不改变平台中立核心；参见 [[08-ADR/ADR-0011-Milky-Experimental-QQ-Edge-Protocol]]。

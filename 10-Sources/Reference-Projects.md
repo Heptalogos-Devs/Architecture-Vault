@@ -18,3 +18,6 @@ tags:
 - https://github.com/lioensky/VCPToolBox
 - https://github.com/AstrBotDevs/AstrBot
 - https://github.com/NapNeko/NapCatQQ
+- https://github.com/LLOneBot/LuckyLilliaBot
+- https://milky.ntqqrev.org/
+- https://github.com/NapNeko/NcatBot

@@ -26,6 +26,7 @@ tags:
 - EventEnvelope
 - RawReference
 - 规范化诊断
+- OpaqueEvent / OpaqueContentPart
 
 ## 数据所有权
 
@@ -37,6 +38,9 @@ tags:
 - 编辑与撤回生成新事件
 - 时间字段保留 occurred/observed
 - 未知字段可保留扩展
+- 未知事件与消息段不导致进程崩溃
+- 规范化失败不得删除或覆盖 RawPlatformEvent
+- 规范事件标识必须与平台账号和原始事件引用共同可追溯
 
 ## 典型故障
 
@@ -60,6 +64,10 @@ tags:
 
 - 事件 schema 扩展机制
 - 跨平台消息段最小公分母
+
+## 契约策略
+
+Canonical Interaction Event 使用版本化 JSON Schema。协议生成 DTO 只存在于适配器内部；平台特有语义通过命名扩展、CapabilityDescriptor 和 RawReference 保留，不强制压缩为跨平台最小公分母。
 
 ## 相关需求
 

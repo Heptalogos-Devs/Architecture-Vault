@@ -17,8 +17,10 @@ tags:
 
 ```mermaid
 flowchart TB
-    A[Platform Adapters] --> B[Normalizer & Identity]
-    B --> C[(Event Ledger)]
+    P[Protocol Implementations] --> A[Platform Adapters]
+    A --> R[(Raw Event Ledger)]
+    R --> B[Normalizer & Identity]
+    B --> C[(Canonical Event Ledger)]
     C --> D[Partition Router]
     D --> E[Conversation Mailboxes]
     E --> F[Observation Windows]
@@ -45,6 +47,17 @@ MVP 可以只有三个进程或运行角色：
 - `control/replay`：管理 API、诊断和评估。
 
 它们可以共享同一代码库和数据库。只有在负载、隔离或团队边界明确后再拆服务。
+
+MVP 默认由 Python 运行时直接承载薄适配器。TypeScript Gateway 只有在平台 SDK、独立部署、权限或故障域形成明确边界时引入；语言本身不是拆分理由。
+
+QQ 个人号实验拓扑为：
+
+```text
+LLBot → Milky HTTP/WebSocket → heptalogos-adapter-milky
+      → Raw Event Ledger → Canonical Interaction Event → Runtime
+```
+
+LLBot 和 Milky 类型都不得穿过 Platform Adapter 边界。
 
 ## 串行与并行
 

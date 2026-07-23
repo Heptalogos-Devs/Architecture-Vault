@@ -25,6 +25,7 @@ tags:
 
 - RawPlatformEvent
 - 标准化前的发送回执和能力状态
+- 协议连接、断开、版本和观测缺口事件
 
 ## 数据所有权
 
@@ -37,6 +38,9 @@ tags:
 - 不得丢弃原始载荷引用
 - 不得调用模型或写记忆
 - 发送必须返回可对账标识
+- 不得把平台 SDK、OneBot 或 Milky 类型暴露给核心
+- 不得提供任意 API、文件路径或 URL 透传
+- 发送超时必须表达为可对账的 `uncertain`，不得默认盲目重试
 
 ## 典型故障
 
@@ -62,6 +66,12 @@ tags:
 
 - 是否每个平台独立进程
 - 如何表达平台特有事件而不污染通用契约
+
+## QQ 个人号实验实现
+
+`heptalogos-adapter-milky` 是 proposed 薄适配器：LLBot 提供 Milky HTTP/WebSocket，适配器负责连接生命周期、原始事件落盘、规范化、身份映射、能力白名单和投递对账。完整 Bot Framework 不进入核心。
+
+参见 [[08-ADR/ADR-0010-Platform-Adapter-Boundary-and-Canonical-Interaction-Events]] 与 [[08-ADR/ADR-0011-Milky-Experimental-QQ-Edge-Protocol]]。
 
 ## 相关需求
 

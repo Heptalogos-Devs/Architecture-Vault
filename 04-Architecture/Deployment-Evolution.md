@@ -16,7 +16,7 @@ tags:
 
 ## 阶段 A：单机研究运行时
 
-SQLite、本地媒体、进程内 Mailbox、DB 调度表。目标是回放、实验和领域边界。
+Python 运行时、薄平台适配器、SQLite、本地媒体、进程内 Mailbox、DB 调度表；TypeScript 仅用于需要时的控制面。目标是回放、实验和领域边界。
 
 ## 阶段 B：多工作器
 
@@ -38,3 +38,9 @@ SQLite、本地媒体、进程内 Mailbox、DB 调度表。目标是回放、实
 - 独立伸缩需求稳定；
 - 团队所有权清晰；
 - 接口已经通过单体内实践稳定。
+
+## 语言与协议约束
+
+- 新语言不得单独构成拆分理由，遵循 [[08-ADR/ADR-0009-Programming-Language-and-Runtime-Policy]]。
+- 外部协议实现与运行时通过 RawPlatformEvent、Canonical Interaction Event、PlatformAction 和 CapabilityDescriptor 交互。
+- LLBot + Milky 必须保持可替换边缘进程，不与认知运行时共享领域类型或生命周期。

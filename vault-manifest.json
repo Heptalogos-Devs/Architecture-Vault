@@ -2,7 +2,7 @@
   "name": "Heptalogos Architecture Vault",
   "version": "0.1",
   "generated_at": "2026-07-23",
-  "file_count": 93,
+  "file_count": 96,
   "files": [
     ".obsidian/app.json",
     ".obsidian/appearance.json",
@@ -83,6 +83,9 @@
     "08-ADR/ADR-0006-Tools-Return-as-Events.md",
     "08-ADR/ADR-0007-Persistent-Outbox.md",
     "08-ADR/ADR-0008-Platform-Neutral-Identity.md",
+    "08-ADR/ADR-0009-Programming-Language-and-Runtime-Policy.md",
+    "08-ADR/ADR-0010-Platform-Adapter-Boundary-and-Canonical-Interaction-Events.md",
+    "08-ADR/ADR-0011-Milky-Experimental-QQ-Edge-Protocol.md",
     "08-ADR/ADR-MOC.md",
     "09-Templates/ADR-Template.md",
     "09-Templates/Component-Spec-Template.md",
