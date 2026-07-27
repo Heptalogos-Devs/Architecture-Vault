@@ -48,4 +48,3 @@ Heptalogos 的早期不确定性集中在人格、记忆、消息聚合、行为
 - CI 对 Python 模型、TypeScript 生成类型和 JSON Schema 运行兼容性测试。
 - 若 Python 无法满足已量化的延迟、吞吐、内存或隔离目标，再以独立 ADR 引入 Rust。
 - 若 TypeScript Gateway 没有形成独立部署或故障域，保持平台接入位于 Python 模块化单体中。
-

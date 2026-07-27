@@ -12,6 +12,10 @@ tags:
 
 # 组件规格地图
 
+- [[05-Components/Fusion-Service|交互融合服务]]
+- [[05-Components/Reactor-Input-Feed|Reactor 输入流]]
+- [[05-Components/Routing-and-Delivery|路由与投递]]
+
 - [[05-Components/Platform-Adapter|平台适配器]]
 - [[05-Components/Event-Normalizer|事件规范化器]]
 - [[05-Components/Conversation-Mailbox|会话 Mailbox]]

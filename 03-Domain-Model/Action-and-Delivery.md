@@ -4,7 +4,7 @@ status: proposed
 type: domain-model
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 tags:
   - domain
   - action
@@ -39,6 +39,11 @@ status: planned | scheduled | executing | delivered | failed | cancelled | expir
 ## Outbox 模式
 
 持久化 Outbox 保存待执行动作，工作器原子领取并发送。发送回执形成事件，状态投影再更新 Action 状态。
+
+第一版进一步拆分 `CommunicationIntent`、`DeliveryPlan`、Adapter Outbound
+Evidence 和 `DeliveryOutcome`。Intent 表达核心决定，Plan 记录所选平台账号、
+会话和 Adapter Instance；请求可能已经到达平台但缺少确定响应时 Outcome 必须为
+`uncertain`。
 
 ## 平台降级
 

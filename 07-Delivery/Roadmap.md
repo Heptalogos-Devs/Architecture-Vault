@@ -1,10 +1,10 @@
 ---
 title: "研发路线图"
-status: proposed
+status: accepted
 type: delivery
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-26
 tags:
   - delivery
   - roadmap
@@ -15,11 +15,13 @@ tags:
 
 ## Phase 1：事实与回放
 
-Canonical Interaction Event schema、Raw/Canonical Ledger、身份、投影、虚拟时钟和 Fake Adapter；建立 Python/TypeScript 契约生成与兼容性检查。
+Evidence/Canonical 分库、多来源 Fusion、身份、Reactor Feed、虚拟时钟、Fake
+Adapter 与旧 Edge raw replay importer；建立版本化契约和兼容性检查。
 
-## Phase 2：反应式消息处理
+## Phase 2：双向通信闭环
 
-Mailbox、窗口、唤醒门、打断、Outbox，以及 LLBot + Milky / NapCat + OneBot 11 的 QQ 边缘对照实验和故障注入。
+Communication Intent、原端点路由、Delivery Plan、调用前后 Evidence、
+Canonical Outcome，以及 LLBot + Milky / NapCat + OneBot 11 的 QQ 双向对照实验。
 
 ## Phase 3：最小角色与关系
 

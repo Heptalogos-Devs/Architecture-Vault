@@ -52,6 +52,8 @@ flowchart TB
 - 正式技术栈为 Python + TypeScript + SQL；Rust 由测量或隔离需求触发，C++ 仅作为外部原生依赖。
 - 原始平台事实先落盘，再转换为 Canonical Interaction Event；平台协议类型不得进入认知核心。
 - LLBot + Milky 是 QQ 个人号接入的实验性基线，必须通过故障与替换性测试后再决定是否采用。
+- Canonical Interaction Gateway 已作为通信基础设施目标基线接受，采用每实例
+  Evidence、中央 Fusion/Canonical、可恢复 Feed 和持久化 Intent/Delivery。
 
 ## 当前未决议题
 

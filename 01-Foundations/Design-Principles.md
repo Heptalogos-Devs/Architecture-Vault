@@ -4,7 +4,7 @@ status: active
 type: foundation
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 tags:
   - foundation
   - principles
@@ -52,3 +52,16 @@ tags:
 ## P10 术语不绑定实现
 
 领域概念、组件名称、数据库表和公开 API 分开演化。当前工作名称不构成长期兼容承诺。
+
+## Interaction Gateway 对原则的具体化
+
+- **证据先于解释**：平台 bytes 先成为 Evidence；Canonical 是可追溯解释，不覆盖
+  原始观察。这是 P1、P4 和 P8 的共同落点。
+- **权威边界先于部署边界**：Evidence、Canonical、Feed、Intent、Plan、Outcome
+  分开建模，即使它们暂时运行在同一进程。微服务不是边界成立的前提。
+- **诚实表达不确定性**：外部调用不存在本地 exactly-once。request 已记账而 response
+  缺失时使用 `uncertain`，宁可人工对账，也不以自动重试制造重复副作用。
+- **派生最小化，原始可回放**：allowlist 限制进入认知和资产管线的内容，不删减
+  Adapter 已观察到的 raw evidence。
+- **复杂度由故障语义驱动**：SQLite、轮询和单包多角色是当前刻意选择；只有吞吐、
+  隔离或团队边界被测量证明不足时，才引入 broker 或微服务。

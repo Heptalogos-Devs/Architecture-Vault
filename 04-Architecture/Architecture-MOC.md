@@ -26,3 +26,7 @@ tags:
 - [[04-Architecture/Modular-Monolith-Boundaries|模块化单体边界]]
 - [[04-Architecture/Failure-Modes-and-Recovery|故障模式与恢复]]
 - [[04-Architecture/Deployment-Evolution|部署演化]]
+- [[04-Architecture/Time-Emotion-and-Attention|虚拟时间、情绪与注意力]]
+- [[04-Architecture/Lived-Timeline-and-Narrative-Commit|生活时间线与叙事现实提交]]
+- [[04-Architecture/System-Principles-and-Roadmap|系统级原则与演进建议]]
+- [[08-ADR/ADR-0012-Canonical-Interaction-Gateway|Canonical Interaction Gateway 决策]]

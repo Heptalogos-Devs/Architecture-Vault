@@ -16,6 +16,10 @@ tags:
 ## 架构验收
 
 - 核心领域测试不加载平台 SDK 或真实模型；
+- 一个 Adapter Source 故障不阻塞其他 source，且每个 Fusion cursor 可独立恢复；
+- Canonical Fact 可关联多个 raw evidence，Reactor 只消费 Feed；
+- Intent 在平台调用前持久化，request/response evidence 可对账；
+- 不确定发送结果进入 `uncertain` 且不盲目重试；
 - 所有长期副作用都有事件或任务终态；
 - 同会话并发测试不产生双重行动；
 - 状态可从事件重建；

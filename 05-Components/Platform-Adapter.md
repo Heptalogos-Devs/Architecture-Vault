@@ -4,7 +4,7 @@ status: proposed
 type: component-spec
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 tags:
   - component
   - platform-adapter
@@ -32,6 +32,7 @@ tags:
 - 连接状态
 - 平台账号元数据
 - 短期 SDK 资源
+- 该 Adapter Instance 的 append-only Evidence Store
 
 ## 不变量
 
@@ -41,6 +42,9 @@ tags:
 - 不得把平台 SDK、OneBot 或 Milky 类型暴露给核心
 - 不得提供任意 API、文件路径或 URL 透传
 - 发送超时必须表达为可对账的 `uncertain`，不得默认盲目重试
+- 每次平台调用前后都写入带 Delivery Plan ID 的 request/response evidence
+- Adapter Instance、Platform Account、Protocol 和 Connection Session 不得合并为
+  一个配置或数据库身份
 
 ## 典型故障
 
@@ -69,7 +73,14 @@ tags:
 
 ## QQ 个人号实验实现
 
-`heptalogos-adapter-milky` 是 proposed 薄适配器：LLBot 提供 Milky HTTP/WebSocket，适配器负责连接生命周期、原始事件落盘、规范化、身份映射、能力白名单和投递对账。完整 Bot Framework 不进入核心。
+`heptalogos-interaction` 的 adapter role 是当前薄适配器实现：LLBot 提供 Milky
+HTTP/WebSocket，NapCat 提供 OneBot；adapter role 负责连接生命周期、原始事件落盘、
+账号/版本验证、历史 checkpoint、能力白名单、资产获取和投递对账。规范化由 Gateway
+调用的 adapter normalizer 完成，完整 Bot Framework 不进入核心。
+
+连接建立后 capture 先启动，保证身份验证和历史 API 的并发平台 frame 也先入账。
+验证成功后才标记 healthy 并启动 delivery。每次重连使用新 connection session，
+连接内 sequence 只描述接收顺序，不替代平台消息身份。
 
 参见 [[08-ADR/ADR-0010-Platform-Adapter-Boundary-and-Canonical-Interaction-Events]] 与 [[08-ADR/ADR-0011-Milky-Experimental-QQ-Edge-Protocol]]。
 

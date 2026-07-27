@@ -23,5 +23,8 @@ tags:
 - [[08-ADR/ADR-0009-Programming-Language-and-Runtime-Policy|ADR-0009 编程语言与运行时政策]]
 - [[08-ADR/ADR-0010-Platform-Adapter-Boundary-and-Canonical-Interaction-Events|ADR-0010 平台适配边界与规范交互事件]]
 - [[08-ADR/ADR-0011-Milky-Experimental-QQ-Edge-Protocol|ADR-0011 Milky 作为实验性 QQ 个人号边缘协议]]
+- [[08-ADR/ADR-0012-Canonical-Interaction-Gateway|ADR-0012 Canonical Interaction Gateway]]
+- [[08-ADR/ADR-0013-Central-AI-Validation-Workflow|ADR-0013 Central AI Validation Workflow]]
+- [[08-ADR/ADR-0014-Global-Single-Cognitive-Thread|ADR-0014 Central Reactor 采用全局单线程认知模型]]
 
 > ADR 状态为 proposed 时仍可修改；accepted 后通过新 ADR 替代，不直接删除历史。

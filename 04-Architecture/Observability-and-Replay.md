@@ -4,7 +4,7 @@ status: proposed
 type: architecture
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 tags:
   - architecture
   - observability
@@ -47,3 +47,17 @@ tags:
 ## 用户解释
 
 系统可生成简短解释：“因为你引用了我之前的消息并补充了信息，所以我等待后一起回复。”这不是隐藏推理链，而是由结构化决策原因生成。
+
+## Interaction Gateway 最小可观测闭环
+
+- Evidence count/latest cursor 证明 Adapter 实际入账，而非只证明 LLBot 在运行。
+- 每来源 Fusion cursor 证明 raw 已被中央事务处理。
+- Canonical、filtered、opaque/diagnostic 数量解释 evidence 去向。
+- Feed consumer checkpoint 证明 Reactor 已确认到哪个 ordinal。
+- heartbeat 证明实例近期健康，但不能代替数据 cursor。
+- recovery job 的 pages/messages/gap 证明重连补偿覆盖范围。
+- Delivery 的 request/response evidence 与 Outcome 形成外部副作用对账链。
+- Asset attempt、error、sha256 和 path 证明媒体是否真正归档。
+
+在线探针应使用唯一文本标记：目标会话要求 evidence 与 canonical/feed 同时增长；
+非目标控制会话只允许 evidence 增长。该方法避免把历史存量误判为当前采集成功。

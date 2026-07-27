@@ -20,6 +20,7 @@ tags:
 - [[06-Research/Scenario-Catalog|场景目录]]
 - [[06-Research/Reference-Projects-Comparative-Study|参考项目比较研究]]
 - [[06-Research/BionicBot-and-QQContextBot-Lessons|当前原型经验]]
+- [[06-Research/EXP-QQ-INGRESS-001-NapCat-OneBot-Raw-Ledger|NapCat OneBot 原始入站账本实验]]
 - [[06-Research/Evidence-and-Decision-Policy|证据与决策规则]]
 
 ## 研究纪律

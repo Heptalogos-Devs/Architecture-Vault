@@ -1,10 +1,10 @@
 ---
 title: "MVP 定义"
-status: proposed
+status: accepted
 type: delivery
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-26
 tags:
   - delivery
   - mvp

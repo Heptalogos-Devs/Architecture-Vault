@@ -21,6 +21,10 @@ tags:
 - [[03-Domain-Model/Memory-Model|记忆模型]]
 - [[03-Domain-Model/Task-Commitment-and-Autonomy|任务、承诺与自主]]
 - [[03-Domain-Model/Action-and-Delivery|行动与投递]]
+- [[03-Domain-Model/Artificial-Subject-Vision|人工主体愿景与总体模型]]
+- [[03-Domain-Model/Core-Identity-and-Living-State|核心人格、动态状态与统一主体]]
+- [[03-Domain-Model/Social-Memory-Diary-and-Dream|社交关系、记忆、日记与梦]]
+- [[03-Domain-Model/Epistemic-Model-and-Knowledge-Boundaries|认知领域与知识边界]]
 
 ## 聚合边界候选
 

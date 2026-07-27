@@ -4,7 +4,7 @@ status: proposed
 type: component-spec
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 tags:
   - component
   - response-scheduler-and-outbox
@@ -27,6 +27,7 @@ tags:
 - OutboxRecord
 - DeliveryCommand
 - 过期/取消事件
+- CommunicationIntent、DeliveryPlan 与 DeliveryOutcome
 
 ## 数据所有权
 
@@ -37,6 +38,8 @@ tags:
 - 发送前可取消
 - 过期动作不发送
 - 同一幂等键至多一个业务结果
+- Intent 先于 Plan，Plan 先于平台 request evidence
+- `uncertain` 是终止自动重试的可对账状态
 
 ## 典型故障
 

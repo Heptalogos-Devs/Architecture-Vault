@@ -4,7 +4,7 @@ status: proposed
 type: domain-model
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 tags:
   - domain
   - identity
@@ -35,6 +35,10 @@ verification: unverified | user_confirmed | admin_confirmed
 ### AgentIdentity
 
 Agent 在某个平台上的账号。不得用 QQ 账号作为未知平台默认身份。
+
+实现必须区分长期主体、Platform Account、Protocol、Protocol Implementation、
+Adapter Instance 和短期 Connection Session。同一 Platform Account 更换 OneBot /
+Milky 或 NapCat / LLBot 后，内部账号身份和会话绑定保持连续。
 
 ### Conversation
 

@@ -43,4 +43,8 @@ tags:
 
 `qq_recorder` 可演化为平台事件采集与历史导入适配器；`grok` 中的工具注册、运行循环和投递经验可拆入能力、推理和 Outbox 实验，但不直接复制插件拓扑。
 
+### QQ 入站证据更新
+
+[[06-Research/EXP-QQ-INGRESS-001-NapCat-OneBot-Raw-Ledger|EXP-QQ-INGRESS-001]] 已将 `qq_recorder` 调整为原始帧先落盘、派生消息后处理的观测基线。历史检查确认固定消息段 allowlist 会遗漏语音、文件和视频段，因此“ORM 中没有结构化段”不能作为“平台未发送”的证据。该结果支持 [[08-ADR/ADR-0010-Platform-Adapter-Boundary-and-Canonical-Interaction-Events|ADR-0010]] 的 raw-first 边界，也为 Milky 对照实验提供同粒度证据。
+
 来源：<https://github.com/Heptalogos-Devs/QQContextBot>

@@ -12,6 +12,14 @@ tags:
 
 # 需求追踪矩阵
 
+| 需求 | 架构/组件 | 验证 |
+| --- | --- | --- |
+| 多来源原始事实不丢失 | ADR-0012、Platform Adapter | INT-EVIDENCE / INT-FUSION |
+| Canonical 多来源与可恢复 Feed | Fusion Service、Reactor Input Feed | INT-FUSION / INT-FEED |
+| 平台无关 Intent 与原端点回复 | Routing and Delivery | INT-ROUTE / INT-DELIVERY |
+| 不确定发送不盲目重试 | ADR-0012、Failure Modes | INT-DELIVERY-UNCERTAIN |
+| 旧 Edge 语料可审计迁移 | Persistence and Data Topology | INT-LEGACY |
+
 | 领域 | 需求 ID | 主要组件 | 主要实验 |
 |---|---|---|---|
 | EVT | EVT-001, EVT-002, EVT-003, EVT-004, EVT-005 | [[05-Components/Event-Normalizer|事件规范化器]], [[05-Components/State-Projection|状态投影器]], [[05-Components/Evaluation-Harness|评估 Harness]] | E7 |

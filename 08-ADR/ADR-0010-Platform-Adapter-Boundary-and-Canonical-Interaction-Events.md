@@ -60,4 +60,3 @@ Heptalogos Runtime
 - 契约测试覆盖已知与未知事件、消息段、重复、乱序、超大标识和异常时间戳。
 - 核心测试只使用 Fake Adapter 即可运行；替换协议实现不得修改 Persona、Memory 或 Reactive Processor。
 - 若某类平台语义无法无损映射，保留 RawReference 和平台扩展，不把供应商类型泄漏到核心。
-

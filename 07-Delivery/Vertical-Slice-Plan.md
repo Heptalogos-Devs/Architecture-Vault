@@ -15,7 +15,13 @@ tags:
 
 ## VS-0 可回放事件骨架
 
-平台事件 → 规范化 → Ledger → 状态投影 → Trace → 回放。暂不调用模型。
+多个 Adapter Evidence → Fusion → Canonical Ledger → Reactor Feed → Trace →
+回放。暂不调用模型。
+
+## VS-0.5 双向网关闭环
+
+Fake Reactor Intent → 原端点路由 → Delivery Plan → Adapter request/response
+Evidence → Canonical Outcome，覆盖 `uncertain` 且不盲目重试。
 
 ## VS-1 逐消息基线
 

@@ -4,7 +4,7 @@ status: active
 type: vault-guide
 confidentiality: internal
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-24
 tags:
   - heptalogos
   - architecture
@@ -34,6 +34,8 @@ Heptalogos 研究面向即时通信场景的 AI 拟人化交互系统。目标�
 | 需求体系 | 场景、功能需求、质量属性、安全控制与追踪矩阵 | [Requirements MOC](02-Requirements/Requirements-MOC.md) |
 | 领域模型 | 身份、会话、关系、记忆、行为、任务与事件 | [Domain MOC](03-Domain-Model/Domain-MOC.md) |
 | 架构设计 | 上下文、事件流、运行时、持久化、部署与故障恢复 | [Architecture MOC](04-Architecture/Architecture-MOC.md) |
+| 概念归档 | 人工主体愿景、人格状态、时间与记忆等长期设计设想 | [概念归档索引](00-Home/Concept-Archive-Index.md) |
+| Interaction Gateway | 当前运行机制、权威边界、恢复语义与设计哲学 | [Canonical Interaction Gateway ADR](08-ADR/ADR-0012-Canonical-Interaction-Gateway.md) |
 | 组件规格 | 组件边界、输入输出、策略、调度与评估 | [Component MOC](05-Components/Component-MOC.md) |
 | 研究与评估 | 假设、实验计划、指标、证据和参考项目 | [Research MOC](06-Research/Research-MOC.md) |
 | 交付计划 | MVP、验收标准、垂直切片、路线图与测试策略 | [MVP Definition](07-Delivery/MVP-Definition.md) |
@@ -76,11 +78,12 @@ flowchart LR
 
 ## 当前状态
 
-- 研究阶段，当前版本为 `0.1`。
+- 研究阶段，当前版本为 `0.2`。
 - 重点关注状态、记忆、消息处理、能力编排、主动行为和可观测性。
 - 当前架构倾向于事件驱动、按会话串行处理、平台与模型解耦，并保留模块化单体作为早期实现边界。
 - 具体角色状态、关系模型、记忆分层、主动行为价值函数和多 Agent 拓扑仍属于不同置信度的研究议题。
-- 本仓库不包含生产实现、稳定公共 API 或生产级 SLA 承诺。
+- 当前仓库包含 `heptalogos-interaction` 研究实现和版本化内部契约，但不承诺生产级
+  SLA；人格、记忆与模型 Reactor 仍不在 Gateway 实现范围内。
 
 更细的事实与置信度说明见[信息状态与置信度](00-Home/Status-and-Confidence.md)。
 
