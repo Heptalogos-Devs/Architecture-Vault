@@ -111,7 +111,7 @@ flowchart TB
 - 事实与状态：SQL / SQLite；
 - 管理界面：React / TypeScript。
 
-当前代码仍以 Python 为主，详见 [当前实现](../04-Engineering/Current-Implementation.md)。
+当前在线运行时为 TypeScript/Node.js，详见 [当前实现](../04-Engineering/Current-Implementation.md)。
 
 ## 进一步阅读
 

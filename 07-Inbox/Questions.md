@@ -37,9 +37,9 @@
 
 ## 语言与迁移
 
-- TypeScript 在线运行时从哪个完整切片开始实现？
-- 当前 Python Gateway 是否先保留为独立边缘，还是与 Cognitive Kernel 一同迁移？
-- 如何用相同场景比较 Python 当前实现与 TypeScript 目标实现？
+- ~~TypeScript 在线运行时从哪个完整切片开始实现？~~ 已完成：全部切片已迁移。
+- ~~当前 Python Gateway 是否先保留为独立边缘，还是与 Cognitive Kernel 一同迁移？~~ 已完成：Gateway 已迁移为 TypeScript。
+- 如何用相同场景比较原 Python 实现与 TypeScript 实现？
 
 ## 产品与评估
 

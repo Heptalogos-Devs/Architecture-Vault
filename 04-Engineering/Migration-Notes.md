@@ -1,4 +1,4 @@
-# Python 到目标 TypeScript 运行时的迁移说明
+# Python 到 TypeScript 运行时的迁移记录
 
 迁移不按文件或类逐行翻译，而按完整行为切片进行。
 
@@ -6,7 +6,7 @@
 
 - 固定 Event、BehaviorIntent、ActionPlan 和 Outcome 契约；
 - 建立 Fake Adapter、Provider 和 Clock；
-- 保存当前 Python 实现的回放场景；
+- 保存原 Python 实现的回放场景；
 - 明确迁移期间唯一权威写入者。
 
 ## 推荐顺序

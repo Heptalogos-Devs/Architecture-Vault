@@ -2,17 +2,17 @@
 
 ## 仓库组成
 
-主仓库当前包含三个 Python 包和一个 React/TypeScript Web 应用：
+主仓库当前包含三个 TypeScript 包和一个 Node.js runtime：
 
 ```text
-heptalogos-control-plane
-├── heptalogos-reactor
-└── heptalogos-interaction
-
-apps/control-plane-web
+packages/interaction
+packages/reactor
+packages/control-plane
+apps/runtime          (组合根：生命周期、launcher、package assembly)
+apps/control-plane-web (React/MUI 前端，构建产物嵌入 apps/runtime/web/dist/)
 ```
 
-运行基线为 Python 3.14；前端开发使用 Node 24、pnpm、React、TypeScript、Vite 和 MUI。当前实现事实以主仓库 README、各模块文档、测试和代码为准。
+在线运行时为 Node 24、pnpm、TypeScript；前端使用 React、MUI 和 Vite。Python 3.14 仅用于授权快照 worker 和兼容性工具（`python/` 目录），不参与在线运行时。当前实现事实以主仓库 README、各模块文档、测试和代码为准。
 
 ## Interaction Gateway
 
@@ -83,8 +83,8 @@ Control Plane 不跨库解释拥有模块的持久化 schema。
 - SQLite migration 连续并带 checksum；
 - 原始内容默认脱敏，不进入普通列表和 WebSocket；
 - 关键状态转移和人工操作有审计；
-- 前端制品嵌入 Python wheel，部署端不要求 Node。
+- 前端制品嵌入 Node runtime package，部署端不要求 Python。
 
 ## 目标栈与当前栈的关系
 
-Vault 的目标设计建议未来在线权威运行时转向 TypeScript/Node.js，但这不是当前代码事实。迁移应以领域契约、回放场景和行为切片为单位，不以逐文件翻译 Python 为目标。
+迁移已完成：TypeScript/Node.js 是当前在线权威运行时。原 Python 在线包已废弃，Python 仅保留授权快照 worker 和兼容性工具。
