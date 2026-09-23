@@ -1,0 +1,21 @@
+\chapter{来源基线与复现信息}
+
+\section{输入基线}
+
+研究内容以 2026-09-22 的完整当前研究资料包为依据。MANIFEST 列出的 16 个受校验文件 SHA-256 均匹配。正文章节与输入文件的对应关系见 \SourcePath{SOURCE_MAP.md}。
+
+\section{代码基线}
+
+\begin{itemize}
+\item Nous Wave：HEAD \texttt{\detokenize{9794f44}}；核查时工作区含已暂存和未暂存改动。研究资料包中的代码快照与该 HEAD 一致，当前实现描述还包括当时的工作区变更。
+\item Heptalogos：HEAD \texttt{\detokenize{2f86311}}，核查时工作区干净。仓库中的资格记录按其原日期和范围引用。
+\item 本报告依据指定代码快照、检视时工作区和仓库既有资格记录整理。PASS、BLOCKED 和 NOT\_RUN 对应记录中的日期、平台与运行范围。
+\end{itemize}
+
+\section{实验复现状态}
+
+研究资料包报告 EPA 加权、Residual 差分、Wave 合并和排序稳定性的合成试验摘要。原始脚本、试验记录和完整结果文件列入后续归档；本报告中的数值均标注为资料包报告结果。
+
+\section{编译信息}
+
+编译工具版本、干净构建状态、PDF 页数、引用检查和版面抽查记录见仓库 \texttt{docs/BUILD.md}。

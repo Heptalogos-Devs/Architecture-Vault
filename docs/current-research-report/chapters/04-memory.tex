@@ -1,0 +1,76 @@
+\chapter{记忆语义模型}
+
+\section{记忆域的职责}
+
+记忆域保存主体认为值得跨会话保留的认知。聊天逐字稿、原始材料、观察事件和外部知识仍由各自对象及来源管理；主体接触材料后可形成记忆、保留证据供后续判断，或仅在运行时使用材料。\cite{nous-research-package}
+
+目标形成流程为：
+
+\begin{center}
+\small
+来源快照 $\rightarrow$ 当前相关认知 $\rightarrow$ 提案 $\rightarrow$ 主张/证据/语义指向映射 $\rightarrow$ 所有者核验 $\rightarrow$ 对象纪元与当前版本核验 $\rightarrow$ 不可变修订
+\end{center}
+
+模型生成默认只形成提案；只有特定所有者合同明确允许时，确定性流程才可直接提交。每个记忆修订保留证据引用（EvidenceRef）、生产者签名（ProducerSignature）和来源谱系。
+
+\section{材料、接触记录、派生表示与证据}
+
+\begin{description}
+\item[原始材料（Artifact）] 稳定的原始或生成内容；大文件可保存在不可变对象库中。
+\item[观察事件（ObservationOccurrence）] 主体在特定时间实际接触材料或事件的一次记录。相同字节内容可以对应多次观察。
+\item[派生表示（DerivedRepresentation）] 由光学字符识别、解析器或模型生成的版本化解释，保存生成者、版本和来源区域映射。
+\item[证据引用（EvidenceRef）] 指向观察事件、来源区域、派生表示或派生区域的来源句柄。
+\item[记忆对象（Memory）] 主体接受并决定长期保留的认知对象，具有稳定对象身份和不可变修订。
+\end{description}
+
+\begin{ReportWideFigure}
+\centering
+\begin{tikzpicture}[
+  node distance=0.5cm,
+  block/.style={draw=NWBlue,rounded corners,align=center,text width=3.2cm,minimum height=1.05cm,inner sep=5pt},
+  small/.style={draw=NWRule,rounded corners,align=center,text width=3.2cm,minimum height=0.9cm,inner sep=4pt},
+  arrow/.style={-{Stealth[length=2mm]},thick,color=NWBlue}
+]
+\node[block] (artifact) {原始材料\\稳定来源内容};
+\node[block,right=of artifact] (encounter) {观察事件\\主体的一次接触};
+\node[block,right=of encounter] (derived) {派生表示\\版本化解释};
+\node[small,below=1.1cm of encounter] (evidence) {证据引用\\来源谱系};
+\node[block,right=of evidence] (proposal) {认知提案\\主张与语义指向};
+\node[block,right=of proposal] (revision) {领域所有者核验\\不可变修订};
+\draw[arrow] (artifact) -- (encounter);
+\draw[arrow] (encounter) -- (derived);
+\draw[arrow] (encounter.south) -- (evidence.north);
+\draw[arrow] (derived.south) |- (evidence.east);
+\draw[arrow] (evidence) -- (proposal);
+\draw[arrow] (proposal) -- (revision);
+\end{tikzpicture}
+\captionof{figure}{材料进入主体认知的边界。派生表示不替代观察事件，也不会自动成为记忆。}
+\label{fig:memory-formation}
+\end{ReportWideFigure}
+
+认知对象由自身身份与修订标识；证据引用说明支撑该对象的来源。多个派生文本若共享同一来源祖先，证据独立性仍按共同来源谱系计算。检索保留来源链，区分独立佐证与同源转述。
+
+\section{身份、修订与生命周期}
+
+对同一认知对象的修正、澄清或重释，通常创建该对象的新修订；独立的新经历创建新对象；矛盾认知通常以显式矛盾关系保留，不通过把一方标记为“已取代”来隐藏。修订、当前版本、对象纪元和生命周期分别承担内容版本、当前指针、并发栅栏和生命周期状态。\cite{nous-research-package}
+
+当前 Nous Wave 源树已包含记忆对象/修订、证据关系、当前版本保护、抑制/恢复和管理面清除路径。源代码中的 MemoryClass 仍分为 Specific、Integrative、Procedural 三类；目标设计改用正交的形成依据和认知角色维度。该差异见第十八章。\cite{nous-code-snapshot}
+
+\section{时间语义}
+
+至少需要区分：
+
+\begin{itemize}
+\item 事件发生时间（occurred\allowbreak\_time）；
+\item 主体观察时间（observed\allowbreak\_at）；
+\item 主张有效时间（valid\allowbreak\_time）；
+\item 系统记录时间（recorded\allowbreak\_at）；
+\item 主体权威提交序号（authority\allowbreak\_seq）；
+\item 认知形成时间（formed\allowbreak\_at）。
+\end{itemize}
+
+记忆的观察时间沿证据谱系追溯到真实接触事件。读取视图可展示派生的最早和最晚时间；范围值保留为读取结果，不写作新的权威事实。未知时间保持未知，并由查询策略显式处理。
+
+\section{认知类别与语义指向}
+
+认识状态、证据支持角色、来源谱系和生命周期分别建模。材料提及记录材料中出现的实体；记忆的语义指向记录认知所涉及的实体及其角色。当前代码已增加记忆修订到实体的独立关联表；实体身份由调用方或服务提供方绑定，向量相似度用于候选检索。\cite{nous-research-package,nous-code-snapshot}

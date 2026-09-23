@@ -1,0 +1,31 @@
+\chapter{模型服务能力与 Heptalogos 边界}
+
+\section{按能力合同接入模型}
+
+模型通过明确的能力合同提供：
+\begin{itemize}
+\item 向量嵌入（Embedding）与重排（Reranking）；
+\item 结构化提案生成（StructuredProposal）；
+\item 文本、图像和语音派生（Text/Vision/Speech Derivation）。
+\end{itemize}
+合同描述输入限制、成本、隐私和可用性，并附生产者签名（ProducerSignature）。向量空间标识需包含模型、预处理、池化、归一化和维度，避免混用不同空间的向量。\cite{nous-research-package}
+
+本地网关和远程接口在认知语义中承担相同角色。部署元数据可记录时延、隐私边界、离线可用性、输入限制和硬件要求；主体身份与记忆类别由领域语义决定。
+
+\section{Nous Wave 与 Heptalogos 的职责}
+
+目标集成中，Nous Wave 负责认知、人格、记忆、关系、动机、运行时和认知提案核验；Heptalogos 负责即时通信与外部世界输入、规范交互事实、反应调度、行为审查、约束性承诺、通信批准记录和外部效果。双方通过共享 SubjectId 及类型明确的引用和回执协作。\cite{nous-research-package}
+
+\section{当前两个仓库的实现关系}
+
+当前 Heptalogos 主体路径由产品宿主组合隔离的 Subject OpenClaw 运行时。模型提出认知提案后，Heptalogos 的确定性审查、通信承诺和表达领域决定是否产生本地回复。仓库当前实现聚焦主体聊天、提案审查和本地表达，持久记忆、关系认知、人格、外部即时通信驱动和主动消息列入后续范围。\cite{heptalogos-code-snapshot}
+
+Nous Wave 仓库包含 PostgreSQL 权威存储、记忆服务、认知运行时、检索/服务层，以及 TypeScript 核心和 Rust 内核。两仓库尚未建立直接客户端与 SubjectId 桥接；Nous Wave 为 Heptalogos 完整主体档案提供认知能力属于目标设计。
+
+\section{权限与模型服务失败}
+
+Nous Wave 的认知目标经 Heptalogos 行为审查后再形成对外承诺；记忆和资源检索结果作为认知输入处理。模型服务输出默认形成提案或证据，由领域所有者核验来源引用、数据结构、当前状态和权限后提交。必需能力不可用时明确返回失败；可选检索通道不可用时继续服务并记录降级状态。\cite{nous-research-package,heptalogos-code-snapshot}
+
+\section{当前外部模型服务证据}
+
+Heptalogos 仓库资格记录显示：本地回环测试环境中的 AI SDK/OpenClaw 提案路径为通过（PASS）；真实网关或上游模型请求记录为受阻（BLOCKED）或未执行（NOT\_RUN）。真实模型服务与 Nous Wave 的直接集成列入后续资格工作。

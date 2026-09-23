@@ -1,0 +1,68 @@
+\chapter{持久化、并发与可靠性}
+
+\section{权威数据与身份层级}
+
+当前目标以 PostgreSQL 保存结构化认知权威数据，大型或二进制材料存放于不可变对象库，检索索引按需重建。权威数据、运行时状态和检索视图分别拥有独立身份与生命周期。\cite{nous-research-package}
+
+\begin{ReportWideTable}{p{3.0cm}p{10.2cm}}
+\captionof{table}{权威数据、运行时与服务视图的身份层级}\label{tab:identity-layers}
+\toprule
+\textbf{标识} & \textbf{语义}\\
+\midrule
+SubjectId & 跨限界上下文保持稳定的逻辑主体身份。\\
+object\_id & 稳定的语义对象身份。\\
+revision\_id & 不可变内容或解释修订的身份。\\
+object\_epoch & 当前版本指针和生命周期状态的并发版本。\\
+authority\_seq & 主体范围内有序的提交位置。\\
+runtime\_revision & 会话与运行时状态的当前版本。\\
+view\_set\_id / generation\_id & 多视图集合与不可变服务代次。\\
+request\_id / event\_id & 变更请求与使用事件的幂等标识。\\
+\bottomrule
+\end{ReportWideTable}
+
+内容修订与抑制、清除等对象状态变化分别处理。时间语义区分事件发生、主体观察、主张有效、系统记录和提交顺序；未知时间与开放区间均需明确表示。
+
+\section{统一变更顺序}
+
+权威数据写入按固定事务顺序完成：
+
+\begin{enumerate}
+\item 验证请求、引用、操作者和输入结构；
+\item 开启权威数据事务并分配主体提交序号；
+\item 按稳定顺序锁定目标对象；
+\item 检查幂等键及预期对象版本和当前修订；
+\item 重新验证来源、证据、访问控制和生命周期；
+\item 写入不可变修订及关联，并更新当前指针、生命周期和版本号；
+\item 记录权威数据变更、待发布事件和幂等结果；
+\item 提交事务。
+\end{enumerate}
+
+模型或网络调用在事务外完成。跨领域更新先由目标领域所有者核验提案，再提交权威数据。\cite{nous-research-package}
+
+\begin{lstlisting}[caption={目标变更合同的简化顺序},label={lst:mutation-order}]
+validate(request, actor, source_refs)
+BEGIN
+  allocate Subject authority_seq
+  lock target objects in stable order
+  check request idempotency
+  check expected epoch and current head
+  revalidate evidence, source, ACL and lifecycle
+  write immutable revision and relations
+  advance head, lifecycle and epoch
+  append Authority change and idempotent result
+COMMIT
+\end{lstlisting}
+
+伪代码概括研究资料包提出的事务语义；各领域实现情况见第十八章。
+
+\section{投影、过期结果与恢复}
+
+权威数据事务按投影类别记录失效事件和处理水位。投影构建器可分别重建精确、词项、稠密、拓扑或摘要视图。发布前核对输入水位，使当前代次始终对应最新有效修订。查询返回前重新核验权威数据、访问控制和生命周期。\cite{nous-research-package,nous-code-snapshot}
+
+请求和事件使用稳定标识处理超时重试、重复投递和乱序交付。重复使用回执按幂等规则去重；同一请求标识对应不同内容摘要时，返回标识冲突。
+
+\section{清除管理}
+
+清除由具有管理权限的流程执行。流程隔离普通读取，取消或标记依赖提案，按规则清理权威数据载荷、服务视图、缓存、上下文和对象库内容，并记录清除回执。需保留的审计元数据只保留不可逆的操作信息，不包含已清除内容、可逆摘要或向量。\cite{nous-research-package}
+
+当前 \SourcePath{crates/memory-service/src/memory_lifecycle.rs} 包含记忆抑制、恢复和清除协调路径。崩溃重试、外部存储与跨领域清除的资格范围需结合相应运行记录确认。\cite{nous-code-snapshot}

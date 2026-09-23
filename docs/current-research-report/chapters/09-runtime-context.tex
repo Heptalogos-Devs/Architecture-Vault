@@ -1,0 +1,28 @@
+\chapter{认知运行时与上下文}
+
+\section{运行时的职责}
+
+认知运行时（Cognitive Runtime）把持久认知组织为当前可供推理或调用方使用的状态。运行时状态可失效后重建；权威认知数据由持久化存储维护。会话（Session）表示一次连续运行范围，聊天线程与经历片段分别依照各自语义建模。\cite{nous-research-package}
+
+\begin{description}
+\item[活动认知（Active Cognition）] 近期且容易重新激活的认知引用和少量运行时元数据；可访问性依据使用和上下文状态管理。
+\item[工作上下文（WorkContext）] 可暂停、恢复或结束的任务/问题上下文。同一主体可有多个工作上下文；并发行为由 Heptalogos 调度。
+\item[驻留集（ResidentSet）] 当前会话或工作上下文可直接访问的认知引用。淘汰只把内容移出工作集，不改变记忆或真值状态。
+\item[焦点与前台上下文（Focus/foreground）] 当前显式参与处理的局部上下文。
+\item[调用方工作集（ConsumerWorkingSet）] 面向特定调用方、能力组合和预算选出的有界认知集合。
+\item[受管理上下文（Managed Context）] 对模型调用轨迹的重置（RESET）或追加（APPEND）同步合同，用于上下文缓存。
+\end{description}
+
+\section{注意分配、即时评价与长期倾向}
+
+注意分配是在有限认知预算下动态选择信息；即时评价（Appraisal）根据自我、关系、目标或关切解释当前环境。当前目标将这两类过程放在运行时；稳定且值得长期保留的倾向，由自我或关系领域形成认知修订。评价理论帮助界定动态判断问题，具体模块划分由 Nous Wave 的领域合同确定。\cite{marsella-gratch2009,nous-research-package}
+
+\section{使用事件与长期认知}
+
+针对特定修订的使用可记录为检索命中（\texttt{\detokenize{retrieved}}）、投影或呈现（\texttt{\detokenize{projected}}/\texttt{\detokenize{exposed}}）、检视（\texttt{\detokenize{inspected}}）、引用（\texttt{\detokenize{referenced}}）、采取行动（\texttt{\detokenize{acted_on}}）、结果确认（\texttt{\detokenize{outcome-confirmed}}）、纠正（\texttt{\detokenize{corrected}}）、拒绝（\texttt{\detokenize{rejected}}）和固定（\texttt{\detokenize{pinned}}）等事件。检索和呈现记录服务过程；符合合同的有效使用回执才可改变可访问性或关联支持度，真实性由证据和认知修订流程维护。\cite{nous-research-package}
+
+当前 Nous Wave 实现包含会话、驻留集、使用事件、工作集和调用方专属上下文组合。Heptalogos Product Host 的焦点状态、主体聊天和表达路径属于另一套行为/运行时实现；两者应通过明确接口集成。\cite{nous-code-snapshot,heptalogos-code-snapshot}
+
+\section{受管理上下文的重置与追加}
+
+上下文前缀追加前，核对调用方与服务轨迹、策略、提示前缀、来源修订、访问控制、生命周期和渲染合同；任一条件变化时重建上下文。上下文缓存服务于模型调用，持久记忆和权威数据由认知存储维护。

@@ -1,0 +1,42 @@
+\chapter{物理架构}
+
+\section{TypeScript 宿主与 Rust 内核}
+
+目标实现由 TypeScript 宿主协调外部调用、模型服务、外部资源、调用方上下文和离线流程；Rust 内核承载领域所有者、语义验证、权威数据、检索与服务生命周期。认知写入由内核中的领域所有者核验并提交，宿主通过类型明确的接口发起请求。\cite{nous-research-package}
+
+\begin{ReportWideFigure}
+\centering
+\begin{tikzpicture}[
+  block/.style={draw=NWBlue,rounded corners,align=center,text width=5.0cm,minimum height=1.15cm,inner sep=6pt},
+  data/.style={draw=NWRule,rounded corners,fill=NWLight,align=center,text width=3.3cm,minimum height=0.9cm,inner sep=5pt},
+  arrow/.style={-{Stealth[length=2mm]},thick,color=NWBlue}
+]
+\node[block] (consumer) {调用方 / Heptalogos\\类型明确的认知请求与回执};
+\node[block,below=0.65cm of consumer] (host) {Nous 宿主（TypeScript）\\模型服务方、资源、投影、上下文与流程};
+\node[block,below=0.65cm of host] (kernel) {Nous 内核（Rust）\\领域所有者、验证、权威数据、检索与服务生命周期};
+\node[data,below left=0.85cm and 0.35cm of kernel] (pg) {PostgreSQL\\规范权威数据};
+\node[data,below=0.85cm of kernel] (lex) {Tantivy\\词项检索服务};
+\node[data,below right=0.85cm and 0.35cm of kernel] (dense) {稠密向量服务\\后端候选};
+\node[data,right=0.9cm of host] (object) {OpenDAL 支持的\\不可变对象库};
+\draw[arrow] (consumer) -- (host);
+\draw[arrow] (host) -- (kernel);
+\draw[arrow] (kernel) -- (pg);
+\draw[arrow] (kernel) -- (lex);
+\draw[arrow] (kernel) -- (dense);
+\draw[arrow] (host.east) -- (object.west);
+\end{tikzpicture}
+\captionof{figure}{Nous Wave 目标架构与责任分工。检索存储和外部资源后端提供通用机制，认知身份由权威数据维护。}
+\label{fig:physical-architecture}
+\end{ReportWideFigure}
+
+\section{本机优先与可替换机制}
+
+主要部署方向为本机运行：受管理的 PostgreSQL、Tantivy 词项索引、稠密检索后端、可重建联想拓扑和 OpenDAL 对象库。本地模型网关与远程接口遵循相同能力合同。桌面部署需配套安装、更新、备份、恢复、权限和性能方案。\cite{nous-research-package}
+
+\section{物理实现与语义归属}
+
+领域所有者可分布于多个代码包，也可共同运行于同一进程。代码包和 crate 的划分依据编译、依赖、变更责任及部署需要。检索算法通过窄接口替换；外部资源的通用文档处理交由成熟后端承担，认知语义仍由 Nous Wave 的领域所有者维护。
+
+\section{当前代码映射}
+
+Nous Wave 源树包含 TypeScript Core、Rust Kernel、PostgreSQL 权威数据访问、记忆服务、认知运行时，以及 Tantivy、USearch、petgraph 检索模块。Heptalogos 另有 TypeScript 产品宿主和隔离的 Subject OpenClaw 运行时。两套代码承担各自职责，跨仓库运行时集成列入后续工作。\cite{nous-code-snapshot,heptalogos-code-snapshot}

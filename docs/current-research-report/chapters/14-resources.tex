@@ -1,0 +1,26 @@
+\chapter{外部知识资源}
+
+\section{资源提供知识访问，不直接成为认知}
+
+通用知识库负责光学字符识别、文档解析、分块、增量同步和专业搜索。Nous Wave 通过资源适配器接入这些服务，适配能力包括资源描述（\texttt{\detokenize{describe}}）、检索（\texttt{\detokenize{search}}）、材料展开（\texttt{\detokenize{materialize}}）、版本核验（\texttt{\detokenize{checkVersion}}）和访问核验（\texttt{\detokenize{checkAccess}}）。资源登记簿保存能力说明、稳定引用、访问范围、版本和时效合同；实际内容由外部系统管理。\cite{nous-research-package}
+
+资源感知记录主体或系统已登记的资源范围、权限归属和访问成本。资源内容经主体实际接触后形成观察事件，再由相应领域判断是否接受为长期认知。按需访问可从资源摘要逐步深入到相关记录，再展开精确证据材料。
+
+\section{从资源到观察，再到记忆}
+
+\begin{center}
+\small
+外部资源结果 $\rightarrow$ 主体或调用方实际接触 $\rightarrow$
+观察事件（ObservationOccurrence）$\rightarrow$ 可选的领域提案 $\rightarrow$
+核验后的认知修订
+\end{center}
+
+检索结果按“实际接触—观察事件—领域提案—认知修订”的流程进入主体状态。稳定引用记录提供方、资源和条目标识、来源版本、内容摘要、区域坐标、观察或时效时间、材料展开规则和访问范围。资源派生文本作为数据或证据处理，执行权限由宿主合同管理。
+
+\section{访问控制与来源生命周期}
+
+材料展开前后均遵守资源访问策略。来源版本变化、访问权限撤销、源资源不可用或清除请求，都可使派生表示进入待复核状态；对应领域所有者决定是否撤销认知。清除流程覆盖派生表示、检索服务、缓存和受管理上下文，并记录完成状态。\cite{nous-research-package}
+
+\section{当前实现状态}
+
+Nous Wave 认知运行时包含资源描述对象和资源操作提案接口；Heptalogos 当前将外部模型网关作为独立运维的服务。完整资源适配器和真实资源后端评测列入目标实现。\cite{nous-code-snapshot,heptalogos-code-snapshot}

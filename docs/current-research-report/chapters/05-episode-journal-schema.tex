@@ -1,0 +1,46 @@
+\chapter{经历组织、日记与认知图式}
+
+\section{经历片段（Episode）与事件组织}
+
+经历片段（Episode）是对连续经历流进行组织并可随证据修订的解释。参与者、地点、渠道、情境、任务目标变化、预测误差、主题或因果断裂、明确完成事件，以及较弱的闲置信号，都可作为边界候选。会话（Session）按连续运行过程界定；一个会话可包含多个经历片段，一个经历片段也可跨越多个会话。\cite{nous-research-package}
+
+系统支持拆分、合并和重新分段，并保留成员引用、顺序、角色、时间范围和来源谱系。边界调整会创建修订，不改写成员经历本身。
+
+\section{日记叙事对象（Journal）}
+
+日记（Journal）是组织某段经历或时期的独立、可修订叙事对象。它可用于回顾背景、支持自我叙事或选择离线探索的输入；内容仍需关联证据和来源。来源修订或访问控制发生变化时，日记可被标记为需复核、重新验证或形成新修订。
+
+\section{标签、认知图式与联想拓扑}
+
+\footnotesize
+\begin{ReportWideTable}{>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{5.2cm}}
+\captionof{table}{标签、认知图式与联想拓扑的语义差异}\label{tab:semantic-structures}
+\toprule
+\textbf{表示} & \textbf{语义作用} & \textbf{权属状态}\\
+\midrule
+标签（Tag） & 稳定的语义线索或概念描述；身份依据含义、别名和来源，字符串用于呈现。 & 可参与认知来源和检索；查询热度不永久增加权重。\\
+认知图式（CognitiveSchema） & 主体从多段经历和认知中形成的重复结构，包含适用范围、支持、反例和推导来源。 & 属于认知内容；需实现此能力，最终归入记忆域还是独立类型仍待定。\\
+联想拓扑（AssociativeTopology） & 由标签、记忆、经历片段、图式和关联证据生成的可重建检索图。 & 属于可重建服务投影；枢纽度、中心性、激活值和传播得分用于检索，认知内容由权威数据维护。\\
+\bottomrule
+\end{ReportWideTable}
+\normalsize
+
+\subsection{认知图式的归属}
+
+图式若能由综合型记忆的身份、生命周期、查询和写入合同完整表达，可由记忆域维护；若需要独立的边界、反例、拆分合并或修订合同，则单列语义对象更清楚。归属依据是稳定的合同差异。\cite{nous-research-package}
+
+\subsection{Anchor 的实现与研究边界}
+
+当前代码包含 Anchor 拓扑对象。目标语义分别处理标签、认知图式和可重建联想拓扑；后续工作需明确 Anchor 与这三类语义的对应关系。\cite{nous-research-package,nous-code-snapshot}
+
+\section{关联证据与反馈控制}
+
+权威数据保存类型明确的关联证据（AssociationEvidence），例如共现、顺序、显式关系、独立支持、使用/结果、图式支持或反例。服务层按证据类型生成边权和传播预算，同时保留原始证据类别及来源。
+
+拓扑扩展使用有限预算，包括出边归一化、枢纽抑制、跳数/节点/时间上限和来源去重。反例作为独立证据表示，诊断记录被截断或未探索的内容。
+
+检索和展示形成服务事件；只有类型明确、符合调用方合同的使用回执才可影响可访问性或关联支持度。该区分避免服务热度循环进入长期认知。\cite{anderson1983,nous-research-package}
+
+\subsection{当前代码状态}
+
+Nous Wave 源树保存了标签、Anchor 和关联证据，并据此重建拓扑代次。目标研究要求标签、认知图式和联想拓扑保持语义正交；其归属、图构建参数和长期可访问性算法仍需分别收敛。

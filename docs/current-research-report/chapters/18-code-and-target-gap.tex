@@ -1,0 +1,32 @@
+\chapter{当前代码与目标研究状态}
+
+\section{代码与研究基线}
+
+Nous Wave 代码基线为 HEAD \texttt{9794f44}，截至 2026-09-23 的工作区还包含已暂存和未暂存改动；研究资料包以该提交作为代码分析快照。Heptalogos 代码基线为 HEAD \texttt{2f86311}，检视时工作区干净。下表以研究资料包说明目标语义，以相应代码路径记录当前实现。\cite{nous-research-package,nous-code-snapshot,heptalogos-code-snapshot}
+
+\section{实现与目标对照}
+
+\small
+\begin{ReportWideTable}{>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.0cm}}
+\captionof{table}{当前代码与目标研究语义的对应状态}\label{tab:code-gap}
+\toprule
+\textbf{领域} & \textbf{当前实现} & \textbf{目标设计} & \textbf{状态}\\
+\midrule
+顶层认知领域 & 记忆、运行时和检索已有代码；自我、关系、动机领域列入后续设计。 & 主体基础与记忆构成基础能力；高级主体认知可组合启用。 & 部分实现\\
+记忆类别 & MemoryClass 使用 Specific、Integrative、Procedural。 & 记忆形成依据与认知角色分别建模。 & 语义待对齐\\
+实体绑定 & 修订、证据和观察事件具有独立关联。 & 材料提及与认知指向分别记录并保持来源链。 & 部分实现\\
+标签、图式与拓扑 & Tag、Anchor、AssociationEvidence 和拓扑投影已存在。 & 标签提供语义线索；图式承载认知内容；拓扑作为可重建检索视图。 & 部分实现；图式归属待定\\
+权威、运行时与服务层 & PostgreSQL 权威数据、Session/WorkingSet、服务代次与水位已有代码。 & 三类状态分别维护，并完成过期校验、重建和生命周期管理。 & 核心代码已具备；整体资格待补\\
+检索通道 & 精确、实体倒排、词项、稠密、时间、运行时、拓扑和资源路径已存在。 & 查询前固定通道及权重；按对象聚合；返回前核验权威状态。 & 部分实现\\
+融合稳定性 & 排序器按本批候选出现的类别计算启用集合和分母。 & 查询计划固定证据类别与权重；无关候选加入后，原候选相对顺序保持稳定。 & 目标待实现\\
+语义线索感知 & EPA/Residual 接口和实现已存在。 & 加权主成分分析保留样本重复次数，并与检索基线比较效用。 & 数学修正与效用评测待办\\
+联想扩展 & 当前默认使用 BoundedWaveExpansion，状态合并键为 previous/current。 & 将 PPR/扩散作为候选基线，并与保留路径状态的 Wave 对照。 & 当前默认已实现；方案待评测\\
+可访问性 & 代码包含 AUTO、NORMAL、DEEP、EXPLICIT 模式及 90/365 天派生阈值。 & 阈值作为运行参数；真实性、相关性、抑制和清除分别处理。 & 模式已实现；参数待评测\\
+离线认知 & 已有记忆整理流程；维护租约、梦境来源复核和假设路由仍在目标设计中。 & 宿主授权维护时段；Nous 有界处理并向语义所有者提交提案。 & 部分设计\\
+Heptalogos 集成 & Product Host 使用 Subject OpenClaw 提案运行时；共享 SubjectId 与 Nous Wave 客户端尚未接入。 & 共享主体标识；认知主体和行为主体分别维护权威状态，并使用类型明确的提案与回执。 & 集成待开展\\
+稠密检索后端 & 当前代码默认采用 USearch 代次。 & 依据本机工作负载比较 Qdrant 与 pgvector。 & 选型待评测\\
+\bottomrule
+\end{ReportWideTable}
+\normalsize
+
+表中“已实现”表示代码路径可定位；“已核验”表示有注明日期、平台和范围的运行资格记录。未提交的代码改动按检视时工作区状态计入实现描述。
