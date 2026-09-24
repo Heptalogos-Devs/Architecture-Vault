@@ -8,24 +8,48 @@
 \item 结构化提案生成（StructuredProposal）；
 \item 文本、图像和语音派生（Text/Vision/Speech Derivation）。
 \end{itemize}
-合同描述输入限制、成本、隐私和可用性，并附生产者签名（ProducerSignature）。向量空间标识需包含模型、预处理、池化、归一化和维度，避免混用不同空间的向量。\cite{nous-research-package}
+合同描述输入限制、成本、隐私、可用性和 producer identity。向量空间标识包含模型/权重、任务、tokenizer/预处理、pooling、normalization 和 dimension，避免把不同空间的向量混为一体。\cite{nous-research-package}
 
-本地网关和远程接口在认知语义中承担相同角色。部署元数据可记录时延、隐私边界、离线可用性、输入限制和硬件要求；主体身份与记忆类别由领域语义决定。
+本地模型网关和远程 API 在 cognition architecture 中承担相同 provider role。部署元数据可以记录时延、隐私边界、离线可用性、输入限制、成本和硬件要求；切换 provider 不改变 SubjectId、Memory identity 或 owner semantics。
 
 \section{Nous Wave 与 Heptalogos 的职责}
 
-目标集成中，Nous Wave 负责认知、人格、记忆、关系、动机、运行时和认知提案核验；Heptalogos 负责即时通信与外部世界输入、规范交互事实、反应调度、行为审查、约束性承诺、通信批准记录和外部效果。双方通过共享 SubjectId 及类型明确的引用和回执协作。\cite{nous-research-package}
+目标集成中，Nous Wave 负责主体 cognition/personality：Memory、Self、Social、Motivation、Cognitive Runtime、retrieval 与 offline cognition proposal。Heptalogos 负责 real-IM interaction、canonical product facts、Opportunity/Reaction、行为审查、规范/管理权限、binding Commitment、CommunicationCommit、Action/Effect 和外部世界结果。双方共享逻辑 SubjectId，并通过类型明确的 observation、context/query、proposal、use/outcome receipt 协作。\cite{nous-research-package,heptalogos-code-snapshot}
 
-\section{当前两个仓库的实现关系}
+核心边界为：
 
-当前 Heptalogos 主体路径由产品宿主组合隔离的 Subject OpenClaw 运行时。模型提出认知提案后，Heptalogos 的确定性审查、通信承诺和表达领域决定是否产生本地回复。仓库当前实现聚焦主体聊天、提案审查和本地表达，持久记忆、关系认知、人格、外部即时通信驱动和主动消息列入后续范围。\cite{heptalogos-code-snapshot}
+\begin{center}
+Nous：``我记得/如何理解/我是谁/我与谁是什么关系/我想要什么''\\
+Heptalogos：``现在是否行动、是否允许、承诺什么、实际向世界做了什么''
+\end{center}
 
-Nous Wave 仓库包含 PostgreSQL 权威存储、记忆服务、认知运行时、检索/服务层，以及 TypeScript 核心和 Rust 内核。两仓库尚未建立直接客户端与 SubjectId 桥接；Nous Wave 为 Heptalogos 完整主体档案提供认知能力属于目标设计。
+Motivation 中的 Goal 不自动成为 Heptalogos Commitment；Social/Memory 的判断不自动获得行为权限；Heptalogos 的 prohibitions 和 system/admin constraints 也不应被普通 cognition revision 覆盖。
+
+\section{当前 Heptalogos 实现边界}
+
+当前权威实现基线是个人仓库 \texttt{ArsvineZhu/Heptalogos}。该仓库已进入 headless Product Host / Product-Subject path，Foundation 以 Service/Capability、Context/Activity contribution、Evidence/provenance 和 authority ceiling 为高级认知保留接入面；它明确不冻结 Memory、Persona、Relationship 等高级 cognition 的内部 ontology。\cite{heptalogos-code-snapshot}
+
+当前 Heptalogos 架构中的 OpenClaw 属于独立 Machine Operations Plane，用于机器/部署维护能力，不是 Subject cognition runtime，也不是 Nous Wave 的替代实现。Vault 旧材料中把 Subject cognition 与 OpenClaw 直接绑定的描述不再代表当前产品架构。
+
+Nous Wave 与 Heptalogos 尚未完成直接产品集成。后续需要冻结的最小跨库合同包括：
+
+\begin{itemize}
+\item SubjectId provisioning/binding；
+\item Heptalogos canonical interaction fact $\rightarrow$ Nous Observation；
+\item Nous ContextContribution/CognitiveQuery 在 Reaction/Activity 中的消费；
+\item Nous Goal/proposal $\rightarrow$ Heptalogos review/adoption；
+\item Heptalogos use/outcome $\rightarrow$ Nous 的幂等回执；
+\item Heptalogos maintenance opportunity/lease $\rightarrow$ Nous offline cognition workflow。
+\end{itemize}
+
+两侧不进行跨数据库分布式 transaction；可靠交接依赖稳定 event/request identity、idempotency、明确的 point-of-no-return 和可重试 receipt。
+
+\section{维护窗口与离线认知}
+
+Nous Wave 不拥有产品级 cron/nightly policy。Heptalogos 或其他 Host 决定“现在是否允许维护”以及可用时间、token/compute、网络和 provider 权限；Nous Wave 根据当前 cognition debt 选择 Journal maintenance、Episode review、Dream/Hypothesis 或其他 owner-specific工作，并在预算耗尽或收益不足时停止。维护窗口提供机会和资源，不赋予 Dream 越权写入 Memory/Self/Social/Motivation 的权限。
 
 \section{权限与模型服务失败}
 
-Nous Wave 的认知目标经 Heptalogos 行为审查后再形成对外承诺；记忆和资源检索结果作为认知输入处理。模型服务输出默认形成提案或证据，由领域所有者核验来源引用、数据结构、当前状态和权限后提交。必需能力不可用时明确返回失败；可选检索通道不可用时继续服务并记录降级状态。\cite{nous-research-package,heptalogos-code-snapshot}
+模型服务输出默认形成 proposal、derived representation 或 retrieval evidence，而不是 Authority。Kernel/owner commit path 重新核验 Subject、evidence lineage、expected revision/epoch、ACL 和生命周期后才能提交。必需 capability 不可用时明确失败；可选 retrieval lane/provider 不可用时可以降级并保留 degradation diagnostics。
 
-\section{当前外部模型服务证据}
-
-Heptalogos 仓库资格记录显示：本地回环测试环境中的 AI SDK/OpenClaw 提案路径为通过（PASS）；真实网关或上游模型请求记录为受阻（BLOCKED）或未执行（NOT\_RUN）。真实模型服务与 Nous Wave 的直接集成列入后续资格工作。
+PC-local-first 是默认部署目标，但不是“只能本地”。官方 profile 可以使用本地 gateway，也可以使用远程 API；两者通过同一 capability contract 接入。敏感材料是否允许远程调用由 deployment/privacy policy 决定，而不是由 cognition object type 隐式决定。
