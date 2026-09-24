@@ -2,34 +2,40 @@
 
 \section{研究对象}
 
-Nous Wave 研究跨模型、会话、进程、检索索引和外部资源持续演化的主体认知。系统需要保留可追溯的经历与认知修订，在检索和上下文组装时说明信息来源，并在更换模型或服务后端、纠正数据和恢复运行时维持权限归属一致。\cite{nous-research-package}
+Nous Wave 研究跨模型、会话、进程、检索索引和外部资源持续演化的 Subject cognition/personality。系统需要保留可追溯的经历与认知修订，在检索和上下文组装时说明信息来源，并在更换模型或服务后端、纠正数据和恢复运行时维持权限归属一致。\cite{nous-research-package}
 
-主体（Subject）是跨模型和运行进程延续的逻辑身份；模型（Model）提供生成能力。模型、供应商、会话和进程可以变化，主体的认知对象、证据谱系和当前状态由相应的语义所有者管理。核心区分为 \texttt{Subject $\neq$ Model}。
+主体（Subject）是跨模型和运行进程延续的逻辑身份；模型（Model）提供生成、嵌入、重排或派生等能力。模型、供应商、会话和进程可以变化，主体的认知对象、证据谱系和当前状态由相应的语义所有者管理。核心区分为 \texttt{Subject $\neq$ Model}。
 
-Nous Wave 将记忆（Memory）作为基础认知领域，并围绕主体长期连续性组织可组合能力。完整目标还包括自我、关系、动机、认知运行时、外部资源引用和跨领域离线认知。普通智能体或检索增强生成系统可组合使用记忆、运行时、检索和资源访问；需要长期主体连续性的系统可进一步启用自我、关系和动机。
+Nous Wave 不是必须完整启用人格才能工作的单体系统。基础组合可以只启用 Memory、Cognitive Runtime、Retrieval 和 Resource capability，作为普通 Agent/RAG 的长期记忆与认知层；完整目标进一步加入 Self、Social、Motivation 及 offline cognition，使同一 Subject 在自我、社会关系、目标和长期经历上持续演化。Persona 是 Self 内部表示，不是模型 prompt 的别名，也不是单独顶层 owner。
 
 \section{对话历史、检索与长期主体状态}
 
-对话记录保存系统接收过的消息；记忆语义则说明主体当前接受什么认知、认知源自何次经历以及后续如何修订。检索增强生成可从外部知识中找到相关片段，主体是否接触材料、形成观察事件并接受长期认知由相应流程记录。向量相似度用于筛选候选材料；主体身份、认知指向、冲突处理、当前可用性和强化规则由领域合同决定。
+对话记录保存系统接收过的消息；Memory 说明主体当前保留哪些经历、事实或经验性做法，以及这些 cognition 来自什么 evidence、如何修订。Social 说明主体如何理解特定 person/dyad/group/community 的关系和语言惯例；Self 维护主体对自身的长期理解；Motivation 维护愿望、关切和 goal。检索服务只负责在当前 query 下找到候选，不决定这些对象是否真实、是否仍被 owner 接受或是否因此被强化。
 
-提示词中的人格设定用于描述一次模型调用条件。长期主体状态还需分别保存自我修订、证据谱系、近期活动、任务上下文和可重建检索索引。外部知识库继续承担全文解析、索引和同步；Nous Wave 维护资源身份、访问范围和引用，并在主体实际接触材料后记录观察事件（ObservationOccurrence）。\cite{nous-research-package,mem0-commit,graphiti-commit}
+外部知识库继续承担文档解析、全文索引和知识源同步；Nous Wave 维护 Resource identity、coverage/access 和 citation，在 Subject 实际接触材料后记录 ObservationOccurrence，再由 owner 决定是否形成长期 cognition。向量相似度、graph centrality、ranking score 和 model confidence 都属于服务/提案证据，不能替代 object identity、epistemic state 或 management authority。\cite{mem0-commit,graphiti-commit,nous-research-package}
 
-对话历史和检索增强生成适用于消息回顾与外部知识查找。涉及主体特定状态、认知修订、来源核验和跨运行恢复时，系统还需相应的语义所有者、持久化记录和校验流程。
+\section{与 Heptalogos 的研究边界}
+
+Heptalogos 是现实交互与 agency/runtime authority：它拥有 canonical IM/product facts、Opportunity/Reaction、行为许可、binding Commitment、CommunicationCommit 与外部 Effect。Nous Wave 拥有 cognition/personality。双方共享逻辑 SubjectId，但分别维护 bounded-context state；Goal 可以由 Nous Motivation 提出，是否形成承诺和执行仍由 Heptalogos 判断。
+
+这种分工使 Nous Wave 可以作为独立 memory/cognition system 被其他 Agent 使用，同时避免 Heptalogos Foundation 内部再实现一套 Memory/Social/Self ontology。
 
 \section{研究问题}
 
-当前研究聚焦以下问题：
+当前研究聚焦：
 
 \begin{enumerate}
-\item 如何在主体身份与模型、会话分离时，表达来源、观察事件、证据与认知修订？
-\item 如何将记忆、经历片段、日记、自我、关系、动机和运行时状态分配给语义所有者？
-\item 如何融合精确路径、实体、词项、稠密向量、时间、运行时、拓扑和外部资源证据，同时保持认知权威与检索服务各自职责？
-\item 如何在离线维护中提出、复核并路由假设，由领域所有者处理认知提案？
-\item 如何在权威数据、运行时状态和服务投影分离后，实现并发保护、投影重建、撤销和清除？
+\item 如何在 Subject identity 与 Model/Session/Process 分离时表达 Observation、Evidence、Aboutness、Revision 与 Lifecycle？
+\item 如何让 Memory、Self、Social、Motivation、Runtime 各自拥有明确对象和写入 Authority，同时复用共同的 evidence/revision/proposal foundation？
+\item 如何表达 Episode、Journal、CognitiveSchema、RelationshipGraph 与 LanguageConvention，而不把心理学概念机械映射成独立服务？
+\item 如何融合 Exact、Entity、Lexical、Dense、Temporal、Runtime、Topology 和 Resource retrieval，同时保持 Authority、Runtime 与 Serving Projection 分离？
+\item 如何让 use/outcome feedback、accessibility 与联想学习具有幂等、可解释、无自强化回路的语义？
+\item 如何在 offline maintenance 中提出、复核并路由 Hypothesis，由目标 owner 处理认知提案而不越权？
+\item 如何与 Heptalogos 在无跨数据库分布式 transaction 的条件下可靠交换 Observation、Context、Goal/Commitment、Use/Outcome 与 Maintenance opportunity？
 \end{enumerate}
 
 \section{研究状态标记}
 
-本文以 2026-09-22 研究资料包作为当前目标语义基线，以代码快照记录实现状态。\StatusTag{目标}{由研究资料包支持的目标语义}；\StatusTag{已实现}{源树中可定位的实现}；\StatusTag{已核验}{注明平台、日期和范围的运行记录}。候选算法、局部实验观察和开放问题分别标注。
+本文当前设计基线更新至 2026-09-24；基础研究来源包括 2026-09-22 研究资料包，代码事实依据 Nous Wave \texttt{e9af4ebd} 与 Heptalogos \texttt{a5287a0} 审查。\StatusTag{目标}{当前架构/语义结论}；\StatusTag{已实现}{指定源码快照中可定位的实现}；\StatusTag{已核验}{有日期、平台、范围和执行证据的资格结果}；\StatusTag{实验}{有局部实现或实验，但尚未成为可靠默认}；\StatusTag{开放}{仍可能改变 owner/semantic contract 的问题}。
 
-研究将长期主体连续性作为软件系统问题。心理学与哲学文献用于厘清问题结构，并与具体的数据结构和软件领域划分保持区分。\cite{olson2023,mcadams2006}
+心理学、认知科学、信息检索和多智能体文献用于帮助识别问题结构、反例与基线，不直接决定 Nous Wave 的数据库、参数或模块边界。\cite{olson2023,mcadams2006}

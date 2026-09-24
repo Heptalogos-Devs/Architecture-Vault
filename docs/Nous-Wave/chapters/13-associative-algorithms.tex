@@ -1,46 +1,81 @@
 \chapter{联想检索与算法研究}
 
-\section{算法比较的共同条件}
+\section{稳定问题合同与实验实现分离}
 
-稳定抽象对应语义问题类别，例如语义线索感知和联想扩展；具体算法名称留在内部实现层。比较替代方案时，应使用相同的图、种子、计算预算、候选集和诊断条件。先核验算法性质，再比较其对真实语料检索质量和成本的影响。\cite{nous-research-package}
+稳定抽象对应语义问题类别，例如 weak-cue discovery、bounded associative expansion 和 topology candidate generation；EPA、Residual、Wave、PPR 等具体算法只属于可替换实现/实验层。任何一个命名算法都不是 Nous Wave 的系统身份。比较替代方案时使用相同 Authority 输入、图构建规则、种子、硬过滤、计算预算、候选范围和诊断条件，先验证算法性质，再比较真实语料上的检索质量和总成本。\cite{nous-research-package}
 
 \footnotesize
 \begin{ReportWideTable}{>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{3.2cm}}
-\captionof{table}{联想检索机制及研究状态}\label{tab:algorithm-comparison}
+\captionof{table}{联想检索机制及当前研究状态}\label{tab:algorithm-comparison}
 \toprule
-\textbf{机制} & \textbf{解决的问题} & \textbf{当前证据与状态} & \textbf{下一步验证}\\
+\textbf{机制} & \textbf{解决的问题} & \textbf{当前状态} & \textbf{下一步验证}\\
 \midrule
-标签（Tag） & 稳定的语义线索身份。 & 当前权威对象已实现；标签字符串不等同于身份。 & 验证身份解析和语义指向。\\
-联想拓扑（AssociativeTopology） & 从类型化证据重建有界检索图。 & 当前服务层已有代次实现。 & 对照无拓扑、PPR 和 Wave。\\
-PPR/扩散 & 可解释的拓扑检索基线。 & 研究包建议作为候选对照；当前默认方案为 BoundedWaveExpansion。 & 固定图、种子和预算评测。\\
-Wave & 有界竞争式联想扩展。 & 当前默认实现；研究包指出状态合并存在近似风险。 & 与保留路径预算的版本、PPR 和非回溯扩展对比。\\
-残差金字塔（Residual Pyramid） & 生成弱线索候选。 & 局部差分试验报告路径、能量与残差一致；检索效用待测。 & 与稠密检索、多查询和模型分解对比。\\
-EPA & 构造语义线索基。 & 加权主成分分析的协方差处理待修正；检索效用待测。 & 修正权重处理后测量检索质量。\\
-排名融合 & 稳定融合多个证据类别。 & 当前实现的归一化依赖本批候选集合。 & 固定查询计划类别集合后测试排序稳定性。\\
+Tag & 稳定语义线索身份。 & Authority primitive；同名字符串不等于同一 TagId。 & 身份解析、别名、aboutness 与 query semantics。\\
+AssociativeTopology & 从类型化证据重建可查询图。 & Serving Projection；边导通率和中心性不是 Authority。 & 构建规则、fan/hub 抑制、重建一致性。\\
+无拓扑基线 & 验证 graph expansion 是否真的增加有效召回。 & 必需对照。 & Exact/Entity/Lexical/Dense 与真实语料评测。\\
+类型化 PPR/扩散 & 可解释、有界的图检索候选基线。 & 实验候选。 & 与无拓扑和 state-faithful Wave 同预算比较。\\
+Wave & 有状态的竞争式联想扩展。 & 已实现研究分支；当前 state merge 存在预算近似，\textbf{未验证为默认方案}。 & 保留充分状态后与 PPR/无拓扑比较。\\
+Residual Pyramid & 从当前 query residual 发现独立/弱语义方向。 & 数学核心局部差分较健康；作为实验 candidate generator。 & 测量端到端 recall/precision/cost。\\
+EPA & 从 Tag vector 集构造全局语义基。 & 当前 weighted PCA 处理存在已知问题；实验性，默认不依赖。 & 修正 $\sqrt{weight}$ 协方差语义后再评估 utility。\\
+固定计划融合 & 稳定融合多条检索证据。 & 目标基线为 fixed-plan weighted RRF；当前代码尚未对齐。 & 排序不变性与端到端检索评测。\\
 \bottomrule
 \end{ReportWideTable}
 \normalsize
 
+\section{关联 Authority 与 Serving 导通率}
+
+AssociationEvidence 保存有类型和来源的关系证据，不直接保存一个能随使用次数无限累加的“最终 graph weight”。TopologyBuilder 按版本化规则将有效证据投影为当前图的 edge conductance，并记录 implementation id、revision 和 config digest。
+
+图构建至少考虑：
+
+\begin{itemize}
+\item relation/association type；
+\item polarity、validity 和 source independence；
+\item fixed/normalized outbound mass；
+\item fan/hub suppression；
+\item query-dependent edge eligibility；
+\item counterevidence 与生命周期状态。
+\end{itemize}
+
+被 retrieved、ranked、projected 或 exposed 本身不增加 Authority support。只有明确有独立语义的 Use/Outcome 或新 Observation 才能成为 owner 可接受的 evidence。这样检索系统不会通过自己的历史输出制造越来越强的自我确认回路。\cite{anderson1983,nous-research-package}
+
 \section{Wave 与 PPR}
 
-Wave 用于预算受限的竞争式联想扩展。当前实现会合并相邻节点状态；若路径预算或动量影响后续合法可达性，仅按前一状态和当前状态合并就可能借用或丢失路径预算。研究资料包因此把 Wave 保留为待比较方案，并要求与保留充分状态的实现、类型化 PPR/扩散、非回溯扩展和无拓扑基线在相同预算下对比。\cite{nous-research-package,nous-code-snapshot}
+当前 Wave 实现将传播状态按前一节点和当前节点合并；不同路径如果具有不同 path budget，合并后的 energy 可以使用最强状态保留的预算继续传播，从而借用或丢失另一部分质量的可达性。该问题已经由构造/随机性质测试暴露，因此“代码存在”不等于“算法已经验证”。\cite{nous-code-snapshot,nous-research-package}
 
-目标研究建议以类型化、有界 PPR/扩散作为可解释基线。参数、边类型、种子构造和截断策略仍需实验决定；比较结果属于检索证据，认知真值由权威数据维护。
+下一轮比较至少包含：
 
-\section{残差金字塔}
+\begin{enumerate}
+\item 无 topology expansion；
+\item 类型化、有界 PPR/diffusion；
+\item 保留影响后续可达性的充分状态的 Wave；
+\item 如有必要，再加入 non-backtracking/single-hop 等较简单结构基线。
+\end{enumerate}
 
-研究资料包报告：在精确余弦服务方和相同 MGS 条件下，1000 组随机输入的路径、能量和最终残差保持一致。该结果反映此实验设置下的核心数学转写一致性；真实语料检索效用和用户任务表现列入后续评测。源代码通过有界候选搜索、正交基构造和残差能量停止条件实现该方法。\cite{nous-research-package,nous-code-snapshot}
+所有方案共享相同 hard filters、种子和预算；同时记录截断质量、hub 影响、path/state 数、延迟和最终检索效用。Contradiction/negative relation 不应未经语义定义直接作为普通非负 transition。
+
+\section{Residual Pyramid}
+
+Residual 当前实现按 residual query 检索候选 Tag direction，经 modified Gram--Schmidt 构造局部子空间，将当前 residual 投影并相减，再依据剩余能量停止。研究资料包记录的 1000 组局部 differential test 在相同 exact-cosine candidate provider 下没有发现路径、能量或最终 residual 差异。该结果只支持核心数学转写在该测试条件下的一致性，不证明真实 retrieval quality。\cite{nous-research-package,nous-code-snapshot}
+
+因此 Residual 可以保留为实验 candidate generator/query expansion seam，但不进入 Memory Reference Profile 的 correctness critical path。
 
 \section{EPA 加权问题}
 
-当代表向量的重复次数不同，加权均值和协方差都应保留样本密度。研究资料包报告，只对均值加权、却未以 $\sqrt{weight}$ 缩放矩阵行，会改变主方向；构造反例的偏差约为 $21.2^\circ$，并称 1000 组随机实验中偏差经常显著。该结果指出需先保持数学处理一致，再评估 EPA 对检索的贡献。\cite{nous-research-package}
+当前 EPA 在代表向量压缩后使用 multiplicity 计算 weighted mean，却在构造中心化 SVD matrix 时没有按 $\sqrt{weight}$ 缩放 row，因此没有保持原样本密度对应的 weighted covariance。研究材料中的构造反例显示主方向可发生约 $21.2^\circ$ 偏差，并在随机实验中频繁出现显著几何差异。\cite{nous-research-package,nous-code-snapshot}
 
-当前 \SourcePath{crates/memory-retrieval/src/cue_sensing.rs} 在均值计算中使用代表向量权重，构造中心化 SVD 矩阵时尚未按代表次数缩放各行；对应修正列入实现待办。\cite{nous-code-snapshot}
+这证明当前实现与目标 weighted PCA sample-density semantics 不一致，但不能直接推导 EPA 会降低最终检索质量。正确顺序是先修数学语义，再与更简单的 dense/multi-query/Residual baseline 比较；在此之前 EPA 保持实验性、默认不依赖。
 
-\section{排序稳定性}
+\section{固定计划排名与拓扑通道}
 
-研究资料包报告的反例显示：添加一个低分且带有新证据类别的无关候选后，按当前候选集合归一化可能改变原候选 A/B 的相对顺序。当前 \SourcePath{crates/memory-retrieval/src/ranking.rs} 仍据候选中出现的类别动态计算启用集合；固定查询计划中的证据类别和权重列入实现待办。\cite{nous-research-package,nous-code-snapshot}
+当前 ranking 根据本批候选出现了哪些 EvidenceFamily 动态改变归一化分母，并在融合结果上额外叠加 topology continuous bonuses。前者已经有无关候选导致原候选相对顺序变化的反例，后者使 QueryPlan 难以解释最终排序。目标实现改为：
 
-\section{实验依据}
+\begin{center}
+QueryPlan freeze lanes/weights $\rightarrow$ lane ranking $\rightarrow$ object-level collapse $\rightarrow$ weighted RRF $\rightarrow$ optional rerank/diversity
+\end{center}
 
-本章数值与局部性质来自研究资料包所记载的实验摘要。项目组后续归档脚本、运行环境、数据、试验记录和完整输出，以便按同一条件复核并评价检索效用。
+Topology 与其他通道一样输出 object-level rank，不作为无法从计划解释的隐藏加分项。\cite{nous-research-package,nous-code-snapshot}
+
+\section{阶段实现边界}
+
+Memory Reference Profile 的可靠演示只要求 Exact、Entity、Lexical、Dense 等基础通道形成稳定闭环；高级 topology、EPA、Residual、Wave/PPR 均可在同一 semantic seam 后继续研究。这样算法实验不会决定 Memory Authority、Evidence、Revision、Use、Purge 等基础语义是否正确。

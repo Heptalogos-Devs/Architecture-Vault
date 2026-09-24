@@ -8,6 +8,7 @@
 
 ```powershell
 Set-Location docs/Nous-Wave
+latexmk -C
 latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error main.tex
 Set-Location ../..
 New-Item -ItemType Directory -Force dist
@@ -16,6 +17,24 @@ Copy-Item tmp/pdfs/research/main.pdf dist/Nous_Wave_Current_Research_Report.pdf
 
 `latexmkrc` 将编译中间文件写入仓库根目录的 `tmp/pdfs/research`，并由 latexmk 调用 Biber。
 
-## 本次报告构建记录
+## 当前构建状态
 
-2026 年 9 月 23 日完成干净构建，输出 41 页 A4 PDF。构建环境为 TeX Live 2026、XeTeX 3.141592653-2.6-0.999998、latexmk 4.87、Biber 2.21。检查结果为：无未解析引文、交叉引用、缺字、Overfull 与 LaTeX 错误；日志保留少量非致命 Underfull 提示。版面抽查覆盖封面、摘要、目录、双栏正文、图表、公式、伪代码和参考文献，PDF 文本检查覆盖占位符与未解析引用。
+**当前 canonical source 已更新至 2026-09-24，尚未在本次文档增量中重新执行 TeX clean build。** 因此 `dist/Nous_Wave_Current_Research_Report.pdf` 在重新构建前只代表上一生成快照，不应被引用为最新设计内容。
+
+合并当前源文件后，需要在装有 TeX Live 2026 的开发机执行上述 clean build，并检查：
+
+- undefined citation / reference；
+- Biber error / warning；
+- missing glyph / font fallback；
+- Overfull / 严重 Underfull；
+- 大表格、TikZ 图、代码/路径换行；
+- PDF metadata、目录、书签和超链接；
+- 封面、摘要、普通双栏页、跨栏表、参考文献和附录的视觉结果。
+
+检查完成后，再更新本节的“最新已验证构建记录”和 `dist` PDF。
+
+## 上一已验证生成快照
+
+2026 年 9 月 23 日曾完成一次干净构建，输出 41 页 A4 PDF。构建环境：TeX Live 2026、XeTeX 3.141592653-2.6-0.999998、latexmk 4.87、Biber 2.21。当次检查记录为：无未解析引文、交叉引用、缺字、Overfull 或 LaTeX fatal error；日志保留少量非致命 Underfull 提示。版面抽查覆盖封面、摘要、目录、双栏正文、图表、公式、伪代码和参考文献。
+
+该记录仅证明 **2026-09-23 的源文件快照** 可以成功构建，不证明 2026-09-24 当前源文件已经验证。

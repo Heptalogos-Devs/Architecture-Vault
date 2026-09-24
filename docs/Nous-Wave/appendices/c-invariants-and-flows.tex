@@ -3,28 +3,43 @@
 \section{权威数据不变量}
 
 \begin{itemize}
-\item 主体（Subject）$\neq$ 模型（Model）；认知权威 $\neq$ 行为权威。
-\item 原始材料（Artifact）$\neq$ 观察事件（ObservationOccurrence）$\neq$ 记忆（Memory）。
-\item 消息事实（MessageFact）$\neq$ 记忆；资源检索结果 $\neq$ 已接受认知。
-\item 检索命中 $\neq$ 服务投影 $\neq$ 实际使用 $\neq$ 认知强化。
-\item 材料提及（Mention）$\neq$ 认知指向（Aboutness）；证据谱系 $\neq$ 独立佐证数量。
-\item 假设（Hypothesis）$\neq$ 已接受认知；主体目标（Goal）$\neq$ 行为承诺（Commitment）。
-\item 检索服务投影 $\neq$ 认知权威。
-\item 工作集淘汰 $\neq$ 忘却；忘却 $\neq$ 抑制 $\neq$ 清除。
+\item Subject $\neq$ Model；Cognitive Authority $\neq$ Heptalogos Behavior/Normative Authority。
+\item Artifact $\neq$ ObservationOccurrence $\neq$ Cognition；MessageFact $\neq$ Memory。
+\item Source Mention $\neq$ Cognition Aboutness；evidence lineage $\neq$ independent support count。
+\item Memory cognitive role $\neq$ formation mode；Relationship degree $\neq$ epistemic certainty。
+\item Hypothesis/proposal $\neq$ accepted cognition；Goal $\neq$ Commitment。
+\item retrieved/ranked $\neq$ exposed $\neq$ referenced/acted-on $\neq$ reinforced。
+\item UseEvent retry $\neq$ new use；durable use/outcome feedback 以稳定 event identity 幂等提交。
+\item Relationship Authority Graph $\neq$ Associative/Serving Topology。
+\item Resource awareness $\neq$ Resource contents $\neq$ Subject cognition。
+\item Durability $\neq$ Accessibility $\neq$ Relevance；Accessibility $\neq$ Truth $\neq$ Suppression $\neq$ Purge。
+\item 自然语言“忘掉” $\neq$ destructive management authority。
 \end{itemize}
 
 \section{认知形成与检索主链}
 
 \begin{enumerate}
-\item 主体实际接触原始材料或事件，形成观察事件（ObservationOccurrence）。
-\item 证据引用（EvidenceRef）固定来源区域、派生表示和来源谱系。
-\item 认知提案绑定主张、语义指向、当前修订和证据。
-\item 语义领域所有者核验来源、访问控制及对象版本后，提交不可变修订。
-\item 权威数据变更触发相应投影类别的更新。
-\item 查询计划在检索前固定通道与预算，多个视图按对象和修订聚合。
-\item 返回前重新核验当前修订、生命周期、访问控制和材料展开状态。
+\item Subject 实际接触材料或事件，记录 ObservationOccurrence 与稳定来源。
+\item EvidenceRef 固定 source/derived representation 与 provenance root。
+\item Formation/Revision proposal 绑定 target owner/object、claim/content、aboutness、expected revision/epoch 和 evidence。
+\item Memory/Self/Social/Motivation owner 核验来源、权限、对象版本和 owner-specific semantics 后提交 immutable revision 或 typed relation。
+\item Authority change 以同一可靠提交顺序推进 subject/owner sequence，并触发对应 Serving generation invalidation/outbox。
+\item QueryPlan 在候选前冻结 lanes、budgets、hard filters 与 fusion weights；各 lane 先按 object/revision 聚合多 views。
+\item fixed-plan fusion / optional rerank 后，在返回或 materialization 前重新核验当前 revision、lifecycle、access/ACL 与 purge/suppression 状态。
+\item 调用方真正消费 cognition 后，以 caller-stable UseEvent/Outcome receipt 幂等回报；candidate/retrieval trace 不自动形成 reinforcement。
 \end{enumerate}
+
+\section{Memory Reference Profile 主链}
+
+\begin{center}
+Observation $\rightarrow$ Evidence/Provenance $\rightarrow$ Memory Formation/Revision\\
+$\rightarrow$ PostgreSQL Authority $\rightarrow$ Exact/Entity/Lexical/Dense Serving\\
+$\rightarrow$ fixed QueryPlan + object-level fusion $\rightarrow$ Use/Outcome Receipt\\
+$\rightarrow$ Accessibility/Runtime update $\rightarrow$ Suppress/Restore/Purge/Recovery
+\end{center}
+
+该主链是 2026-10-27 前优先形成完整资格证据的纵向实现。Episode、Journal、CognitiveSchema、Social、Self、Motivation、Dream 保持目标设计，但不作为该闭环的 correctness 前置。
 
 \section{离线维护主链}
 
-宿主或 Heptalogos 提供维护租约与预算；Nous 固定来源快照后执行有界回放、关联扩展和反例搜索；结果先形成假设；随后重新核验来源与当前版本；最后由记忆、自我、关系或动机领域所有者决定接受、拒绝、标记冲突或过期。
+Heptalogos 或其他 Host 提供 maintenance opportunity/lease 与预算；Nous 固定输入 revision/source snapshot 后执行有界 replay、association/schema exploration、counterevidence search；结果先形成 Hypothesis；随后重新核验当前 evidence/owner state；最后由 Memory、Self、Social 或 Motivation owner 决定接受、拒绝、修订、标记冲突或保持未决。维护窗口不赋予 Dream 绕过 owner authority 的权限。
