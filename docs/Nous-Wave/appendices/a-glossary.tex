@@ -5,28 +5,37 @@
 \toprule
 \textbf{术语} & \textbf{本文定义}\\
 \midrule
-主体（Subject） & 跨模型、会话和执行进程保持逻辑身份的主体。\\
-认知主体（CognitiveSubject） & Nous Wave 中承载认知与人格状态的主体视图。\\
-行为主体（AgencySubject） & Heptalogos 中承载交互、行为和规范状态的主体视图。\\
+主体（Subject） & 跨模型、会话、执行进程和 provider 保持逻辑身份的长期主体。\\
+认知主体（CognitiveSubject） & Nous Wave bounded context 中承载认知与人格状态的 Subject 视图。\\
+行为主体（Agency/Product Subject） & Heptalogos bounded context 中承载交互、行为、规范与外部效果状态的 Subject 视图。\\
 观察事件（ObservationOccurrence） & 主体对一份材料或一个事件的一次真实接触记录。\\
-证据引用（EvidenceRef） & 指向来源观察事件、来源区域或派生表示的引用。\\
-记忆（Memory） & 经领域所有者接受并决定长期保留的主体认知。\\
-经历片段（Episode） & 对连续经历流进行组织并可随证据修订的解释。\\
-日记（Journal） & 组织一段经历或时期的独立、可修订叙事对象。\\
-标签（Tag） & 稳定的语义线索或概念描述。\\
-认知图式（CognitiveSchema） & 跨多段经历形成的可泛化结构认知；最终归属待定。\\
-联想拓扑（AssociativeTopology） & 从认知和关联证据派生、可重建的检索图。\\
-活动认知（Active Cognition） & 近期且容易重新激活的运行时认知集合。\\
+证据引用（EvidenceRef） & 指向来源 Observation、SourceRegion 或 DerivedRepresentation 的引用。\\
+记忆（Memory） & 经 Memory owner 接受并决定长期保留的主体认知对象。\\
+认知角色（Cognitive Role） & Memory 内容承担的稳定作用，目标基础集合为 Experiential、Declarative、ProceduralExperience。\\
+形成方式（Formation Mode） & 某次认知修订主要如何形成，基础集合为 Grounded 与 Synthesized。\\
+经历片段（Episode） & 对连续经历流进行组织并可随证据拆分、合并或重新分段的解释。\\
+日记（Journal） & 组织一段经历或时期的独立、可修订叙事对象，不作为事实 Authority。\\
+标签（Tag） & 稳定的语义线索/概念身份；同名字符串不自动表示同一 TagId。\\
+认知图式（CognitiveSchema） & Memory 域拥有的一等对象族，表达跨多段经历形成的可泛化结构认知，具有支持、反例、边界与 split/merge 语义。\\
+关联证据（AssociationEvidence） & 有类型、来源和生命周期的认知关联证据；不等于 Serving graph 的最终边权。\\
+联想拓扑（AssociativeTopology） & 从当前认知与关联证据派生、可重建的 Serving 检索图。\\
+社会认知（Social Cognition） & 拥有其语义依赖具体 person/dyad/group/community 的长期认知领域，首批对象族包括 RelationshipGraph 与 LanguageConvention。\\
+关系主张（RelationshipAssertion） & 某 Subject 对 from-entity 到 to-entity 的有向社会关系认知，relation degree 与 epistemic certainty 分开表示。\\
+语言惯例（LanguageConvention） & 在特定 person、dyad、group、community 或 channel 作用域中的词义、称呼、黑话或语用约定。\\
+人格（Persona） & Self 内的 dispositions/preferences/interaction tendencies 等表示层，不是独立顶层 owner。\\
+动机目标（Goal） & Motivation 中对未来状态的愿望、关切或目标；不自动成为 Heptalogos 的 binding Commitment。\\
+活动认知（Active Cognition） & 近期且容易重新激活的运行时 cognition set，不由固定 TTL 定义。\\
 任务上下文（WorkContext） & 可暂停、恢复或结束的任务/问题上下文。\\
-调用方工作集（ConsumerWorkingSet） & 面向特定调用方的有界认知选择结果。\\
-使用事件（UseEvent） & 针对特定对象或修订的使用或结果回执。\\
-假设（Hypothesis） & 由目标领域所有者核验处理的认知候选。\\
-维护租约（Maintenance Lease） & 宿主授权的维护时段、资源、网络和模型服务权限边界。\\
-可访问性（Accessibility） & 认知在特定线索或上下文中被回忆的难易程度。\\
-抑制（Suppression） & 保留认知内容，同时禁止普通读取或消费。\\
-撤回（Revocation） & 领域所有者明确撤回对某项认知主张的接受状态。\\
-清除（Purge） & 由管理权限执行、覆盖权威数据与派生材料的清除流程。\\
-外部资源（Resource） & 对外部知识或数据源的访问描述，不直接成为主体认知。\\
-服务代次（Serving Generation） & 具有输入水位和构建标识的不可变、可重建读优化制品。\\
+调用方工作集（ConsumerWorkingSet） & 面向特定调用方、预算与能力约束的有界认知选择结果。\\
+使用事件（UseEvent） & 调用方对特定 cognition 的幂等、类型化使用/结果回执；Exposed 不等于 meaningful use。\\
+假设（Hypothesis） & 尚未被目标 owner 接受的结构化认知候选，保留输入、支持、反证、不确定性与 producer identity。\\
+维护租约（Maintenance Lease） & Host 授权的维护时段、资源、网络和模型服务权限边界；不赋予认知写入 Authority。\\
+可访问性（Accessibility） & 给定线索、上下文、policy 与 effort 时认知被回忆的资格/成本，不等于存储强度或真值。\\
+抑制（Suppression） & 保留 cognition Authority，同时禁止普通认知读取/消费。\\
+撤回（Revocation） & owner 明确撤回对某项认知主张的当前接受状态。\\
+清除（Purge） & 由管理 Authority 驱动、协调 Authority/Serving/cache/context/material 等层的物理/语义清除流程。\\
+外部资源（Resource） & 对外部知识或数据源的访问描述；Resource content 不自动成为 Subject cognition。\\
+查询计划（QueryPlan） & 在候选生成前冻结 lanes、预算、hard filters、fusion/rerank/materialization 的内部执行计划。\\
+服务代次（Serving Generation） & 具有输入水位、implementation/config identity 的不可变、可重建读优化制品。\\
 \bottomrule
 \end{ReportWideTable}
