@@ -1,60 +1,44 @@
 \chapter{物理架构}
 
-\section{TypeScript Cognitive Host 与 Rust Cognitive Kernel}
+\section{宿主与内核}
 
-目标实现由 TypeScript Cognitive Host 负责公开 Core/Client orchestration、provider/model invocation、Resource adapters、Focus/Projection/Managed Context policy 以及 offline cognition workflow；Rust Cognitive Kernel 负责 owner validation、Authority transaction、revision/epoch/idempotency、检索 planning/fusion diagnostics、Serving generation/recovery 与可靠 persistence。\cite{nous-research-package,nous-code-snapshot}
+目标实现由 TypeScript 宿主和 Rust 内核组成。TypeScript 宿主负责模型服务、外部资源适配、调用方上下文、离线认知工作流、维护租约集成和面向产品的编排；Rust 内核负责认知领域语义、权威写入验证、持久化一致性、认知查询、检索计划、服务投影生命周期和管理操作。
+
+宿主不得直接绕过内核修改认知权威。内核不直接拥有模型供应商账户、外部资源凭据或产品行为调度。
 
 \begin{ReportWideFigure}
 \centering
 \begin{tikzpicture}[
-  block/.style={draw=NWBlue,rounded corners,align=center,text width=5.2cm,minimum height=1.15cm,inner sep=6pt},
-  data/.style={draw=NWRule,rounded corners,fill=NWLight,align=center,text width=3.25cm,minimum height=0.9cm,inner sep=5pt},
+  block/.style={draw=NWBlue,rounded corners,align=center,text width=5.0cm,minimum height=1.15cm,inner sep=6pt},
+  data/.style={draw=NWRule,rounded corners,fill=NWLight,align=center,text width=3.4cm,minimum height=0.9cm,inner sep=5pt},
   arrow/.style={-{Stealth[length=2mm]},thick,color=NWBlue}
 ]
-\node[block] (consumer) {调用方 / Heptalogos\\Observation、Cognitive Query、Context、Proposal、Use/Outcome};
-\node[block,below=0.65cm of consumer] (host) {Cognitive Host（TypeScript）\\Core/Client、Providers、Resources、Context、Offline Workflow};
-\node[block,below=0.65cm of host] (kernel) {Cognitive Kernel（Rust）\\Owner Validation、Authority、Retrieval、Serving Lifecycle};
-\node[data,below left=0.9cm and 0.45cm of kernel] (pg) {PostgreSQL\\Cognitive Authority};
-\node[data,below=0.9cm of kernel] (lex) {Tantivy\\Lexical Serving};
-\node[data,below right=0.9cm and 0.45cm of kernel] (dense) {Dense Serving\\pgvector / Qdrant 候选};
-\node[data,right=0.95cm of kernel] (object) {OpenDAL-backed\\Immutable Object Repository};
+\node[block] (consumer) {调用方 / Heptalogos\\认知请求、上下文贡献与结果回执};
+\node[block,below=0.65cm of consumer] (host) {Nous Wave 宿主（TypeScript）\\模型、资源、上下文与离线流程};
+\node[block,below=0.65cm of host] (kernel) {Nous Wave 内核（Rust）\\领域所有者、权威数据、查询与服务生命周期};
+\node[data,below left=0.85cm and 0.4cm of kernel] (pg) {PostgreSQL\\结构化权威数据};
+\node[data,below=0.85cm of kernel] (lex) {词项检索\\Tantivy};
+\node[data,below right=0.85cm and 0.4cm of kernel] (dense) {稠密检索\\可替换后端};
+\node[data,right=0.9cm of host] (object) {不可变对象库\\OpenDAL 接入};
 \draw[arrow] (consumer) -- (host);
 \draw[arrow] (host) -- (kernel);
 \draw[arrow] (kernel) -- (pg);
 \draw[arrow] (kernel) -- (lex);
 \draw[arrow] (kernel) -- (dense);
-\draw[arrow] (kernel.east) -- (object.west);
+\draw[arrow] (host.east) -- (object.west);
 \end{tikzpicture}
-\captionof{figure}{Nous Wave 目标物理架构。模型/资源调用位于 Host，认知提交、对象引用和 Serving lifecycle 由 Kernel 可靠维护。}
+\captionof{figure}{Nous Wave 的目标物理架构。权威数据与可重建检索服务分别维护。}
 \label{fig:physical-architecture}
 \end{ReportWideFigure}
 
-Host 与 Kernel 之间使用私有、认证、类型明确的 semantic RPC；公开 API 不泄露 EPA/Wave、USearch 等实现算法/引擎开关。Model/provider call 不放在 PostgreSQL transaction 中；Host 获得 proposal/derived material 后由 Kernel 重新校验 Subject、Evidence、expected revision/epoch 和 owner rules。
+\section{持久化与检索组件}
 
-\section{本机优先与可替换机制}
+PostgreSQL 保存结构化认知权威数据和事务状态。不可变对象库保存大型材料和二进制对象。Tantivy 提供词项检索；稠密检索后端和联想拓扑属于可替换的服务组件。所有服务组件都可以从权威数据和不可变材料重建。
 
-主要部署方向为 PC-local：受管理 PostgreSQL、Tantivy、一个稠密检索后端、可重建 AssociativeTopology 与 OpenDAL-backed object repository。本地模型网关与远程 API 遵循同一 capability contract；是否允许远程处理敏感材料由 deployment/privacy policy 决定。
+稠密检索后端不在本设计中锁定具体产品。后端选择由本机工作负载、过滤能力、多视图支持、资源占用、备份恢复和运维成本的下游评测决定。
 
-当前不把 USearch + pgvector + Qdrant 同时作为正式长期栈。USearch 是现有代码资产；目标默认 dense backend 在 pgvector/Qdrant 等候选间通过 filtered recall、multi-view、RAM/disk、build/restart、backup/restore 与安装复杂度 benchmark 冻结。
+\section{部署原则}
 
-\section{对象库提交边界}
+参考部署以个人计算机本地运行优先，允许本地模型与远程模型服务并存。配置、数据和可执行实例分别维护，使实例升级或替换不要求删除主体数据。
 
-大型/二进制 Artifact 与 DerivedRepresentation 采用不可变内容寻址对象库。可靠提交路径遵循：
-
-\begin{center}
-temporary write $\rightarrow$ digest/validation $\rightarrow$ durable publish/rename $\rightarrow$ PostgreSQL commit stable reference
-\end{center}
-
-事务失败可留下未引用 orphan，后续 GC；已经提交的 Authority reference 不允许长期指向缺失 material。Provider replacement 生成新的 DerivedRepresentation/ProducerSignature，不原地重写历史解释。
-
-\section{物理实现与语义归属}
-
-Domain owner、进程、crate/package 和数据库表不是一一对应。Memory/Self/Social/Motivation 是 semantic ownership；当前可先共同运行在 Rust Kernel 并共享 cognition foundation。只有独立 deployment/failure/security/scale reason 出现时才拆分物理服务。
-
-同理，一个 owner 可以拥有多个一等 object families：Memory 拥有 Memory/Episode/Journal/CognitiveSchema/Tag，不要求每种对象一个 crate。成熟库负责数据库、向量检索、文件系统、RPC、图结构等 mechanics；项目代码负责 identity、revision、evidence、authority、query semantics 和 lifecycle。
-
-\section{当前代码映射}
-
-Nous Wave 当前源树已经包含 TypeScript Core/Client、Rust Kernel、protobuf、PostgreSQL Authority、Memory service、Cognitive Runtime，以及 Tantivy、USearch、petgraph 等 Serving/algorithm assets。下一轮不是从零搭建物理框架，而是在这些资产上重新对齐 Memory taxonomy、Schema/Anchor、UseEvent、QueryPlan/ranking 与新的 owner boundaries。\cite{nous-code-snapshot}
-
-Heptalogos 当前个人仓库包含 headless Product Host、Foundation/Subject contracts、Management/Machine Operations 等体系。OpenClaw 是独立 Machine Operations Plane，不是 Subject cognition process。H 与 NW 的直接 Client/Subject integration 尚未完成，按第十五章的 typed contracts 后续接入。\cite{heptalogos-code-snapshot}
+管理接口为未来 CLI、管理 API 和图形界面提供稳定能力边界；目标设计不要求在 Nous Wave 仓库中实现特定 GUI。物理模块可以随着工程需要重组，只要不改变本文规定的语义所有权和系统边界。

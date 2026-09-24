@@ -1,3 +1,2 @@
-$bibtex_use = 2;
 $pdf_mode = 5;
-$out_dir = '../../tmp/pdfs/research';
+$out_dir = '../../tmp/pdfs/target-design';

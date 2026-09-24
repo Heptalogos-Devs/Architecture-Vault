@@ -1,11 +1,9 @@
 \chapter*{摘要}
 \addcontentsline{toc}{chapter}{摘要}
 
-Nous Wave 研究跨模型、会话和运行进程持续存在的 Subject cognition/personality。系统可以仅启用 Memory/Runtime/Retrieval 作为普通 Agent 或 RAG 的长期记忆能力，也可以进一步启用 Self、Social、Motivation 与 offline cognition，形成完整主体档案。本报告整理当前领域所有权、认知对象、证据与修订、运行时、检索、持久化和 Heptalogos 行为边界，并对照当前代码基线说明实现状态。
+Nous Wave 是面向长期运行人工智能主体的可组合认知与人格平台。主体身份独立于模型、会话、进程和检索索引；持久认知、认知运行时与检索服务投影分别维护。系统以可追溯的观察与证据为基础，管理记忆、自我、社会认知、动机及其修订，并通过认知查询、运行时工作集和离线认知流程向宿主提供持续的主体状态。
 
-当前设计将 Cognitive Authority、Semantic Runtime 与 Serving Projection 分离；Memory 使用正交的 cognitive-role/formation-mode 分类，CognitiveSchema 作为 Memory 域的一等对象族，旧 Anchor 本体被拆为认知图式与可重建联想拓扑。Social Cognition 采用主体视角的有向 RelationshipGraph，并为 person/dyad/group/community 等作用域维护 LanguageConvention。UseEvent、accessibility 和 retrieval fusion 进一步按幂等回执、动态检索资格与 fixed-plan object-level fusion 收敛。
+记忆型能力组合可以独立服务普通智能体和检索增强生成系统；完整主体能力组合在同一认知基础上增加自我、社会认知、动机与跨领域离线认知。Nous Wave 与 Heptalogos 共享稳定主体标识，但分别维护认知权威与行为、规范及外部效果状态。模型服务、外部知识资源和检索算法均属于可替换机制，不决定主体身份或认知真值。
 
-当前代码已经具备 PostgreSQL Authority、Evidence/Provenance、Memory revision、Runtime、Serving generation、TypeScript Core/Client 与 Rust Kernel 等可复用基础。Self constitution 与 Motivation lifecycle 仍是主要宏观开放问题；EPA、Residual、Wave/PPR、advanced accessibility 和 dense backend 属于实验/选型层。2026 年 10 月 27 日前的工程重点是把 Memory Reference Profile 做成一条从 Observation/Evidence 到检索、Use feedback、生命周期、恢复与 provenance tracing 的完整纵向闭环，而不削弱 Nous Wave 的长期完整架构。
-
-\textbf{关键词：} 长期主体；认知系统；记忆语义；社会认知；证据溯源；认知运行时；关联检索
+\textbf{关键词：} 长期主体；认知系统；记忆；自我；社会认知；动机；认知运行时；证据溯源；检索
 \clearpage

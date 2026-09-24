@@ -18,20 +18,7 @@
 \usepackage{hyperref}
 \usepackage{bookmark}
 \usepackage[nameinlink,noabbrev]{cleveref}
-\usepackage[
-  backend=biber,
-  style=numeric,
-  sorting=nyt,
-  maxbibnames=6,
-  giveninits=true,
-  doi=false,
-  url=true,
-  isbn=false
-]{biblatex}
-\AtBeginBibliography{\small\raggedright\setlength{\emergencystretch}{4em}}
 
-% Consistent Chinese report hierarchy: Song body text, Hei headings, and
-% smaller but readable captions/tables in the two-column body.
 \ctexset{
   chapter = {format=\centering\heiti\zihao{3},beforeskip=0pt,afterskip=1.2em},
   section = {format=\heiti\zihao{4},beforeskip=1.1em,afterskip=0.55em},
@@ -40,7 +27,6 @@
 }
 \captionsetup[table]{font=small,labelfont=bf,textfont=normalfont,skip=5pt}
 \captionsetup[figure]{font=small,labelfont=bf,textfont=normalfont,skip=5pt}
-
 \usetikzlibrary{arrows.meta,calc,fit,positioning,shapes.geometric}
 
 \definecolor{NWInk}{HTML}{24323A}
@@ -63,7 +49,6 @@
 \hypersetup{
   colorlinks=true,
   linkcolor=NWBlue,
-  citecolor=NWBlue,
   urlcolor=NWBlue,
   pdfborder={0 0 0}
 }
@@ -95,22 +80,8 @@
   keepspaces=true
 }
 
-\newcommand{\StatusTag}[2]{%
-  \begingroup
-  \setlength{\fboxsep}{2.5pt}%
-  \colorbox{NWLight}{\textcolor{NWInk}{\footnotesize\bfseries #1}}%
-  \endgroup
-  \nobreak\hspace{0.35em}#2%
-}
-
-\newcommand{\EvidenceNote}[1]{%
-  \begin{quote}\small\color{NWInk}\hrule\medskip #1\medskip\hrule\end{quote}%
-}
-
-\newcommand{\SourcePath}[1]{{\small\nolinkurl{#1}}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
-% Wide tables and diagrams span both columns at their source position.
 \newenvironment{ReportWideTable}[1]{%
   \begin{strip}
   \begin{minipage}{\textwidth}

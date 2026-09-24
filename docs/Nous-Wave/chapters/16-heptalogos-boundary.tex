@@ -1,0 +1,33 @@
+\chapter{与 Heptalogos 的系统边界}
+
+\section{共享主体身份}
+
+Nous Wave 与 Heptalogos 使用同一稳定 SubjectId，但分别维护认知主体和行为主体的领域状态。共享标识用于引用同一长期主体，不表示两个系统共享可变对象或数据库事务。
+
+\section{职责划分}
+
+\begin{ReportWideTable}{>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{5.4cm}>{\raggedright\arraybackslash}p{5.4cm}}
+\captionof{table}{Nous Wave 与 Heptalogos 的主要职责}\label{tab:nw-h-boundary}
+\toprule
+\textbf{系统} & \textbf{主要职责} & \textbf{主要输出}\\
+\midrule
+Nous Wave & 观察与证据、记忆、自我、社会认知、动机、认知运行时、认知查询、资源认知和离线认知 & 认知对象、上下文贡献、认知提案、目标、使用与认知状态\\
+Heptalogos & 外部即时通信和环境摄入、规范交互事实、反应调度、行为审查、承诺与义务、通信提交、工具与外部效果、产品生命周期 & 行为决策、约束性承诺、外部效果、维护机会和结果回执\\
+\bottomrule
+\end{ReportWideTable}
+
+\section{交互数据流}
+
+外部世界事实由 Heptalogos 或其他宿主摄入并建立规范交互事实。主体实际接触相应材料时，Nous Wave 记录观察事件和证据，并根据领域规则形成认知提案。
+
+行为处理需要长期主体状态时，Heptalogos 通过认知查询或上下文贡献接口读取 Nous Wave。返回的记忆、自我、社会认知和动机只作为行为决策输入；行为权限和外部效果仍由 Heptalogos 决定。
+
+动机领域产生的目标可以提交给 Heptalogos 采纳。Heptalogos 形成、完成、拒绝或取消承诺后，以类型明确的结果回执返回 Nous Wave。结果可以形成新的观察、使用事件或认知修订提案。
+
+\section{维护机会}
+
+Heptalogos 或其他宿主可以根据空闲、离线、维护模式和资源状态向 Nous Wave 授予维护租约。Nous Wave 在租约内选择认知维护工作，并在前台活动抢占或宿主取消时停止。
+
+\section{权限边界}
+
+Nous Wave 的记忆、自我、社会认知和目标不能绕过 Heptalogos 的系统安全、操作权限和行为规范。Heptalogos 的系统管理命令也不应伪装为主体自然形成的认知；需要修改认知时，通过明确的管理或认知提案接口执行。

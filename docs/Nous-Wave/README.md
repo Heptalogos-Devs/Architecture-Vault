@@ -1,32 +1,37 @@
-# Nous Wave 当前研究总报告
+# Nous Wave 文档入口
 
-本目录维护 Nous Wave 的**当前态研究与系统设计报告源文件**。基础研究资料来自 2026-09-22 的完整研究包，当前正文已进一步纳入 2026-09-24 对 Memory taxonomy、CognitiveSchema、Social Cognition、UseEvent、accessibility、retrieval 与 Heptalogos 边界的设计收敛。
+本目录保存 Nous Wave 的目标设计、设计论证、研究证据、当前工程状态和实施计划。不同文档承担不同职责，不能互相替代。
 
-当前代码审查基线：
+## 首要文档
 
-- Nous Wave：`ArsvineZhu/Nous-Wave@e9af4ebd8a77d316c78764fd85836e6de8d9b7ee`
-- Heptalogos：`ArsvineZhu/Heptalogos@a5287a01b42e3d09f445e96982caf6842ed74674`
+- **[目标设计 PDF](https://github.com/Heptalogos-Devs/Architecture-Vault/releases/download/nous-wave-target-design-latest/Nous_Wave_Target_Design.pdf)**：正式设计文档。只陈述系统应当是什么，不记录设计历史、方案比较、实验、代码现状或施工计划。
+- **[LaTeX 目标设计源文件](main.tex)**：PDF 的规范源文件。
+- **[文档职责与阅读顺序](DOCUMENT_MODEL.md)**：说明各类文档的权威范围。
+- **[设计决定索引](DECISIONS.md)**：面向人和研发 Agent 的高密度入口，列出已经确定的设计决定及其详细位置。
 
-章节资料来源和实现快照边界见 [SOURCE_MAP.md](SOURCE_MAP.md)。报告正文不记录设计演化史，只描述当前有效设计、实现事实、实验状态和真正开放的问题。
+## 论证与研究
 
-## 构建
+- [设计论证](rationale/README.md)：解释设计选择、比较替代方案、记录失败模式和设计后果。这里可以讨论方案，但不覆盖目标设计。
+- [研究与实验](research/README.md)：保存外部研究、算法实验、数学核对和软件研究快照。
 
-正文采用 A4 双栏排版，封面、摘要和目录为单栏；跨栏图表在正文位置横跨两栏。构建说明见 [BUILD.md](BUILD.md)。
+## 工程推进
 
-- [LaTeX 主文件](main.tex)
-- [来源映射](SOURCE_MAP.md)
-- [仓库内 PDF 快照](../../dist/Nous_Wave_Current_Research_Report.pdf)
-- [最新 GitHub Actions PDF artifact](https://github.com/Heptalogos-Devs/Architecture-Vault/actions/workflows/build-pdf.yml)
-- [稳定 PDF 下载地址](https://github.com/Heptalogos-Devs/Architecture-Vault/releases/download/nous-wave-report-latest/Nous_Wave_Current_Research_Report.pdf)
+- [当前工程状态](CURRENT_STATE.md)：描述代码现在实际做到什么，不定义目标设计。
+- [未决问题](OPEN_QUESTIONS.md)：记录尚未进入目标设计的研究问题和规格问题。
+- [实施计划](plans/README.md)：从目标设计和当前状态下降到可执行规格、代码和验证。
+- [实现审查](audits/README.md)：记录代码与目标设计之间的差距、缺陷和迁移事项。
+- [编译说明](BUILD.md)：目标设计 PDF 的本地和持续集成构建方式。
 
-> `dist/Nous_Wave_Current_Research_Report.pdf` 是生成制品。当前源文件发生设计更新后，在执行一次 clean XeLaTeX/Biber build 并完成引用/版面检查前，PDF 不应被视为最新设计快照；**源文件是当前 canonical document**。
+## 建议阅读顺序
 
-## 当前设计收敛摘要
+新的研发 Agent 依次读取：
 
-- Nous Wave 是可组合的 Subject cognition/personality platform；Memory 可独立服务普通 Agent/RAG，高级 Self/Social/Motivation 不是基础运行前提。
-- Memory taxonomy 使用 `cognitive_role × formation_mode`，不再以 `Specific / Integrative / Procedural` 互斥分类。
-- CognitiveSchema 是 Memory 域的一等对象族；目标架构不再保留万能 Anchor Authority。
-- Social Cognition 取代较窄的 Relationship 顶层 owner，首批对象族为有向 RelationshipGraph 与 socially scoped LanguageConvention。
-- UseEvent 需要 caller-stable identity 和幂等语义；`retrieved/exposed` 不等于 reinforcement。
-- QueryPlan 在候选生成前冻结 lanes/weights/budgets；基础融合采用 object-level fixed-plan weighted RRF。
-- EPA、Residual、Wave/PPR 都是算法实验，不能定义 Memory correctness；10 月 27 日前工程重点是 Memory Reference Profile 的完整纵向闭环。
+1. `DOCUMENT_MODEL.md`
+2. `DECISIONS.md`
+3. 目标设计中与任务相关的章节
+4. 对应的 `rationale/` 论证文档
+5. `CURRENT_STATE.md` 与相关 `audits/`
+6. 当前 `plans/`
+7. 进入代码仓库后，再读取代码仓自身的架构、设计决定、可执行规格和实现
+
+目标设计与设计论证发生冲突时，以目标设计为准；当前代码与目标设计发生冲突时，差异进入审查和计划，不反向改写目标设计。
