@@ -22,6 +22,7 @@ Vault 不复制 Heptalogos 全部实现规范。当前规范以个人仓库中�
 - [报告编译说明](docs/Nous-Wave/BUILD.md)
 - [仓库内 PDF 快照](dist/Nous_Wave_Current_Research_Report.pdf) — 最新源代码对应的 PDF 从 Actions 成功运行的 artifact 下载。
 - [GitHub Actions PDF 构建](https://github.com/Heptalogos-Devs/Architecture-Vault/actions/workflows/build-pdf.yml) — 成功运行的 artifact 对应其源代码提交。
+- [稳定 PDF 下载地址](https://github.com/Heptalogos-Devs/Architecture-Vault/releases/download/nous-wave-report-latest/Nous_Wave_Current_Research_Report.pdf) — `main` 分支成功构建后自动更新。
 
 Nous Wave 当前研究报告承担跨项目 cognition/personality 设计基线；可执行 Architecture/Decisions/Specs 将在 Nous-Wave 代码仓库中按该设计重新下降。
 

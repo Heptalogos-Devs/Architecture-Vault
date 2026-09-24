@@ -18,7 +18,7 @@ Journal 维护适合在宿主授予的维护窗口中执行；宿主决定何时
 
 推荐逻辑结构为：
 
-\begin{verbatim}
+\begin{lstlisting}
 CognitiveSchema
   schema_id
   subject_id
@@ -37,10 +37,11 @@ SchemaSupport
   cognitive_ref
   role = supporting | counterexample | boundary_case
   provenance
-\end{verbatim}
+\end{lstlisting}
 
 增加新的 supporting evidence 并不必然产生内容 revision。如果图式本身的结构解释和适用范围没有改变，可以增加证据关系并推进对象纪元；只有 description、scope、boundary 或语义判断变化时才形成新的 CognitiveSchemaRevision。这避免每个新证据都制造无意义内容版本。
 
+\clearpage
 \section{Tag、CognitiveSchema 与 AssociativeTopology}
 
 \footnotesize

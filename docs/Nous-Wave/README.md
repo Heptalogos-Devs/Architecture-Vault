@@ -17,6 +17,7 @@
 - [来源映射](SOURCE_MAP.md)
 - [仓库内 PDF 快照](../../dist/Nous_Wave_Current_Research_Report.pdf)
 - [最新 GitHub Actions PDF artifact](https://github.com/Heptalogos-Devs/Architecture-Vault/actions/workflows/build-pdf.yml)
+- [稳定 PDF 下载地址](https://github.com/Heptalogos-Devs/Architecture-Vault/releases/download/nous-wave-report-latest/Nous_Wave_Current_Research_Report.pdf)
 
 > `dist/Nous_Wave_Current_Research_Report.pdf` 是生成制品。当前源文件发生设计更新后，在执行一次 clean XeLaTeX/Biber build 并完成引用/版面检查前，PDF 不应被视为最新设计快照；**源文件是当前 canonical document**。
 

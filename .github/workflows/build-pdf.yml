@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-pdf:
@@ -41,3 +41,22 @@ jobs:
           path: dist/Nous_Wave_Current_Research_Report.pdf
           if-no-files-found: error
           retention-days: 90
+
+      - name: Update stable PDF release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: nous-wave-report-latest
+          RELEASE_TITLE: Nous Wave Current Research Report (latest)
+        run: |
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" dist/Nous_Wave_Current_Research_Report.pdf \
+              --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$RELEASE_TAG" dist/Nous_Wave_Current_Research_Report.pdf \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_SHA" \
+              --title "$RELEASE_TITLE" \
+              --notes "自动构建的 Nous Wave 当前研究总报告。该 Release 资产随 main 分支成功构建更新。"
+          fi

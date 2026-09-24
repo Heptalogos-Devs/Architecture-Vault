@@ -13,8 +13,11 @@
 \listoftables
 \input{frontmatter/abbreviations.tex}
 
-\twocolumn
+\let\ReportOriginalClearDoublePage\cleardoublepage
+\let\cleardoublepage\clearpage
 \mainmatter
+\let\cleardoublepage\ReportOriginalClearDoublePage
+\twocolumn
 \input{chapters/01-problem.tex}
 \input{chapters/02-invariants.tex}
 \input{chapters/03-domain-authority.tex}

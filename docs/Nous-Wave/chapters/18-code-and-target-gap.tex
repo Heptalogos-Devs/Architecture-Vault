@@ -29,27 +29,36 @@ Heptalogos 当前产品代码基线为 \texttt{ArsvineZhu/Heptalogos@a5287a0}。
 
 \section{实现与目标对照}
 
+\clearpage
 \small
 \begin{ReportWideTable}{>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.1cm}}
-\captionof{table}{当前代码与目标研究语义的对应状态}\label{tab:code-gap}
+\captionof{table}{当前代码与目标研究语义的对应状态（上）}\label{tab:code-gap}
 \toprule
 \textbf{领域} & \textbf{当前实现} & \textbf{目标设计} & \textbf{处置}\\
 \midrule
 顶层 cognition & Subject Core、Runtime、Memory 为当前主要 owner；Self/Social/Motivation 尚无实现。 & Memory、Self、Social、Motivation、Runtime；Persona 属 Self。 & Architecture/Spec 需重写，高级 owner 后续实现\\
-Memory taxonomy & \texttt{MemoryClass=Specific/Integrative/Procedural}。 & \texttt{cognitive\_role} 与 \texttt{formation\_mode} 正交。 & 替换\\
-Evidence/aboutness & temporal lineage、revision relations、\texttt{memory\_revision\_entities} 已实现。 & 来源 mention、aboutness、evidence、revision/lifecycle 正交。 & 直接继承并补验收\\
-Tag/Anchor/Schema & Tag、Anchor、AnchorSupport、AssociationEvidence 已实现；无 CognitiveSchema。 & Tag 保留；CognitiveSchema 是 Memory-owned first-class family；Anchor Authority 移除；Topology 可重建。 & Anchor 迁移/替换，新增 Schema 后续实现\\
+Memory taxonomy & \texttt{MemoryClass=Specific/\allowbreak Integrative/\allowbreak Procedural}。 & \texttt{cognitive\_role} 与 \texttt{formation\_mode} 正交。 & 替换\\
+Evidence/\allowbreak aboutness & temporal lineage、revision relations、\texttt{memory\_revision\_entities} 已实现。 & 来源 mention、aboutness、evidence、revision/lifecycle 正交。 & 直接继承并补验收\\
+Tag/\allowbreak Anchor/\allowbreak Schema & Tag、Anchor、AnchorSupport、AssociationEvidence 已实现；无 CognitiveSchema。 & Tag 保留；CognitiveSchema 是 Memory-owned first-class family；Anchor Authority 移除；Topology 可重建。 & Anchor 迁移/替换，新增 Schema 后续实现\\
 Association weight & Authority 有通用 \texttt{support\_value:f64}。 & Authority 保存 typed evidence；Serving builder 生成 edge conductance。 & 重设语义\\
-Accessibility & AUTO/NORMAL/DEEP/EXPLICIT 与 90/365 天规则已实现。 & Authority 与 dynamic accessibility 分离；AUTO 默认不以硬年龄排除合法 Memory。 & 保留实验资产，改默认/合同\\
+Accessibility & AUTO/\allowbreak NORMAL/\allowbreak DEEP/\allowbreak EXPLICIT 与 90/365 天规则已实现。 & Authority 与 dynamic accessibility 分离；AUTO 默认不以硬年龄排除合法 Memory。 & 保留实验资产，改默认/合同\\
+\bottomrule
+\end{ReportWideTable}
+\clearpage
+\begin{ReportWideTable}{>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{4.0cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.1cm}}
+\captionof{table}{当前代码与目标研究语义的对应状态（下）}
+\toprule
+\textbf{领域} & \textbf{当前实现} & \textbf{目标设计} & \textbf{处置}\\
+\midrule
 Use feedback & 使用事件持久化并可更新 runtime；事件 ID 由服务端每次生成。 & caller-stable event id + digest 幂等；Exposed 与 meaningful use 分开。 & P0 修复\\
 QueryPlan & 有 semantic effort、candidate/topology/resource budget。 & 查询前冻结 lanes、per-lane budget、weights、fusion/rerank。 & 扩展\\
 Ranking & family set/denominator 取决于本批候选，并有 topology bonus。 & object-level collapse + fixed-plan weighted RRF；Topology 为独立 lane。 & P0 修复\\
 EPA & 代码已实现代表向量压缩与 SVD。 & 修正 weighted covariance 后才进入 utility 评测。 & 实验，默认不依赖\\
 Residual & 有 bounded candidate + MGS + residual subtraction。 & 实验 candidate generator；不作为 correctness 前置。 & 保留，评测\\
 Wave & BoundedWaveExpansion 已实现，state 按 previous/current 合并。 & 与 typed PPR、state-faithful Wave、无拓扑比较。 & 实验，不能视作已验证默认\\
-Episode/Journal/Schema & 无完整一等对象合同/实现。 & 属 Memory domain；非中期 Memory Reference Profile 前置。 & 继续设计，后续实现\\
-Social/Self/Motivation & 未实现。 & 高级 cognition owner。 & 中期不实现，继续 Spec 研究\\
-Heptalogos 集成 & H 当前保留高级 cognition integration seams；无直接 Nous client/Subject bridge。 & typed Observation/Context/Proposal/Use/Outcome/Maintenance contracts。 & 跨库 Spec 待编写\\
+Episode/\allowbreak Journal/\allowbreak Schema & 无完整一等对象合同/实现。 & 属 Memory domain；非中期 Memory Reference Profile 前置。 & 继续设计，后续实现\\
+Social/\allowbreak Self/\allowbreak Motivation & 未实现。 & 高级 cognition owner。 & 中期不实现，继续 Spec 研究\\
+Heptalogos 集成 & H 当前保留高级 cognition integration seams；无直接 Nous client/Subject bridge。 & typed Observation/\allowbreak Context/\allowbreak Proposal/\allowbreak Use/\allowbreak Outcome/\allowbreak Maintenance contracts。 & 跨库 Spec 待编写\\
 \bottomrule
 \end{ReportWideTable}
 \normalsize
@@ -59,9 +68,9 @@ Heptalogos 集成 & H 当前保留高级 cognition integration seams；无直接
 中期工程目标不是缩小 Nous Wave 的长期设计，而是在完整架构中选择边界最成熟的 Memory owner 做一条 production-shaped vertical slice。验收范围为：
 
 \begin{enumerate}
-\item Artifact/Observation/Evidence/Provenance/Entity aboutness 闭环；
+\item Artifact/\allowbreak Observation/\allowbreak Evidence/\allowbreak Provenance/\allowbreak Entity aboutness 闭环；
 \item MemoryObject/Revision 与正交 taxonomy；
-\item correction/reinterpretation/contradiction/derivation 和 lifecycle；
+\item correction/\allowbreak reinterpretation/\allowbreak contradiction/\allowbreak derivation 和 lifecycle；
 \item explicit/model-assisted formation、suppress/restore/purge 与 AccessPolicy；
 \item Exact/Entity/Lexical/Dense，固定 QueryPlan、对象级聚合和 weighted RRF；
 \item caller-idempotent UseEvent，明确 retrieved/exposed/referenced/acted-on 区别；
