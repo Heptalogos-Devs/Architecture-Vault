@@ -1,38 +1,80 @@
 \chapter{待解决的研究问题}
 
-\section{语义类型与领域所有权}
+当前真正可能改变顶层 cognition ownership 的问题已经明显减少。CognitiveSchema 归属已收敛为 Memory domain 内的一等对象族；Social Cognition 的方向性关系图和 LanguageConvention 也已形成目标语义。以下问题继续保持 OPEN，避免用实现便利提前冻结。
+
+\section{宏观语义与领域所有权}
 
 \begin{enumerate}
-\item \textbf{自我构成：} 认知种子中哪些内容参与自我修订演化，哪些由宿主或系统宪制约束？涉及构成约束的认知，应由何种管理操作允许覆盖或重释？
-\item \textbf{动机范围与生命周期：} 价值观、需要和兴趣如何归属？目标冲突、激活、满足、放弃和暂停分别需要哪些最小语义？
-\item \textbf{认知图式归属：} 图式可否由综合型记忆完整表达，还是需要独立身份、生命周期、查询和写入合同？
+\item \textbf{Self / Cognitive Seed constitution：} Seed 中哪些内容只是可演化的初始条件，哪些属于不能由普通 cognition 自我覆盖的 constitutional constraint？Self Model、Persona/dispositions、values/preferences 与 narrative identity 如何在同一 Self owner 中保持不同修订和冲突语义？管理员修改 Seed 时，是修改初始化来源、产生新的 constitution revision，还是提交 Self proposal？
+\item \textbf{Motivation 范围与生命周期：} values、needs、interests 分别属于 Self 还是 Motivation？Goal 的激活、优先级、冲突、满足、暂停、放弃和过期需要哪些最小 durable semantics？Runtime priority 与长期 Motivation 如何分离？
 \end{enumerate}
 
-\section{治理规则与可靠性合同}
+Subject fork/clone 的原则已经确定为新 SubjectId + inherited immutable lineage + branch-local mutable heads；具体 copy-on-write、purge lineage 和导出/迁移合同属于实现/产品层，不再作为顶层 ontology blocker。
 
-项目组需明确来源依赖变化、访问权撤销、过期提案、证据独立性、清除后的审计元数据、主体分支谱系清理，以及跨领域提案的当前状态核验。每项规则均需落实到责任领域和失败合同。
+\section{Social Cognition 的规格问题}
 
-\section{算法与评测}
-
-后续对照试验包括：
+Social 顶层 owner 和两个首批对象族已经确定，剩余问题应在 Social Spec 中收敛，而不是重新打开领域边界：
 
 \begin{itemize}
-\item 在相同图和预算下比较无拓扑、单跳、类型化 PPR、非回溯扩展和保留路径状态的 Wave；
-\item 修正 EPA 权重处理后测量弱线索检索效用；
-\item 比较 Residual、稠密检索、结构化多查询和模型分解；
-\item 评估对象级多视图聚合与固定查询计划的排序稳定性；
-\item 对照无衰减、仅按时间衰减、时间与类型化使用联合调整等可访问性方案；
-\item 比较梦境探索和常规记忆整理在支持精度、反例召回、重复循环与计算成本方面的表现。
+\item relation kind 的最小 canonical set，以及哪些关系允许 ordinal degree；
+\item degree 的 operational semantics，避免跨 relation kind 的无定义算术比较；
+\item Person/Dyad/Group/Community/Channel 等 LanguageConvention scope 的最小编码；
+\item 显式说明、重复成功指代、repair/acknowledgement 等 evidence 如何进入 formation proposal；
+\item competing scoped meanings、relation contradictions、split/merge 和 identity rebind 的 revision contract；
+\item social graph 的 Serving projection 如何处理 fan-out、hub、方向性和 query-specific inverse view。
 \end{itemize}
 
-\section{部署与模型服务}
+这些问题不会阻塞 Memory Reference Profile。
 
-本机部署需通过真实过滤、多视图查询、重建、崩溃恢复和备份恢复评测，在 Qdrant 与 pgvector 之间确定稠密检索方案，并明确安装、更新、备份、恢复、模型服务和外部资源适配流程。
+\section{记忆、运行时与检索实验}
 
-\section{实现合同}
+以下问题已经有稳定 semantic seam，但默认算法/参数需要真实工作负载验证：
 
-记忆角色集合、经历片段边界信号、活动状态阈值、关系字段、梦境探索种子与停止策略，以及 SQL、Proto、Rust、TypeScript 接口，需通过规格或实验收敛。主体分支写时复制和本地模型配置也需纳入实现合同。\cite{nous-research-package}
+\begin{itemize}
+\item AUTO accessibility：比较无硬衰减、time-only、time+typed-use 以及更复杂候选模型；
+\item multi-view aggregation：best-view、capped multi-view 及其 recall/cost；
+\item topology utility：在相同 hard filters、图、种子和预算下比较 no-topology、typed PPR、state-faithful Wave 等；
+\item EPA：修正 weighted covariance 后再评价是否带来弱线索检索收益；
+\item Residual：与普通 dense、多查询和模型分解比较真实 retrieval utility；
+\item reranking：确定在 PC-local workload 中何时收益足以抵消模型成本；
+\item dense backend：按 filtered recall、multi-view、RAM/disk、build/restart、backup/restore 和部署复杂度比较 pgvector/Qdrant 等候选。
+\end{itemize}
 
-\section{与 Heptalogos 的集成}
+算法实验不能改变 Authority identity、Evidence、Revision、UseEvent、Suppression/Purge 等基础语义。
 
-Heptalogos 是完整主体档案的主要目标使用方。跨库集成需先确定 SubjectId 提供方式、认知提案、使用与结果回执、维护租约，再以端到端场景确认两侧的权威数据和失败处理。
+\section{Episode、Journal 与 Offline Cognition 的实现合同}
+
+Episode/Journal 的对象性质已明确，仍需在实现前写清：
+
+\begin{itemize}
+\item Episode boundary proposal 的输入信号、split/merge/re-segment 与历史引用解析；
+\item Journal source revision、复核状态、重写边界和 retrieval role；
+\item Heptalogos maintenance opportunity/lease 的资源、取消和 deadline 语义；
+\item Dream seed selection、novelty/quality stop、循环抑制、counterevidence search 和 proposal routing；
+\item Hypothesis 的 stable identity、输入引用、producer signature、uncertainty 和 owner decision receipt。
+\end{itemize}
+
+这些合同属于后续 Memory/offline cognition wave，不作为 10 月 27 日 Memory Reference Profile 的必要条件。
+
+\section{可靠性与跨域合同}
+
+需要落到 Spec/transaction/test 的问题包括：
+
+\begin{itemize}
+\item UseEvent request/event idempotency 与 timeout-after-commit；
+\item projection outbox/watermark、stale result revalidation 和 rebuild failure；
+\item purge 对 Authority、Serving、cache/context、material、backup/export retention 的一致语义；
+\item 来源访问权撤销和 derived material 的 invalidation；
+\item Heptalogos 与 Nous Wave 的 Subject provisioning、Observation、Context、Goal/Commitment、Use/Outcome、Maintenance handoff；
+\item 不使用跨库分布式 transaction 时的可靠事件交接、receipt 和重试。
+\end{itemize}
+
+\section{从研究到执行规格}
+
+当前最大工程缺口已经不是继续增加宏观概念，而是把已收敛的设计下降为可执行合同：
+
+\begin{center}
+owner/object semantics $\rightarrow$ operations $\rightarrow$ Proto/SQL/types $\rightarrow$ transaction/CAS/idempotency $\rightarrow$ projection invalidation $\rightarrow$ acceptance tests $\rightarrow$ implementation Plan
+\end{center}
+
+Memory 是第一套走完整条链路的 Reference Profile；它完成后，Social、Motivation 和 Self 应复用同一 Evidence/Revision/Proposal/Use 基础，而不是各自重新发明 cognition infrastructure。
