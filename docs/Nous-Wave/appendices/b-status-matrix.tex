@@ -6,18 +6,26 @@
 \toprule
 \textbf{主题} & \textbf{研究状态} & \textbf{说明}\\
 \midrule
-Nous Wave 定位 & 目标设计 & 可组合的主体认知与人格平台；记忆型能力组合可独立使用。\\
-Nous Wave / Heptalogos & 目标设计 & 共享 SubjectId；认知权威与行为、规范权威分别维护。\\
-记忆（Memory） & 必需能力 & 基础能力组合中的认知领域所有者。\\
-自我 / 关系 / 动机 & 高级目标 & 各领域合同单独确定，可与基础记忆能力组合启用。\\
-人格风格（Persona） & 目标设计 & 自我领域中的一种表示。\\
-认知图式（CognitiveSchema） & 必需能力；归属待定 & 表达跨经历形成的结构认知；具体领域归属待定。\\
-联想拓扑（AssociativeTopology） & 目标设计 & 可重建的检索服务投影；认知权威由领域数据维护。\\
-类型化有界 PPR/扩散 & 候选基线 & 作为可解释的拓扑对照方案。\\
-Wave & 当前已实现；候选方案 & 当前代码默认使用 Wave，目标研究要求与其他基线比较。\\
-EPA / Residual & 候选方案及局部证据 & 数学性质、局部试验和端到端效用分别评价。\\
-稠密检索后端 & 候选方案 & Qdrant 与 pgvector 按本机工作负载评测。\\
-自我构成 / 动机细节 & 待定问题 & 后续合同将明确领域归属、范围和写入规则。\\
+Nous Wave 定位 & 目标设计 & 可组合的 Subject cognition/personality platform；基础 Memory 能力可独立服务普通 Agent/RAG，高级人格不是运行前提。\\
+Nous Wave / Heptalogos & 目标设计 & 共享逻辑 SubjectId；NW cognition/personality 与 H agency/interaction/normative behavior 分权。\\
+Memory & 中期优先 Reference Profile & 第一套从 ontology 到 SQL/Proto/transaction/test/演示完整落地的 cognitive owner。\\
+Memory taxonomy & 目标设计 & cognitive role（Experiential/Declarative/ProceduralExperience）与 formation mode（Grounded/Synthesized）正交。\\
+CognitiveSchema & 目标设计 & Memory 域拥有的一等对象族；具有 support/counterexample/boundary 与 split/merge 语义。\\
+Anchor & 目标不保留 & 当前代码仍有 Authority Anchor；目标拆为 CognitiveSchema cognition 与 rebuildable AssociativeTopology。\\
+Self / Persona & 高级目标；部分 OPEN & Persona 是 Self 内部层；Seed/constitution 与 evolved Self 的 Authority 仍需收敛。\\
+Social Cognition & 高级目标 & 顶层 owner，首批对象族为 directed RelationshipGraph 与 socially scoped LanguageConvention。\\
+Motivation & 高级目标；OPEN & Goal/desire/concern 属 NW；binding Commitment/Obligation/Effect 属 Heptalogos。内部 lifecycle 待定。\\
+Cognitive Runtime & 目标设计 & Active、WorkContext、ResidentSet、ConsumerWorkingSet、动态 attention/appraisal；不以固定 TTL 定义 cognition。\\
+UseEvent & 目标设计；代码待对齐 & caller-stable event identity + digest idempotency；Exposed 不等于 meaningful use。\\
+Accessibility & 语义已分离；算法待评测 & Authority/Durability、Accessibility、Relevance、Suppression/Purge 正交；90/365 天只是实验基线。\\
+固定 QueryPlan + weighted RRF & 目标基线 & lanes/weights 在候选前冻结，多视图先按 object/revision 聚合，Topology 是独立 lane。\\
+AssociativeTopology & 目标设计 & 可重建 Serving Projection；edge conductance 由版本化 builder 从 typed evidence 派生。\\
+Residual & 实验候选 & 数学核心局部 differential 较健康；真实 retrieval utility 待测。\\
+EPA & 实验候选；默认不依赖 & 当前 weighted PCA 样本密度处理需修正后再评效用。\\
+Wave & 已实现研究分支；未验证默认 & state merge 有 path-budget approximation；需与 typed PPR/无拓扑比较。\\
+Dense backend & 候选方案 & Qdrant、pgvector 等按 PC-local 真实 workload 评测后冻结。\\
+Episode / Journal / Dream & 目标设计；后续实现 & Episode/Journal 本体较稳；offline cognition 的 seed/stop/budget/proposal contract 继续研究。\\
+主要宏观 OPEN & 两项 & Self/Cognitive Seed constitution；Motivation 精确范围与 lifecycle。\\
 \bottomrule
 \end{ReportWideTable}
 \normalsize
