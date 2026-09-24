@@ -4,13 +4,44 @@
 
 经历片段（Episode）是对连续经历流进行组织并可随证据修订的解释。参与者、地点、渠道、情境、任务目标变化、预测误差、主题或因果断裂、明确完成事件，以及较弱的闲置信号，都可作为边界候选。会话（Session）按连续运行过程界定；一个会话可包含多个经历片段，一个经历片段也可跨越多个会话。\cite{nous-research-package}
 
-系统支持拆分、合并和重新分段，并保留成员引用、顺序、角色、时间范围和来源谱系。边界调整会创建修订，不改写成员经历本身。
+系统支持拆分、合并和重新分段，并保留成员引用、顺序、角色、时间范围和来源谱系。边界调整创建 Episode revision，不改写成员经历本身。Episode 是事件组织对象，不是 Memory 的固定晋升阶段。
 
 \section{日记叙事对象（Journal）}
 
-日记（Journal）是组织某段经历或时期的独立、可修订叙事对象。它可用于回顾背景、支持自我叙事或选择离线探索的输入；内容仍需关联证据和来源。来源修订或访问控制发生变化时，日记可被标记为需复核、重新验证或形成新修订。
+日记（Journal）是组织某段经历或时期的独立、可修订叙事对象。它可以用于回顾背景、支持自我叙事或选择离线探索输入；内容仍需关联证据和来源。Journal 不作为事实 Authority，也不是形成 Memory 的必经门槛。来源修订、访问权或所引用认知发生实质变化时，Journal 可进入需复核状态或形成新 revision。
 
-\section{标签、认知图式与联想拓扑}
+Journal 维护适合在宿主授予的维护窗口中执行；宿主决定何时、以何种资源预算允许维护，Nous Wave 决定本次维护具体需要更新哪些叙事或提出哪些认知 proposal。
+
+\section{记忆域内的一等认知图式（CognitiveSchema）}
+
+认知图式用于表达主体跨多个经历和认知对象学到的重复结构、适用范围与例外。它不是 \texttt{MemoryClass=Schema}，也不需要成为新的顶层 MicroSystem。当前设计将 CognitiveSchema 固定为 \textbf{Memory 域拥有的一等对象族}：它与普通 Memory 共用 Subject、Evidence、Provenance、Revision、Epistemic State、Accessibility、Retrieval、Suppression/Purge 等基础设施，但拥有独立的支持、反例、边界和拆分/合并语义。
+
+推荐逻辑结构为：
+
+\begin{verbatim}
+CognitiveSchema
+  schema_id
+  subject_id
+  head_revision
+  lifecycle / epoch
+
+CognitiveSchemaRevision
+  description
+  scope / boundary
+  epistemic_class
+  valid_time?
+  created_at
+
+SchemaSupport
+  schema_revision_id
+  cognitive_ref
+  role = supporting | counterexample | boundary_case
+  provenance
+\end{verbatim}
+
+增加新的 supporting evidence 并不必然产生内容 revision。如果图式本身的结构解释和适用范围没有改变，可以增加证据关系并推进对象纪元；只有 description、scope、boundary 或语义判断变化时才形成新的 CognitiveSchemaRevision。这避免每个新证据都制造无意义内容版本。
+
+\section{Tag、CognitiveSchema 与 AssociativeTopology}
 
 \footnotesize
 \begin{ReportWideTable}{>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{5.2cm}}
@@ -18,29 +49,39 @@
 \toprule
 \textbf{表示} & \textbf{语义作用} & \textbf{权属状态}\\
 \midrule
-标签（Tag） & 稳定的语义线索或概念描述；身份依据含义、别名和来源，字符串用于呈现。 & 可参与认知来源和检索；查询热度不永久增加权重。\\
-认知图式（CognitiveSchema） & 主体从多段经历和认知中形成的重复结构，包含适用范围、支持、反例和推导来源。 & 属于认知内容；需实现此能力，最终归入记忆域还是独立类型仍待定。\\
-联想拓扑（AssociativeTopology） & 由标签、记忆、经历片段、图式和关联证据生成的可重建检索图。 & 属于可重建服务投影；枢纽度、中心性、激活值和传播得分用于检索，认知内容由权威数据维护。\\
+标签（Tag） & 稳定的语义线索/概念身份；同名字符串只提供 resolver candidate，不自动等同。 & Memory 域的底层语义线索对象；查询热度不永久增加权重。\\
+认知图式（CognitiveSchema） & 主体从多段经历和认知中形成的重复结构，包含适用范围、支持、反例和来源。 & Memory 域的一等认知对象族，具有独立身份、修订与 split/merge 语义。\\
+联想拓扑（AssociativeTopology） & 从 Tag、Memory、Episode、Schema 与类型化关联证据构建的当前检索图。 & 可重建 Serving Projection；中心性、传播势能和边导通率不是认知真值。\\
 \bottomrule
 \end{ReportWideTable}
 \normalsize
 
-\subsection{认知图式的归属}
+\section{Anchor 不再作为目标 Authority 对象}
 
-图式若能由综合型记忆的身份、生命周期、查询和写入合同完整表达，可由记忆域维护；若需要独立的边界、反例、拆分合并或修订合同，则单列语义对象更清楚。归属依据是稳定的合同差异。\cite{nous-research-package}
+当前 Nous Wave 代码仍包含 \texttt{Anchor}、\texttt{AnchorRevision} 和 \texttt{AnchorSupport}。该对象把“主体学到的跨经历结构”与“检索图中的汇聚/路由中心”混在同一 Authority 身份中。目标设计不再保留这种万能 Anchor 本体：
 
-\subsection{Anchor 的实现与研究边界}
+\begin{center}
+认知结构 $\rightarrow$ CognitiveSchema（Authority）\\
+检索汇聚、中心性、传播路由 $\rightarrow$ AssociativeTopology（Serving）
+\end{center}
 
-当前代码包含 Anchor 拓扑对象。目标语义分别处理标签、认知图式和可重建联想拓扑；后续工作需明确 Anchor 与这三类语义的对应关系。\cite{nous-research-package,nous-code-snapshot}
+因此现有 Anchor 数据模型属于下一轮实现需要迁移/替换的语义。若某个历史 Anchor 实际表达稳定认知结构，应转换为有证据的 CognitiveSchema；若只是图中计算得到的 hub，则应成为可重建 projection，不保留为主体认知事实。
 
-\section{关联证据与反馈控制}
+\section{关联证据与服务边权}
 
-权威数据保存类型明确的关联证据（AssociationEvidence），例如共现、顺序、显式关系、独立支持、使用/结果、图式支持或反例。服务层按证据类型生成边权和传播预算，同时保留原始证据类别及来源。
+Authority 保存类型明确、可追溯的 AssociationEvidence，例如共现、顺序、显式关系、因果/程序关系、共同激活、使用结果或图式支持。权威数据记录：
 
-拓扑扩展使用有限预算，包括出边归一化、枢纽抑制、跳数/节点/时间上限和来源去重。反例作为独立证据表示，诊断记录被截断或未探索的内容。
+\begin{itemize}
+\item association kind 与方向/极性；
+\item support/evidence class；
+\item 来源、生产者和有效时间；
+\item 若来源本身具有可解释测量，可保存该 source-specific measurement。
+\end{itemize}
 
-检索和展示形成服务事件；只有类型明确、符合调用方合同的使用回执才可影响可访问性或关联支持度。该区分避免服务热度循环进入长期认知。\cite{anderson1983,nous-research-package}
+Authority 不保存一个可被不断累加的通用“最终关联强度真值”。服务层的 edge conductance 由版本化 TopologyBuilder 根据当前有效证据确定性生成，并记录实现版本/config digest。这样可以改变归一化、hub/fan 抑制、边类型权重而不改写认知历史。
 
-\subsection{当前代码状态}
+拓扑扩展必须使用有限资源：固定或归一化出边质量、枢纽/fan 抑制、跳数/节点/状态/时间上限、来源祖先去重以及被截断质量诊断。单纯被检索、排名或展示不得生成新的 AssociationEvidence，从而避免“越常召回越强、越强越常召回”的无限正反馈。\cite{anderson1983,nous-research-package}
 
-Nous Wave 源树保存了标签、Anchor 和关联证据，并据此重建拓扑代次。目标研究要求标签、认知图式和联想拓扑保持语义正交；其归属、图构建参数和长期可访问性算法仍需分别收敛。
+\section{当前实现边界}
+
+当前代码已经有 Tag、Anchor、AssociationEvidence 和 topology generation，可作为实现经验和测试资产；目标模型保留 Tag 与类型化关联证据，移除 Anchor Authority，并把 CognitiveSchema 加入 Memory 域。具体 topology algorithm、edge aggregation 和 accessibility 参数仍属于实验/Serving 层，不应反向定义 Authority ontology。
