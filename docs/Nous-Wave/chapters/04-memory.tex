@@ -2,7 +2,7 @@
 
 \section{记忆域的职责}
 
-记忆域保存主体认为值得跨会话保留的认知。聊天逐字稿、原始材料、观察事件和外部知识仍由各自对象及来源管理；主体接触材料后可形成记忆、保留证据供后续判断，或仅在运行时使用材料。\cite{nous-research-package}
+记忆域保存主体决定跨会话保留的经历与认知，并拥有与这些认知直接相关的 Episode、Journal、CognitiveSchema、Tag 和证据/修订合同。聊天逐字稿、原始材料、观察事件和外部知识仍由各自对象及来源管理；主体接触材料后可以形成长期认知，也可以只把材料用于当前运行时。\cite{nous-research-package}
 
 目标形成流程为：
 
@@ -54,7 +54,20 @@
 
 对同一认知对象的修正、澄清或重释，通常创建该对象的新修订；独立的新经历创建新对象；矛盾认知通常以显式矛盾关系保留，不通过把一方标记为“已取代”来隐藏。修订、当前版本、对象纪元和生命周期分别承担内容版本、当前指针、并发栅栏和生命周期状态。\cite{nous-research-package}
 
-当前 Nous Wave 源树已包含记忆对象/修订、证据关系、当前版本保护、抑制/恢复和管理面清除路径。源代码中的 MemoryClass 仍分为 Specific、Integrative、Procedural 三类；目标设计改用正交的形成依据和认知角色维度。该差异见第十八章。\cite{nous-code-snapshot}
+对象级状态与内容修订保持分离。抑制、恢复、固定访问策略或其他不改变认知内容的操作可以推进对象纪元而不伪造新的语义修订；真正内容变化才创建新 revision。
+
+\section{正交记忆分类}
+
+目标设计不再使用互斥的 \texttt{Specific / Integrative / Procedural} 作为单一 \texttt{MemoryClass}。它们混合了“如何形成”和“认知内容承担什么作用”两个维度。基础合同改为至少两个正交轴：
+
+\begin{description}
+\item[认知角色（cognitive role）] \texttt{Experiential} 表达主体经历或遇到过什么；\texttt{Declarative} 表达主体长期保留的事实、命题或解释性认知；\texttt{ProceduralExperience} 表达从经验中记住的做法、步骤或策略性经验。ProceduralExperience 仍是认知，不是可执行行为策略。
+\item[形成方式（formation mode）] \texttt{Grounded} 主要由一个有界经历/来源上下文形成，可带额外佐证；\texttt{Synthesized} 跨多个认知对象或独立来源综合形成。
+\end{description}
+
+认知角色更接近对象的稳定身份性质；形成方式属于形成该 revision 的来源语义。一个 Synthesized ProceduralExperience 因而是合法组合，不需要强迫归入互斥类别。“Specific”不再作为全局对象类别；其具体程度由 evidence、Episode、适用范围和内容本身表达。
+
+暂不增加通用 \texttt{Metacognitive} 记忆类别。关于主体自身的长期稳定理解可能属于 Self；只有出现明确独立生命周期与查询合同后，再决定是否扩充 Memory cognitive role。
 
 \section{时间语义}
 
@@ -71,6 +84,22 @@
 
 记忆的观察时间沿证据谱系追溯到真实接触事件。读取视图可展示派生的最早和最晚时间；范围值保留为读取结果，不写作新的权威事实。未知时间保持未知，并由查询策略显式处理。
 
-\section{认知类别与语义指向}
+\section{语义指向、认识状态与来源提及}
 
-认识状态、证据支持角色、来源谱系和生命周期分别建模。材料提及记录材料中出现的实体；记忆的语义指向记录认知所涉及的实体及其角色。当前代码已增加记忆修订到实体的独立关联表；实体身份由调用方或服务提供方绑定，向量相似度用于候选检索。\cite{nous-research-package,nous-code-snapshot}
+认识状态、证据支持角色、来源谱系、认知角色和生命周期分别建模。材料提及（EntityMention）只记录来源中真实出现的实体；MemoryRevision aboutness 独立记录该认知涉及哪些 EntityRef 及其角色。认知指向不能附着到任意一条 evidence 上，也不能由第一条证据或向量相似度猜测。
+
+当前代码已经将记忆修订到实体的语义关联与来源 mention 分开，并把 contradiction 从 revision lifecycle 中拆出；这些语义应直接继承到下一版合同。当前代码仍保留互斥 \texttt{MemoryClass}，属于目标实现需要替换的部分。\cite{nous-code-snapshot}
+
+\section{可访问性、遗忘与管理生命周期}
+
+持久认知是否存在、当前是否允许普通访问、当前是否容易被检索、以及与当前查询是否相关是四个不同问题：
+
+\begin{center}
+Authority/Durability $\neq$ Accessibility $\neq$ Relevance $\neq$ Suppression/Purge
+\end{center}
+
+Authority 保存认知内容及显式管理意图；\texttt{AUTO} accessibility 应在查询时根据时间、类型化使用、线索和预算产生可解释的 AccessibilityDecision，而不是把一个随时间变化的“记忆强度真值”永久写入认知对象。固定（Pinned）或精确访问限制等显式管理意图可以持久保存。
+
+当前实现中的 90/365 天 NORMAL/DEEP/EXPLICIT 阈值是可运行实验基线，不是认知规律。Memory Reference Profile 不以硬时间阈值作为正确性前提：AUTO 默认不因年龄永久排除普通合法记忆；时间和 meaningful use 可以作为软先验、深度预算或诊断输入。后续通过无衰减、仅时间、时间加类型化使用及其他候选模型比较后再冻结默认策略。
+
+抑制（suppression）阻止普通认知消费但保留权威内容；purge 是显式管理权限驱动的跨 Authority/Serving/cache/material 流程；runtime eviction 只移出当前工作集。自然语言“忘掉”本身不具有 destructive authority。
