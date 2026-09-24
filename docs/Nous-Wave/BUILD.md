@@ -22,7 +22,7 @@ Copy-Item tmp/pdfs/target-design/main.pdf dist/Nous_Wave_Target_Design.pdf
 `.github/workflows/build-pdf.yml` 在推送到 `main`、针对 `main` 的拉取请求和手动触发时编译目标设计。成功构建会：
 
 1. 上传对应提交的 Actions artifact；
-2. 在 `main` 成功构建时更新 `nous-wave-target-design-latest` Release 中的 `Nous_Wave_Target_Design.pdf`。
+2. 在 `main` 成功构建时，将 `nous-wave-target-design-latest` 稳定标签移动到本次成功提交，并更新 Release 中的 `Nous_Wave_Target_Design.pdf`；标签与 PDF 资产必须对应同一提交。
 
 稳定下载地址：
 

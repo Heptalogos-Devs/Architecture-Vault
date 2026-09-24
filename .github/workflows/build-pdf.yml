@@ -1,4 +1,4 @@
-name: Build Nous Wave Target Design PDF
+name: Build Nous Wave Target Design
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-      - name: Update stable PDF release
+      - name: Update stable target design release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         env:
@@ -51,15 +51,15 @@ jobs:
           RELEASE_TITLE: Nous Wave Target Design (latest)
         run: |
           if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "$RELEASE_TAG" \
-              dist/Nous_Wave_Target_Design.pdf \
-              --repo "$GITHUB_REPOSITORY" \
-              --clobber
+            # The stable release tag must identify the commit that produced the asset.
+            git tag -f "$RELEASE_TAG" "$GITHUB_SHA"
+            git push --force origin "refs/tags/$RELEASE_TAG"
+            gh release upload "$RELEASE_TAG" dist/Nous_Wave_Target_Design.pdf \
+              --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create "$RELEASE_TAG" \
-              dist/Nous_Wave_Target_Design.pdf \
+            gh release create "$RELEASE_TAG" dist/Nous_Wave_Target_Design.pdf \
               --repo "$GITHUB_REPOSITORY" \
               --target "$GITHUB_SHA" \
               --title "$RELEASE_TITLE" \
-              --notes "自动构建的 Nous Wave 目标设计。该 Release 资产随 main 分支成功构建更新。"
+              --notes "Nous Wave 目标设计 PDF。该 Release 资产和稳定标签随 main 分支成功构建更新。"
           fi
