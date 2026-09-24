@@ -2,7 +2,7 @@
 
 \section{共享主体身份，分离领域状态}
 
-目标集成中，Nous Wave 与 Heptalogos 使用同一稳定主体标识（SubjectId），但不合并认知、行为、交互和外部效果状态。Nous Wave 管理主体认知；Heptalogos 管理行为权限、交互和规范约束。\cite{nous-research-package,heptalogos-code-snapshot}
+目标集成中，Nous Wave 与 Heptalogos 使用同一稳定主体标识（SubjectId），但不合并认知、行为、交互和外部效果状态。Nous Wave 管理主体认知与人格连续性；Heptalogos 管理现实交互、行为权限、规范约束、约束性承诺与外部效果。\cite{nous-research-package,heptalogos-code-snapshot}
 
 \begin{ReportWideFigure}
 \centering
@@ -13,24 +13,24 @@
 ]
 \node[box] (h) {\textbf{Heptalogos / 行为域}\\
 交互事实与消息\\
-反应调度与审查\\
-承诺与通信\\
-操作员权限与行为规范};
+反应调度与行为审查\\
+约束性承诺与通信提交\\
+系统管理、行为规范与外部效果};
 \node[box,right=1.8cm of h] (nw) {\textbf{Nous Wave / 认知域}\\
 观察记录与证据\\
-记忆、经历片段与日记\\
-自我、关系与动机\\
-运行时、检索与服务投影};
+记忆与社会认知\\
+自我、动机与认知运行时\\
+检索、图式与离线认知};
 \node[idbox,below=2.35cm of $(h)!0.5!(nw)$] (sid) {共享逻辑主体标识\\SubjectId};
 \draw[arrow] (sid.north west) -- (h.south east);
 \draw[arrow] (sid.north east) -- (nw.south west);
-\draw[<->,thick,color=NWGray] (h.east) -- node[above,align=center,font=\scriptsize,fill=white,inner sep=2pt]{类型明确的引用} (nw.west);
+\draw[<->,thick,color=NWGray] (h.east) -- node[above,align=center,font=\scriptsize,fill=white,inner sep=2pt]{类型明确的引用、提案与回执} (nw.west);
 \end{tikzpicture}
-\captionof{figure}{目标集成中的身份共用与权属分离。跨域箭头表示引用和交接，各域分别维护自身权威数据。}
+\captionof{figure}{目标集成中的身份共用与权属分离。两个系统共享逻辑主体身份，但分别维护自己的权威状态。}
 \label{fig:subject-contexts}
 \end{ReportWideFigure}
 
-图中展示目标集成。当前 Heptalogos 源树通过 \texttt{\detokenize{SubjectCognitionRuntime}} 接口连接隔离的 OpenClaw 运行时；Nous Wave 与 Heptalogos 的直接集成列入后续工作。\cite{heptalogos-code-snapshot}
+Heptalogos 当前架构已经把高级认知定义为通过 Service/Capability、Context/Activity contribution、Evidence/provenance 与 authority ceiling 接入的独立能力，而 Foundation 不冻结 Memory、Persona、Relationship 等内部数据模型。OpenClaw 在当前 Heptalogos 架构中属于独立的 Machine Operations Plane，而不是主体认知运行时。Nous Wave 与 Heptalogos 的直接 SubjectId、认知查询、提案和使用回执集成仍属于目标工作。\cite{heptalogos-code-snapshot}
 
 \section{顶层认知领域所有者}
 
@@ -43,36 +43,40 @@
 \toprule
 \textbf{领域} & \textbf{负责的问题} & \textbf{状态}\\
 \midrule
-主体基础 & 身份、证据及跨域引用 & 必需目标\\
-记忆（Memory） & 可长期保留的经历与认知 & 必需\\
-自我（Self） & 自我模型、倾向与叙事 & 高级目标；主体构成待定\\
-关系（Relationship） & 关系特定的认知 & 高级目标\\
-动机（Motivation） & 愿望、目标与关切 & 高级目标；细节待定\\
-运行时（Runtime） & 会话、活动状态、任务上下文与工作集 & 必需\\
-离线流程 & Journal/Dream 提案 & 流程，不直接写入认知\\
+主体基础 & SubjectId、初始化来源、证据及跨域引用的共同基础。 & 必需目标\\
+记忆（Memory） & 经历、长期认知、Episode、Journal、CognitiveSchema、Tag 及其证据/修订语义。 & 基础能力；优先形成完整 Reference Profile\\
+自我（Self） & 自我模型、人格倾向、价值与叙事身份。Persona 是其内部表示而非并列顶层领域。 & 高级目标；主体构成待定\\
+社会认知（Social） & 主体视角下的人际/群体关系图与具有社会作用域的语言惯例等长期社会认知。 & 高级目标；对象合同待规格化\\
+动机（Motivation） & 愿望、关切、目标与未来状态偏好；不拥有约束性行为承诺。 & 高级目标；生命周期待定\\
+运行时（Runtime） & 会话、活动认知、工作上下文、注意分配、即时评价与调用方工作集。 & 必需\\
+离线认知流程 & Journal 维护、Dream/Hypothesis、来源复核及跨领域提案路由。 & 跨领域流程，不直接越权写入目标领域\\
 \bottomrule
 \end{ReportWideTable}
 \normalsize
 \renewcommand{\arraystretch}{1.0}
 
-语义所有者依据身份、生命周期和写入合同划分，可在一个或多个代码包中实现。主体核心和通用认知运行时分别维护；离线梦境探索生成候选，由目标领域所有者处理。\cite{nous-research-package}
+语义所有者依据独立身份、修订、生命周期、查询和写入合同划分，而不是把心理学名词逐一映射成软件子系统。一个领域可以拥有多种一等对象；例如 Memory 域拥有 Memory 与 CognitiveSchema 等不同对象族，Social 域可拥有 RelationshipAssertion 与 LanguageConvention。代码包、进程和物理数据库边界可独立演化，不由领域名称机械决定。
 
-\section{权威类型}
+\section{权威类型与写入权限}
 
-当前目标将下列权威分别交由相应领域维护：
+当前目标不采用一条全局的“管理员 $>$ 种子 $>$ 人格 $>$ 记忆 $>$ 用户”优先级链。不同语义类型先由各自所有者判定，再在所有者内部应用写入权限、证据和冲突规则：
 
 \begin{description}
-\item[来源权威] 记录来源实际表达或发生的内容。
-\item[认知权威] 由记忆、自我、关系或动机领域接受认知修订。
-\item[规范与行为权威] 由 Heptalogos 管理允许、禁止和承诺的行为状态。
-\item[管理权威] 决定抑制、清除、配置或主体管理操作的权限。
-\item[主体构成约束] 区分主体初始认知中的可演化部分与系统、产品约束；细节仍待定。
+\item[来源/证据权威] 记录来源实际表达、主体真实接触和可验证的外部事件；它不自动成为主体认知结论。
+\item[认知权威] 由 Memory、Self、Social 或 Motivation 等领域接受、修订、撤回或保留冲突的认知。
+\item[规范与行为权威] 由 Heptalogos 管理允许、禁止、承诺、行动与外部效果状态。
+\item[管理权威] 决定抑制、清除、配置、主体生命周期和其他显式管理操作。
+\item[主体构成约束] 区分认知种子中的可演化初始条件与不可由普通认知自行覆盖的系统/宿主约束；其内部合同仍待研究。
 \end{description}
 
-操作者身份与语义权限分别判定；写入权限由管理身份和目标领域合同共同决定。模型输出、离线假设、用户请求和管理员操作均按各自权限处理。跨域写入以类型明确的提案表达，包含目标领域、预期状态、输入修订、证据和生产者来源；目标领域所有者重新验证后，决定提交、拒绝或标记冲突。
+普通对话对象的自然语言请求首先是 Observation/Evidence，不能凭文本内容获得管理或破坏性权限。例如“把这件事忘掉”可成为行为偏好、社会请求或管理流程提示，但不能直接触发 Memory purge。模型、Dream、检索和跨领域推理默认只提交带目标所有者、输入修订、证据和生产者来源的 proposal；目标所有者重新核验后才能改变权威状态。
+
+\section{认知目标与行为承诺}
+
+Motivation 可以维护“我希望发生什么、我关心什么、我想实现什么”等认知目标；Heptalogos 维护已经采用的 Intention、Commitment、Obligation、Plan 与外部 Effect。认知目标只能作为行为域的输入或提案，不能自动获得执行权限。Heptalogos 接受目标形成约束性承诺时，应保留来源 goal/revision 引用；完成、拒绝或取消的结果再以 Observation/Use/Outcome 等类型明确的回执反馈给 Nous Wave。
 
 \section{主体标识与分支}
 
-主体标识（SubjectId）由宿主或客户端提供。实现分支复制（fork）时分配新的 SubjectId，分支共享继承点以前的不可变修订谱系，之后分别维护可变头指针、对象纪元和抑制/清除状态。\cite{nous-research-package,olson2023}
+主体标识（SubjectId）由宿主或客户端在主体创建/供给时提供，Nous Wave 可在独立部署中自行分配。实现分支复制（fork）时分配新的 SubjectId，分支共享继承点以前的不可变来源谱系，之后分别维护可变对象头、对象纪元、认知修订和抑制/清除状态。\cite{nous-research-package,olson2023}
 
-个人身份研究中的心理连续性、数值身份与分支提供不同分析视角；软件分支的 SubjectId 规则由工程合同确定。
+因此，分支后的主体可把共同继承的认知视为自身历史来源，但两个分支不会共享可变的认知 head。个人身份研究中的心理连续性、数值身份与分支提供分析视角；具体 copy-on-write 方式属于后续实现合同。
