@@ -1,0 +1,43 @@
+name: Build Nous Wave PDF
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-pdf:
+    name: Build report with XeLaTeX
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7.0.1
+
+      - name: Compile report
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          working_directory: docs/Nous-Wave
+          texlive_version: "2026"
+          os: debian
+          latexmk_use_xelatex: true
+          args: -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Stage PDF for upload
+        shell: bash
+        run: |
+          mkdir -p dist
+          cp tmp/pdfs/research/main.pdf dist/Nous_Wave_Current_Research_Report.pdf
+
+      - name: Upload report PDF
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: Nous-Wave-Research-Report-${{ github.sha }}
+          path: dist/Nous_Wave_Current_Research_Report.pdf
+          if-no-files-found: error
+          retention-days: 90

@@ -14,3 +14,22 @@ desktop.ini
 # Local editor and backup artifacts
 *.bak
 *.swp
+
+# LaTeX build outputs
+*.aux
+*.bbl
+*.bbl-SAVE-ERROR
+*.bcf
+*.bcf-SAVE-ERROR
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex*
+*.toc
+*.xdv
+/tmp/

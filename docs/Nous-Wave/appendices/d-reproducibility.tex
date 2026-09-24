@@ -7,9 +7,9 @@
 \section{当前代码快照}
 
 \begin{itemize}
-\item Nous Wave：\texttt{ArsvineZhu/Nous-Wave@e9af4ebd8a77d316c78764fd85836e6de8d9b7ee}。该提交包含此前未推送的 Memory semantic closure 等改动；GitHub 未显示对应 CI/status check，因此本报告不把源码存在转换为新的 PASS 结论。
-\item Heptalogos：\texttt{ArsvineZhu/Heptalogos@a5287a01b42e3d09f445e96982caf6842ed74674}，作为当前产品/架构审查基线。
-\item 组织旧仓库：\texttt{Heptalogos-Devs/Heptalogos@e00fea73feb67741e6637123deb2c56886961ba7}，属于更早实现代，仅用于 lineage/reference，不作为 current product truth。
+\item Nous Wave：\texttt{ArsvineZhu/Nous-Wave@\allowbreak{}e9af4ebd\allowbreak{}8a77d316\allowbreak{}c78764fd\allowbreak{}85836e6d\allowbreak{}e8d9b7ee}。该提交包含此前未推送的 Memory semantic closure 等改动；GitHub 未显示对应 CI/status check，因此本报告不把源码存在转换为新的 PASS 结论。
+\item Heptalogos：\texttt{ArsvineZhu/Heptalogos@\allowbreak{}a5287a01\allowbreak{}b42e3d09\allowbreak{}f445e969\allowbreak{}82caf684\allowbreak{}2ed74674}，作为当前产品/架构审查基线。
+\item 组织旧仓库：\texttt{Heptalogos-Devs/Heptalogos@\allowbreak{}e00fea73\allowbreak{}feb67741\allowbreak{}e6637123\allowbreak{}deb2c568\allowbreak{}86961ba7}，属于更早实现代，仅用于 lineage/reference，不作为 current product truth。
 \end{itemize}
 
 仓库迁移计划不会改变上述 commit identity。后续发生 transfer/rename 时，应记录 GitHub repository identity、迁移前后 URL 与 canonical source map，避免仅按 URL 推断代码版本。
@@ -22,4 +22,4 @@
 
 \section{文档构建状态}
 
-LaTeX 源文件是当前 canonical research document。`dist/Nous_Wave_Current_Research_Report.pdf` 为生成制品；本次 source update 后必须重新执行 clean XeLaTeX/Biber build、undefined citation/reference 检查和视觉抽查，才能把 PDF 视为最新设计快照。构建命令与既有检查记录见 \texttt{docs/Nous-Wave/BUILD.md}。
+LaTeX 源文件是当前 canonical research document。\SourcePath{dist/Nous_Wave_Current_Research_Report.pdf} 为生成制品；本次 source update 后必须重新执行 clean XeLaTeX/Biber build、undefined citation/reference 检查和视觉抽查，才能把 PDF 视为最新设计快照。构建命令与既有检查记录见 \texttt{docs/Nous-Wave/BUILD.md}。
