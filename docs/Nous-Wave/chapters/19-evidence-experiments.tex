@@ -2,16 +2,17 @@
 
 \section{证据类型}
 
-本项目现有研究材料包含四类证据：
+本项目当前使用五类证据，并限制每类证据能支撑的断言范围：
 
 \begin{description}
-\item[架构约束] 规定领域所有权、权限、写入和服务投影的语义关系。
-\item[代码事实] 可在固定提交或检视时工作区中定位的类型、函数和数据路径。
-\item[实验观察] 在明确设置与变量范围内形成的反例、性质试验或方案比较。
-\item[外部研究] 论文和成熟系统对问题背景与概念模型的支持。
+\item[架构约束] 规定领域所有权、权限、写入、失败和服务投影的语义关系。
+\item[代码事实] 可在固定 commit 中定位的 type/function/schema/path，只证明实现存在。
+\item[运行资格] 在明确日期、平台、配置和范围下实际执行得到的 PASS/FAIL/BLOCKED/NOT\_RUN。
+\item[实验观察] 在明确设置和变量范围内形成的反例、性质试验或方案比较。
+\item[外部研究] 论文、规范与成熟系统对问题结构、反例或 baseline 的支持。
 \end{description}
 
-每类证据分别支撑相应范围的判断：设计文件确立目标合同，源代码显示实现路径，带日期的资格记录描述执行范围，实验材料反映相应试验条件下的观察。\cite{nous-research-package}
+“已有代码”“局部数学一致”“成为当前默认”和“端到端效果更好”是不同结论，不能互换。\cite{nous-research-package}
 
 \section{EPA 权重试验}
 
@@ -21,40 +22,48 @@
 
 \textbf{资料包报告结果：} 构造反例中的主方向偏差约为 $21.2^\circ$；随机试验也多次出现显著偏差。
 
-\textbf{阶段认识：} 对均值加权而协方差未保留重复次数，会改变主方向。项目组将先统一数学处理，再测量 EPA 对检索的贡献。
-
-\textbf{当前代码：} \SourcePath{crates/memory-retrieval/src/cue_sensing.rs} 在均值计算中使用代表向量权重，构造中心化 SVD 矩阵时尚未按代表次数缩放各行。该项列入实现修正。\cite{nous-research-package,nous-code-snapshot}
+\textbf{阶段认识：} 对均值加权而协方差未保留重复次数，会改变主方向。当前 \SourcePath{crates/memory-retrieval/src/cue_sensing.rs} 仍具有该结构，因此 EPA 在修正并完成 utility benchmark 前保持实验性、默认不依赖。\cite{nous-research-package,nous-code-snapshot}
 
 \section{Residual 差分试验}
 
-\textbf{研究问题：} 在相同精确余弦计算和 MGS 条件下，Residual 当前转写与参照路径是否存在局部差异？
+\textbf{研究问题：} 在相同精确余弦计算和 modified Gram--Schmidt 条件下，Residual 当前转写与参照路径是否存在局部差异？
 
 \textbf{资料包报告结果：} 1000 组随机输入中，路径、能量和最终残差保持一致。
 
-\textbf{阶段认识：} 该结果支持所述条件下核心计算的一致性。真实语料上的检索效用另行评测；研究资料包提供了结果摘要，完整脚本和结果文件列入后续归档。
+\textbf{阶段认识：} 该结果支持所述条件下核心数学计算的一致性，不证明真实 retrieval utility。Residual 保留为实验 candidate generator；后续与普通 dense、多查询及模型分解比较 recall/precision/cost。
 
 \section{Wave 状态合并反例}
 
-\textbf{研究问题：} 当剩余路径预算或动量影响后续可达性时，按前一状态与当前状态合并能否保留后续计算所需信息？
+\textbf{研究问题：} 当剩余 path budget 或 momentum 影响后续可达性时，按不充分状态键合并能否保持后续计算语义？
 
-\textbf{资料包报告结论：} Nous 与 VCP 当前合并方式均存在近似情形；路径预算影响未来可达性时，状态合并可能借用或丢失后续合法路径。
+\textbf{资料包报告结论：} Nous 与 VCP 当前合并方式均存在近似情形；路径预算影响未来可达性时，状态合并可能借用或丢失合法传播质量。当前 Nous Wave 实现仍以 previous/current 为主要 merge key，因此“BoundedWaveExpansion 已实现”不能写成“算法已验证默认”。\cite{nous-research-package,nous-code-snapshot,vcptoolbox-commit}
 
-\textbf{后续比较：} 在相同图和预算下比较保留路径状态的 Wave、PPR/非回溯扩展及无拓扑基线。研究资料包未包含相应原始脚本和完整数值。\cite{nous-research-package,nous-code-snapshot,vcptoolbox-commit}
+\textbf{后续比较：} 同一 Authority topology、seed、hard filters 和 work budget 下比较 no-topology、typed bounded PPR/diffusion 与 state-faithful Wave，并记录 truncated mass、hub/fan 行为、latency 及最终 retrieval utility。
 
 \section{排序稳定性反例}
 
-\textbf{研究问题：} 按候选集合动态归一化证据类别，会否因加入无关类别而改变已有候选顺序？
+\textbf{研究问题：} 按候选集合动态归一化 evidence family，会否因加入无关 family/candidate 而改变已有候选顺序？
 
-\textbf{资料包报告结果：} 加入一个低分无关候选且该候选带有新证据类别后，原有 A/B 候选的相对顺序可能变化。
+\textbf{资料包报告结果：} 加入一个低分无关候选且该候选带有新 evidence family 后，原有 A/B 候选的相对顺序可能变化。
 
-\textbf{当前代码：} \SourcePath{crates/memory-retrieval/src/ranking.rs} 根据当前候选集推导启用类别和归一化分母。目标设计由查询计划预先固定类别集合与权重，因此该规则仍是待实现项。\cite{nous-research-package,nous-code-snapshot}
+\textbf{当前代码：} \SourcePath{crates/memory-retrieval/src/ranking.rs} 根据当前候选集推导启用 family 和归一化分母，并额外叠加 topology bonus。目标设计改为 QueryPlan 预先冻结 lanes/weights、view hits 先 collapse 到 object/revision，再使用 fixed-plan weighted RRF；RRF 是成熟的信息检索融合 baseline，但具体权重仍由本项目数据评测。\cite{nous-research-package,nous-code-snapshot,cormack2009rrf}
 
-\section{外部研究的支持范围}
+\section{认知图式的外部研究边界}
 
-人格研究区分特质、特征性适应和生命叙事；自传记忆研究讨论自传知识与当前目标、自我工作模型的关系；关系图式研究帮助界定关系特定认知；BDI 与社会承诺研究区分目标、愿望和约束性承诺；评价理论讨论动态评价过程；扩散激活研究为有限激活和干扰提供背景。上述研究为概念建模提供参照，具体数据结构、参数和算法仍由本项目的语义合同与评测确定。\cite{mcadams2006,mcadamsmclean2013,conwaypleydellpearce2000,baldwin1992,rao-georgeff1995,singh1997,singh1999,marsella-gratch2009,anderson1983}
+Schema 研究常把图式描述为从多个 experience 中抽象共同结构、影响后续理解和记忆的知识组织。该结果支持 Nous Wave 把“跨经历结构认知”与单一 episodic memory、纯检索 hub 区分，但不直接证明具体 SQL schema 或自动 consolidation 算法。当前项目据此将 CognitiveSchema 设为 Memory-owned first-class object family，并把 graph centrality/routing 留给 rebuildable AssociativeTopology。\cite{gilboa-marlatte2017}
 
-个人身份文献为主体身份讨论提供概念参照；软件 SubjectId 属于本项目的工程设计。\cite{olson2023}
+\section{社会认知的外部研究边界}
+
+关系研究说明社会联系具有方向性，互惠不能作为默认假设；tie strength 也可由多种社会维度构成，而不只是互动频率或单一强弱标量。对话研究中的 lexical entrainment/conceptual pact 说明共享称呼和概念化可以具有 partner-specific 历史。\cite{almaatouq2016,aiello2022,brennan-clark1996,baldwin1992}
+
+这些证据支持三个软件设计约束：RelationshipAssertion 默认有向；relation degree 与 epistemic certainty 分离；LanguageConvention 具有 person/dyad/group/community scope。它们不授权系统从图路径自动推断现实关系，也不定义固定的“亲密度公式”。
+
+\section{Self、Motivation 与 Appraisal 的外部研究边界}
+
+人格研究区分 traits、characteristic adaptations 和 narrative identity；自传记忆研究讨论 autobiographical knowledge 与 current goals/working self 的关系；BDI 与社会承诺研究区分 belief/desire/intention 和 external/social commitment；appraisal research 讨论动态评价过程。上述研究帮助识别 owner/lifecycle 问题，具体对象字段、权限和参数仍由项目语义合同及评测确定。\cite{mcadams2006,mcadamsmclean2013,conwaypleydellpearce2000,rao-georgeff1995,singh1997,singh1999,marsella-gratch2009}
+
+个人身份文献为 Subject fork/continuity 提供分析参照；软件 SubjectId、lineage 与 copy-on-write 属于本项目工程设计。\cite{olson2023}
 
 \section{试验材料归档}
 
-研究资料包提供 EPA 权重、Residual 差分、Wave 合并和排序稳定性试验摘要，完整运行脚本、随机种子清单、试验记录和输出文件需纳入后续归档。本文所有相关数值均标注为资料包报告结果；完成归档后，项目组可按记录复核并更新证据状态。
+研究资料包已经提供 EPA weighting、Residual differential、Wave merge 和 ranking stability 的实验摘要。完整脚本、随机 seed、目标 corpus、expected output 和运行环境需要继续归档，才能把实验从会话级研究证据提升为仓库可重复资产。未来 benchmark 应同时报告质量、延迟、内存/磁盘、provider 调用成本和失败/降级行为。
