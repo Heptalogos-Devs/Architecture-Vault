@@ -7,7 +7,7 @@
 在仓库根目录运行：
 
 ```powershell
-Set-Location docs/current-research-report
+Set-Location docs/Nous-Wave
 latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error main.tex
 Set-Location ../..
 New-Item -ItemType Directory -Force dist
