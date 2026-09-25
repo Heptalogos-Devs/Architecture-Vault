@@ -1,4 +1,4 @@
-name: Build Nous Wave Target Design
+name: Build Target Designs
 
 on:
   push:
@@ -11,9 +11,18 @@ permissions:
   contents: write
 
 jobs:
-  build-pdf:
-    name: Build target design with XeLaTeX
+  build:
+    name: Build target design PDFs
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+          - project: Nous-Wave
+            artifact: Nous_Wave_Target_Design.pdf
+            artifact_name: Nous-Wave-Target-Design
+          - project: Heptalogos
+            artifact: Heptalogos_Target_Design.pdf
+            artifact_name: Heptalogos-Target-Design
     steps:
       - name: Check out source
         uses: actions/checkout@v7.0.1
@@ -22,44 +31,46 @@ jobs:
         uses: xu-cheng/latex-action@v4
         with:
           root_file: main.tex
-          working_directory: docs/Nous-Wave
+          working_directory: docs/${{ matrix.project }}
           texlive_version: "2026"
           os: debian
           latexmk_use_xelatex: true
           args: -file-line-error -halt-on-error -interaction=nonstopmode
 
-      - name: Stage PDF for upload
+      - name: Stage PDF
         shell: bash
         run: |
           mkdir -p dist
-          cp tmp/pdfs/target-design/main.pdf dist/Nous_Wave_Target_Design.pdf
+          if [ "${{ matrix.project }}" = "Nous-Wave" ]; then
+            cp tmp/pdfs/target-design/main.pdf "dist/${{ matrix.artifact }}"
+          else
+            cp tmp/pdfs/heptalogos-target-design/main.pdf "dist/${{ matrix.artifact }}"
+          fi
 
-      - name: Upload target design PDF
+      - name: Upload PDF artifact
         uses: actions/upload-artifact@v7.0.1
         with:
-          name: Nous-Wave-Target-Design-${{ github.sha }}
-          path: dist/Nous_Wave_Target_Design.pdf
+          name: ${{ matrix.artifact_name }}-${{ github.sha }}
+          path: dist/${{ matrix.artifact }}
           if-no-files-found: error
           retention-days: 90
 
-      - name: Update stable target design release
+      - name: Update stable release
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: nous-wave-target-design-latest
-          RELEASE_TITLE: Nous Wave Target Design (latest)
+          RELEASE_TAG: ${{ matrix.project == 'Nous-Wave' && 'nous-wave-target-design-latest' || 'heptalogos-target-design-latest' }}
+          RELEASE_TITLE: ${{ matrix.project == 'Nous-Wave' && 'Nous Wave Target Design (latest)' || 'Heptalogos Target Design (latest)' }}
         run: |
           if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            # The stable release tag must identify the commit that produced the asset.
             git tag -f "$RELEASE_TAG" "$GITHUB_SHA"
             git push --force origin "refs/tags/$RELEASE_TAG"
-            gh release upload "$RELEASE_TAG" dist/Nous_Wave_Target_Design.pdf \
-              --repo "$GITHUB_REPOSITORY" --clobber
+            gh release upload "$RELEASE_TAG" "dist/${{ matrix.artifact }}" --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create "$RELEASE_TAG" dist/Nous_Wave_Target_Design.pdf \
+            gh release create "$RELEASE_TAG" "dist/${{ matrix.artifact }}" \
               --repo "$GITHUB_REPOSITORY" \
               --target "$GITHUB_SHA" \
               --title "$RELEASE_TITLE" \
-              --notes "Nous Wave 目标设计 PDF。该 Release 资产和稳定标签随 main 分支成功构建更新。"
+              --notes "目标设计 PDF。Release 资产和稳定标签随 main 分支成功构建更新。"
           fi
