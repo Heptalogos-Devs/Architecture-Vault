@@ -1,4 +1,4 @@
-name: Build Target Designs
+name: Build Nous Wave Target Design
 
 on:
   push:
@@ -20,9 +20,6 @@ jobs:
           - project: Nous-Wave
             artifact: Nous_Wave_Target_Design.pdf
             artifact_name: Nous-Wave-Target-Design
-          - project: Heptalogos
-            artifact: Heptalogos_Target_Design.pdf
-            artifact_name: Heptalogos-Target-Design
     steps:
       - name: Check out source
         uses: actions/checkout@v7.0.1
@@ -41,11 +38,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p dist
-          if [ "${{ matrix.project }}" = "Nous-Wave" ]; then
-            cp tmp/pdfs/target-design/main.pdf "dist/${{ matrix.artifact }}"
-          else
-            cp tmp/pdfs/heptalogos-target-design/main.pdf "dist/${{ matrix.artifact }}"
-          fi
+          cp tmp/pdfs/target-design/main.pdf "dist/${{ matrix.artifact }}"
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v7.0.1
@@ -60,8 +53,8 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ matrix.project == 'Nous-Wave' && 'nous-wave-target-design-latest' || 'heptalogos-target-design-latest' }}
-          RELEASE_TITLE: ${{ matrix.project == 'Nous-Wave' && 'Nous Wave Target Design (latest)' || 'Heptalogos Target Design (latest)' }}
+          RELEASE_TAG: nous-wave-target-design-latest
+          RELEASE_TITLE: Nous Wave Target Design (latest)
         run: |
           if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             git tag -f "$RELEASE_TAG" "$GITHUB_SHA"

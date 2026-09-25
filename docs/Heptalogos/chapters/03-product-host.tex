@@ -1,9 +1,0 @@
-\chapter{产品宿主与运行平面}
-
-产品宿主（Product Host）承载 Heptalogos 的正常产品运行。Host 负责运行时组合、服务与能力注册、持久化访问、消息、AI 调用、工作义务、行为处理和管理合同。
-
-系统通过 Desired State、Actual State、运行依赖、能力、健康和运行模式持续协调当前运行图。启动只是第一次协调。
-
-Bootstrap 与 Recovery 保持最小、独立的恢复能力。Product Host 只有在取得当前 Host ownership 后才能进行正常权威写入和外部效果派发。
-
-机器运维平面（Machine Operations Plane）位于产品宿主之外。它处理机器级诊断、修复和部署维护；产品宿主健康时优先通过正式管理合同工作。

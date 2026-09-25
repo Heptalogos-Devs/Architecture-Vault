@@ -6,7 +6,7 @@
 
 - 首次了解文档范围：阅读[文档职责与权威](DOCUMENT_MODEL.md)和[活动文档目录](INDEX.md)。
 - 查阅 Nous Wave 目标设计：从[Nous Wave 文档入口](Nous-Wave/README.md)开始。
-- 查阅 Heptalogos 目标设计：从[Heptalogos 文档入口](Heptalogos/README.md)开始。
+- 查阅 Heptalogos 目标设计正文：阅读[Heptalogos 目标设计](Heptalogos/TARGET_DESIGN.md)，再从[Heptalogos 文档入口](Heptalogos/README.md)进入决定、论证和未决问题。
 - 查阅跨系统语义：阅读[认知与主动性合同](integration/cognition-agency.md)。
 - 查阅仓库边界：阅读[仓库组织模型](repository-governance/REPOSITORY_MODEL.md)。
 

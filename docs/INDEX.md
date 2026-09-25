@@ -17,11 +17,10 @@
 ## Heptalogos
 
 - [文档入口](Heptalogos/README.md)：目标设计、决定、未决问题与论证。
-- [目标设计源](Heptalogos/main.tex)
+- [目标设计正文](Heptalogos/TARGET_DESIGN.md)：唯一直接编辑的 Heptalogos 目标设计 Authority。
 - [设计决定](Heptalogos/DECISIONS.md)
 - [未决问题](Heptalogos/OPEN_QUESTIONS.md)
 - [设计论证目录](Heptalogos/rationale/README.md)
-- [PDF 构建](Heptalogos/BUILD.md)
 
 ## 跨系统与仓库职责
 

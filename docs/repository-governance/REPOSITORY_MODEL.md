@@ -6,7 +6,7 @@
 
 ### Architecture-Vault
 
-Architecture-Vault 维护 Nous Wave 与 Heptalogos 的长期目标设计、已接受设计决定、设计论证、研究证据、跨系统语义合同和目标设计 PDF 构建源。
+Architecture-Vault 维护 Nous Wave 与 Heptalogos 的长期目标设计、已接受设计决定、设计论证、研究证据和跨系统语义合同；每个系统范围分别声明目标设计来源及发布流程。
 
 ### Heptalogos
 

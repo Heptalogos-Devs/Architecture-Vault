@@ -18,5 +18,6 @@ Architecture-Vault owns long-term target design, accepted design decisions, desi
 
 ## Verification
 
-- After changing a target-design source, follow its local build guide, check references and warnings, render every page, and inspect the rendered pages.
+- For target-design sources with an active PDF workflow, follow the local build guide, check references and warnings, render every page, and inspect the rendered pages. This currently applies to Nous Wave.
+- Heptalogos is authored in `docs/Heptalogos/TARGET_DESIGN.md`; verify its semantics and local links. The current workflow does not generate Heptalogos PDFs or use the retired LaTeX source.
 - Check local Markdown links and run `git diff --check` before finishing documentation changes.

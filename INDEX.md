@@ -1,6 +1,6 @@
 # Architecture-Vault 索引
 
-Architecture-Vault 是 Heptalogos 与 Nous Wave 的长期设计知识和目标设计 PDF 仓库。
+Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期设计知识、设计决定、设计论证、研究材料和跨系统合同，并按各系统声明的来源发布目标设计。
 
 ## 从这里开始
 
@@ -18,4 +18,4 @@ Architecture-Vault 是 Heptalogos 与 Nous Wave 的长期设计知识和目标�
 
 ## 构建
 
-目标设计 PDF 的本地构建入口分别位于 [Nous Wave 构建说明](docs/Nous-Wave/BUILD.md) 和 [Heptalogos 构建说明](docs/Heptalogos/BUILD.md)。自动构建由 `.github/workflows/build-pdf.yml` 管理。
+Nous Wave 的 PDF 构建入口位于 [Nous Wave 构建说明](docs/Nous-Wave/BUILD.md)，自动构建由 `.github/workflows/build-pdf.yml` 管理。Heptalogos 的目标设计正文直接维护在 Markdown 中。

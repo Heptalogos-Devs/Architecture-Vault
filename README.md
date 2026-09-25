@@ -11,7 +11,7 @@ Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期目标设计、设�
 ## 目标设计
 
 - Nous Wave：`docs/Nous-Wave/main.tex`
-- Heptalogos：`docs/Heptalogos/main.tex`
+- Heptalogos：`docs/Heptalogos/TARGET_DESIGN.md`
 
 目标设计只陈述系统的目标语义、职责、对象关系和长期约束。方案比较、外部研究和算法实验进入 `rationale/` 或 `research/`。当前代码状态、实施计划、可执行规格和资格记录留在对应代码仓库。
 
