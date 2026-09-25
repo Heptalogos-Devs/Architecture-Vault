@@ -4,11 +4,9 @@ Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期目标设计、设�
 
 ## 文档入口
 
+- [文档集入口](docs/README.md)
+- [文档目录](docs/INDEX.md)
 - [文档职责与权威](docs/DOCUMENT_MODEL.md)
-- [Nous Wave](docs/Nous-Wave/README.md)
-- [Heptalogos](docs/Heptalogos/README.md)
-- [认知与主动性协作](docs/integration/cognition-agency.md)
-- [仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)
 
 ## 目标设计
 
@@ -17,11 +15,11 @@ Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期目标设计、设�
 
 目标设计只陈述系统的目标语义、职责、对象关系和长期约束。方案比较、外部研究和算法实验进入 `rationale/` 或 `research/`。当前代码状态、实施计划、可执行规格和资格记录留在对应代码仓库。
 
+Nous Wave 与 Heptalogos 的文档入口分别见 [Nous Wave](docs/Nous-Wave/README.md) 和 [Heptalogos](docs/Heptalogos/README.md)。跨系统语义由[认知与主动性合同](docs/integration/cognition-agency.md)维护；仓库职责见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。
+
 ## 代码仓库
 
-迁移完成后的目标位置：
+- [Heptalogos 产品与工程仓库](https://github.com/ArsvineZhu/Heptalogos)
+- [Nous Wave 认知系统仓库](https://github.com/ArsvineZhu/Nous-Wave)
 
-- `Heptalogos-Devs/Heptalogos`
-- `Heptalogos-Devs/Nous-Wave`
-
-组织内较早的实现仓库归档后只保留 Git 历史，不继续承担当前知识权威。
+代码仓库负责当前实现、Specs、Plans、Qualification 和工程治理。跨仓库知识所有权见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。

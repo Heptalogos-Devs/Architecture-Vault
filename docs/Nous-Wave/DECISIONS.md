@@ -31,21 +31,21 @@
 
 **决定：** Cognitive Seed 是人类编写的结构化主体初始化来源。原始版本保持不变；主体创建时绑定精确版本并保存实例快照或等价内容身份，后续认知演化不修改原始种子。
 
-目标设计：第 7 章。  
+目标设计：第 7 章。\
 论证：[认知种子与静态自我档案](rationale/09-cognitive-seed-self-profile.md)
 
 ### 认知种子按语义归属初始化多个领域
 
 **决定：** 种子中的身份、自我认知、人格、价值和叙事内容进入 Self；经历与初始知识可以进入 Memory；人物关系和语言惯例可以进入 Social；愿望、关切和期望条件可以进入 Motivation。Seed 本身不成为跨领域超级对象。
 
-目标设计：第 7 章。  
+目标设计：第 7 章。\
 论证：[认知种子与静态自我档案](rationale/09-cognitive-seed-self-profile.md)
 
 ### 安全与管理员强制规则不由认知种子承担
 
 **决定：** 安全政策、操作权限、管理员强制行为和不可绕过的行为限制由 Heptalogos 或宿主的行为与规范权威维护，不依赖会演化的 Self 或 Cognitive Seed。
 
-目标设计：第 2、7、16 章。  
+目标设计：第 2、7、16 章。\
 论证：[认知权威与行为权威](rationale/07-authority-agency.md)
 
 ## 记忆
@@ -114,28 +114,28 @@
 
 **决定：** Nous Wave 的 Motivation 保存 Desire、Concern 和 Desired Condition。期望条件表示能够依据证据评价的期望未来或持续状态，不表示主体已经决定采取行动。
 
-目标设计：第 9 章。  
+目标设计：第 9 章。\
 论证：[动机认知与主动行为](rationale/07-authority-agency.md)
 
 ### 期望条件采用四种基本时间形式
 
 **决定：** 期望条件区分达成、终止、维持和避免四种时间形式，并可带时间范围和适用上下文。满足判断由证据支持；观察覆盖不足时保持未知。
 
-目标设计：第 9 章。  
+目标设计：第 9 章。\
 论证：[动机认知与主动行为](rationale/07-authority-agency.md)
 
 ### 期望条件与主动追求分离
 
 **决定：** Nous Wave 维护期望条件；Heptalogos 维护是否持续投入行为资源的 Pursuit。期望条件存在不会自动产生主动追求，Pursuit 必须引用期望条件的精确修订并由行为侧独立采纳。
 
-目标设计：第 9、16 章。  
+目标设计：第 9、16 章。\
 论证：[动机认知与主动行为](rationale/07-authority-agency.md)
 
 ### 主动追求、行为提议、行动计划与承诺分别维护
 
 **决定：** Pursuit 表示长期主动追求；BehaviorIntent 表示一次决策中的行为提议；ActionPlan/InteractionPlan 表示实现手段；Commitment/Obligation 表示具有约束力的责任。它们不合并为同一 Goal 状态机。
 
-目标设计：第 9、16 章。  
+目标设计：第 9、16 章。\
 论证：[动机认知与主动行为](rationale/07-authority-agency.md)
 
 ## 运行时与检索

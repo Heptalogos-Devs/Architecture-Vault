@@ -20,7 +20,7 @@ Nous Wave 和 Heptalogos 共享逻辑 `SubjectId`，各自维护自己的领域�
 
 `Pursuit` 表示行为侧已经决定持续投入行为资源追求某个期望条件。它引用 Nous Wave 中期望条件的精确修订。
 
-目标设计：第 5 章。  
+目标设计：第 5 章。\
 论证：[认知与主动性](rationale/01-cognition-agency.md)
 
 ### 一次行为提议与持续追求分别维护

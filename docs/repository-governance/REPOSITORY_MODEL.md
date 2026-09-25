@@ -1,39 +1,33 @@
-# 仓库组织模型
+# 仓库职责模型
 
-## 目标仓库
+本模型规定长期设计知识、产品实现知识和报告材料的所有权。它说明信息应由哪个仓库维护，不记录某次迁移或仓库管理操作的执行进度。
 
-### Heptalogos-Devs/Architecture-Vault
+## 仓库职责
 
-长期目标设计、设计决定、论证、研究和跨系统合同。负责生成目标设计 PDF。
+### Architecture-Vault
 
-### Heptalogos-Devs/Heptalogos
+Architecture-Vault 维护 Nous Wave 与 Heptalogos 的长期目标设计、已接受设计决定、设计论证、研究证据、跨系统语义合同和目标设计 PDF 构建源。
 
-Heptalogos 当前产品代码、Specs、Plans、Qualification、工程治理和当前实现文档。
+### Heptalogos
 
-### Heptalogos-Devs/Nous-Wave
+Heptalogos 维护产品代码、当前实现架构与状态、可执行规格、活跃计划、依赖决定、资格证据和工程治理。
 
-Nous Wave 当前代码、Specs、Plans、Qualification、工程治理和当前实现文档。
+### Nous-Wave
 
-### Heptalogos-Devs/mid-term-paper
+Nous-Wave 维护认知系统代码、当前实现架构与状态、可执行规格、活跃计划、依赖决定、资格证据和工程治理。
 
-大创中期材料。它消费项目设计和实现事实，不成为架构权威。
+### 项目报告
 
-## 迁移
+项目报告仓库消费相关系统的目标设计和当前实现事实，按其文档目标组织材料，不成为领域设计或代码事实的权威来源。
 
-当前个人仓库 `ArsvineZhu/Heptalogos` 和 `ArsvineZhu/Nous-Wave` 是当前开发来源。迁移到组织后使用上面的 canonical 名称。
+## 知识所有权
 
-现有组织仓库 `Heptalogos-Devs/Heptalogos` 保存较早实现。迁移当前仓库前先将旧仓库改名为 `Heptalogos-legacy` 并归档，随后把个人当前仓库转移到组织并保持 `Heptalogos` 名称。
+- Vault 的目标设计定义长期目标语义；代码仓库的规格和实现分别定义可执行合同与当前行为。
+- 两个代码仓库链接到 Vault 的长期设计，不复制整套目标设计正文。
+- 跨系统语义由 Vault 的[认知与主动性合同](../integration/cognition-agency.md)统一维护。
+- 代码仓库负责各自的当前状态、施工计划、实现规格、测试与资格结果。
+- 研究材料在形成可接受结论前保留于研究或论证类别，不作为实现事实。
 
-Nous Wave 在组织内没有同名当前仓库，可直接转移。
+## 仓库生命周期
 
-## 旧项目
-
-`BionicBot` 与 `Anthro` 属于早期实验项目，完成说明后归档。
-
-`QQContextBot` 保留为独立的历史、数据与协议参考项目；如果已经不再维护，同样归档，但不把它视为当前 Heptalogos 或 Nous Wave 的实现分支。
-
-归档仓库只保留历史代码和提交记录，不继续维护当前架构文档。
-
-## 文档链接
-
-迁移完成后，Vault 和组织主页只链接 canonical 组织仓库。代码仓库中的长期设计链接指向 Architecture-Vault，不保留复制正文。
+归档决定依据仓库用途、当前或潜在的独立价值、活跃消费者和外部依赖。年龄或最后更新时间单独不足以决定归档。需要保留的历史仓库通过 GitHub Archive 等可恢复方式保留历史，不以删除代替归档。

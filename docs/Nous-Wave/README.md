@@ -6,6 +6,7 @@
 
 - [目标设计 PDF](https://github.com/Heptalogos-Devs/Architecture-Vault/releases/download/nous-wave-target-design-latest/Nous_Wave_Target_Design.pdf)
 - [目标设计 LaTeX](main.tex)
+- [PDF 构建说明](BUILD.md)
 - [设计决定](DECISIONS.md)
 - [未决问题](OPEN_QUESTIONS.md)
 - [设计论证](rationale/README.md)

@@ -2,7 +2,9 @@
 
 本目录保存 Heptalogos 的长期目标设计和设计论证。
 
+- [目标设计 PDF](https://github.com/Heptalogos-Devs/Architecture-Vault/releases/download/heptalogos-target-design-latest/Heptalogos_Target_Design.pdf)
 - [目标设计 LaTeX](main.tex)
+- [目标设计 PDF 构建](BUILD.md)
 - [设计决定](DECISIONS.md)
 - [未决问题](OPEN_QUESTIONS.md)
 - [设计论证](rationale/README.md)
