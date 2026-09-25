@@ -1,0 +1,35 @@
+\documentclass[UTF8,oneside,openany,11pt]{ctexbook}
+\input{metadata}
+\input{preamble}
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{4cm}
+  {\Huge\bfseries \ReportTitle\par}
+  \vspace{0.8cm}
+  {\Large \ReportSubtitle\par}
+  \vfill
+  {\large \ReportDate\par}
+\end{titlepage}
+
+\frontmatter
+\tableofcontents
+\input{frontmatter/terminology}
+
+\mainmatter
+\input{chapters/01-system-definition}
+\input{chapters/02-subject-authority}
+\input{chapters/03-product-host}
+\input{chapters/04-cognition-integration}
+\input{chapters/05-agency-pursuit}
+\input{chapters/06-reaction-behavior}
+\input{chapters/07-messaging-effects}
+\input{chapters/08-management-operations}
+\input{chapters/09-services-extensions}
+\input{chapters/10-persistence-reliability}
+\input{chapters/11-portability-lifecycle}
+\input{chapters/12-physical-architecture}
+
+\end{document}
