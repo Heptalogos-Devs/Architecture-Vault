@@ -19,7 +19,7 @@ Nous Wave 与 Heptalogos 的文档入口分别见 [Nous Wave](docs/Nous-Wave/REA
 
 ## 代码仓库
 
-- [Heptalogos 产品与工程仓库](https://github.com/ArsvineZhu/Heptalogos)
-- [Nous Wave 认知系统仓库](https://github.com/ArsvineZhu/Nous-Wave)
+- [Heptalogos 产品与工程仓库](https://github.com/Heptalogos-Devs/Heptalogos)
+- [Nous Wave 认知系统仓库](https://github.com/Heptalogos-Devs/Nous-Wave)
 
 代码仓库负责当前实现、Specs、Plans、Qualification 和工程治理。跨仓库知识所有权见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。
