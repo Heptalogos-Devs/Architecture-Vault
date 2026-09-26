@@ -10,12 +10,12 @@ Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期目标设计、设�
 
 ## 目标设计
 
-- Nous Wave：`docs/Nous-Wave/main.tex`
+- Nous Wave：`docs/Nous-Wave/TARGET_DESIGN.md`
 - Heptalogos：`docs/Heptalogos/TARGET_DESIGN.md`
 
 目标设计只陈述系统的目标语义、职责、对象关系和长期约束。方案比较、外部研究和算法实验进入 `rationale/` 或 `research/`。当前代码状态、实施计划、可执行规格和资格记录留在对应代码仓库。
 
-Nous Wave 与 Heptalogos 的文档入口分别见 [Nous Wave](docs/Nous-Wave/README.md) 和 [Heptalogos](docs/Heptalogos/README.md)。跨系统语义由[认知与主动性合同](docs/integration/cognition-agency.md)维护；仓库职责见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。
+Nous Wave 与 Heptalogos 的文档入口分别见 [Nous Wave](docs/Nous-Wave/README.md) 和 [Heptalogos](docs/Heptalogos/README.md)。Nous Wave 的目标设计正文见 [TARGET_DESIGN.md](docs/Nous-Wave/TARGET_DESIGN.md)。跨系统语义由[认知与主动性合同](docs/integration/cognition-agency.md)维护；仓库职责见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。
 
 ## 代码仓库
 

@@ -10,7 +10,7 @@ Architecture-Vault 保存跨仓库、长期有效的设计知识。
 
 目标设计不记录当前代码、文件路径、缺陷清单、施工顺序、历史设计和仓库迁移状态。
 
-每个系统范围声明自己的唯一直接编辑来源。Heptalogos 的目标设计正文由 `docs/Heptalogos/TARGET_DESIGN.md` 维护。PDF、HTML 或其他发布物只能从该来源派生，不能加入 Markdown 中不存在的设计语义，也不形成并行 Authority。其他系统继续遵循各自范围的来源声明。
+每个系统范围声明自己的唯一直接编辑来源。Heptalogos 的目标设计正文由 `docs/Heptalogos/TARGET_DESIGN.md` 维护，Nous Wave 的目标设计正文由 `docs/Nous-Wave/TARGET_DESIGN.md` 维护。PDF、HTML 或其他发布物只能从这些来源派生，不能加入 Markdown 中不存在的设计语义，也不形成并行 Authority。其他系统继续遵循各自范围的来源声明。
 
 ### 设计决定
 

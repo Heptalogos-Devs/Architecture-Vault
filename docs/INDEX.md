@@ -6,13 +6,12 @@
 
 ## Nous Wave
 
-- [文档入口](Nous-Wave/README.md)：目标设计 PDF 与各知识类别入口。
-- [目标设计源](Nous-Wave/main.tex)
+- [文档入口](Nous-Wave/README.md)：目标设计正文与各知识类别入口。
+- [目标设计正文](Nous-Wave/TARGET_DESIGN.md)：唯一直接编辑的 Nous Wave Target Design Authority。
 - [设计决定](Nous-Wave/DECISIONS.md)
 - [未决问题](Nous-Wave/OPEN_QUESTIONS.md)
 - [设计论证目录](Nous-Wave/rationale/README.md)
 - [研究与实验目录](Nous-Wave/research/README.md)
-- [PDF 构建](Nous-Wave/BUILD.md)
 
 ## Heptalogos
 

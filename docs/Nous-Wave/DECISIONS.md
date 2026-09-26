@@ -1,6 +1,6 @@
 # Nous Wave 设计决定索引
 
-本文件只列已经确定的设计决定，并指向目标设计和对应论证。详细规范性语义以目标设计 PDF/LaTeX 为准。
+本文件只列已经确定的设计决定，并指向目标设计和对应论证。详细规范性语义以 [Nous Wave 目标设计](TARGET_DESIGN.md) 为准。
 
 ## 系统与权威
 
@@ -8,21 +8,21 @@
 
 **决定：** `SubjectId` 表示长期主体身份；模型、模型服务商、会话和运行进程都是可替换执行条件。
 
-目标设计：第 1、3 章。  
+目标设计：第 1、3 章。
 论证：[认知权威与行为权威](rationale/07-authority-agency.md)
 
 ### 认知权威、认知运行时和服务投影分离
 
 **决定：** 持久认知、认知运行时、检索服务投影使用不同身份和生命周期。索引、向量、传播状态和中心性不能成为认知真值。
 
-目标设计：第 2、10、13、15 章。  
+目标设计：第 2、10、13、15 章。
 论证：[持久认知与服务投影](rationale/08-persistence-serving.md)
 
 ### 跨领域写入通过提案
 
 **决定：** 模型、离线认知和其他领域默认只能提交带来源和输入修订的提案；目标领域所有者负责核验和最终写入。
 
-目标设计：第 2、3、11 章。  
+目标设计：第 2、3、11 章。
 论证：[认知权威与行为权威](rationale/07-authority-agency.md)
 
 ## 自我与初始化
@@ -54,28 +54,28 @@
 
 **决定：** 记忆至少分别记录认知角色和形成方式。认知角色包含经历性记忆、陈述性记忆和程序经验；形成方式包含经历落地形成和综合形成。
 
-目标设计：第 5 章。  
+目标设计：第 5 章。
 论证：[记忆分类与认知图式](rationale/01-memory-model.md)
 
 ### 认知图式属于记忆领域的一等对象族
 
 **决定：** 认知图式具有独立身份、修订、适用范围、支持、反例、拆分和合并语义，由记忆领域拥有。
 
-目标设计：第 6 章。  
+目标设计：第 6 章。
 论证：[记忆分类与认知图式](rationale/01-memory-model.md)
 
 ### 认知结构与检索拓扑分离
 
 **决定：** 结构性认知由认知图式表达；检索中心性和传播结构由可重建联想拓扑表达。系统不建立兼具两种职责的统一权威对象。
 
-目标设计：第 6、13 章。  
+目标设计：第 6、13 章。
 论证：[认知图式、关联证据与联想拓扑](rationale/02-schema-association.md)
 
 ### 关联证据与服务边权分离
 
 **决定：** 权威层保存有来源、有类型的关联证据；服务层根据当前有效证据计算边权。检索次数本身不生成长期关联支持。
 
-目标设计：第 6、13 章。  
+目标设计：第 6、13 章。
 论证：[认知图式、关联证据与联想拓扑](rationale/02-schema-association.md)
 
 ## 社会认知
@@ -84,29 +84,43 @@
 
 **决定：** 社会认知维护依赖具体个人、二人关系、群体、频道或社区语境的长期认知，首批对象族为关系认知图和语言惯例。
 
-目标设计：第 8 章。  
+目标设计：第 8 章。
 论证：[社会认知领域](rationale/03-social-cognition.md)
 
 ### 关系认知默认有向
 
 **决定：** `A → B` 的关系认知不自动生成 `B → A`。对称或逆向查询由查询或服务投影层处理。
 
-目标设计：第 8 章。  
+目标设计：第 8 章。
 论证：[社会认知领域](rationale/03-social-cognition.md)
 
 ### 关系程度与认识确定度分离
 
 **决定：** 关系本身的程度和主体对该判断的确定程度是两个独立属性；不得用同一个数值同时表示。
 
-目标设计：第 8 章。  
+目标设计：第 8 章。
 论证：[社会认知领域](rationale/03-social-cognition.md)
+
+### 关系类型自己声明 degree 语义
+
+**决定：** Relation Type 声明方向性、可选逆/对称关系、允许实体类型、degree semantics 和 temporal semantics。Degree 可不存在，也可以是 ordinal、bounded scalar 或 typed state；不同 relation type 的 degree 默认不可直接算术比较。Relation degree 与 epistemic certainty 继续分离。
+
+目标设计：第 8 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
 
 ### 语言惯例具有社会作用域
 
 **决定：** 黑话、称呼和语用约定按个人、二人关系、群体、社区或频道等作用域维护；主体自己的重复输出不构成新的独立外部证据。
 
-目标设计：第 8 章。  
+目标设计：第 8 章。
 论证：[社会认知领域](rationale/03-social-cognition.md)
+
+### LanguageConvention 的接受要求外部社会证据
+
+**决定：** 显式解释/确认、独立外部一致使用、成功理解后的持续外部使用和修复过程可以支持 LanguageConvention；单次上下文猜测只形成 hypothesis；主体自己的重复输出不构成新的独立外部证据。
+
+目标设计：第 8 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
 
 ## 动机与主动性
 
@@ -144,43 +158,108 @@
 
 **决定：** 候选生成、召回和排序等属于检索轨迹；只有真实呈现、引用、据此行动和结果等语义进入长期使用事件。
 
-目标设计：第 10 章。  
+目标设计：第 10 章。
 论证：[使用事件与可访问性](rationale/04-runtime-accessibility-use.md)
 
 ### 长期使用事件必须幂等
 
 **决定：** 调用方为长期使用事件提供稳定事件标识；重试同一事件不能制造额外认知使用。
 
-目标设计：第 10、15 章。  
+目标设计：第 10、15 章。
 论证：[使用事件与可访问性](rationale/04-runtime-accessibility-use.md)
 
 ### 自动可访问性是查询时状态
 
 **决定：** 自动可访问性不是长期认知真值；固定年龄不能自动删除或永久隐藏仍合法存在的认知。
 
-目标设计：第 5、10 章。  
+目标设计：第 5、10 章。
 论证：[使用事件与可访问性](rationale/04-runtime-accessibility-use.md)
 
 ### 查询计划在候选产生前固定
 
 **决定：** 查询计划预先确定检索通道、预算和融合参数；实际候选集合不能反向改变其他通道的权重或归一化定义。
 
-目标设计：第 12 章。  
+目标设计：第 12 章。
 论证：[检索计划与结果融合](rationale/05-retrieval-fusion.md)
 
 ### 多个服务视图先聚合到对象修订
 
 **决定：** 同一修订的规范表示、段落表示和召回线索等视图不构成多份独立证据；跨通道融合前先聚合到对象修订层。
 
-目标设计：第 12、13 章。  
+目标设计：第 12、13 章。
 论证：[检索计划与结果融合](rationale/05-retrieval-fusion.md)
 
 ### 拓扑检索是普通检索通道
 
 **决定：** 联想拓扑输出有界候选排序，并通过查询计划参与统一融合；不得在计划之外提供隐藏加分。
 
-目标设计：第 12、13 章。  
+目标设计：第 12、13 章。
 论证：[联想检索机制](rationale/06-associative-retrieval.md)
+
+## 本轮设计收敛
+
+### 陈述性记忆身份以认知事项连续性为准
+
+**决定：** 陈述性 Memory Object 表示一个持续的认知事项。对同一 referent、claim family、scope 和 world-valid interval 的纠正、澄清、收窄或重新解释形成 revision；新的世界状态、独立事件、不同有效时间中的状态变化或新的综合主张形成新的认知对象。文本相似度和向量距离不能单独决定对象身份。
+
+目标设计：第 5 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### 证据独立性从 provenance 派生
+
+**决定：** Authority 保存来源、观察、派生和认知推导的 provenance；独立佐证是对 lineage 的派生判断。共享来源、共享派生和未知依赖不能被多个记录数量自动放大成多份独立支持。系统不建立替代来源结构的统一全局置信分数。
+
+目标设计：第 4 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### Self 由可独立修订的自我认知和叙事组织共同构成
+
+**决定：** 身份、角色、能力、局限、人格倾向、价值和长期偏好在能够独立变化、被质疑、拥有来源或拥有 scope 时维护独立对象身份；Narrative Identity 引用 Episode、Memory 和 Self revision 组织长期连续性，不复制这些对象的权威内容。
+
+目标设计：第 7 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### Desired Condition 使用有界类型化条件表达
+
+**决定：** Desired Condition 使用版本化 predicate/evaluator 叶子和有限 ALL / ANY / NOT 组合，并单独声明 temporal form、applicability、time window 和 observation coverage。条件真值至少区分 satisfied、violated 和 unknown；Maintain/Avoid 等开放世界条件不能因未观察到反例而自动判定满足。通用脚本和完整规则语言不进入 Desired Condition 核心模型。
+
+目标设计：第 9 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### Episode 支持层级与分段轨道
+
+**决定：** Episode 可以形成层级；同一 Observation 可参与多个 segmentation track。不同 track 可以重叠；同一 parent + track 中 sibling Episode 默认形成有序非重叠分段。分段算法只提出边界候选，不直接取得 Episode Authority。
+
+目标设计：第 6 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### Durable WorkContext checkpoint 属于 Runtime state
+
+**决定：** WorkContext 在需要长暂停、跨进程或跨 Session 恢复时可以形成 durable checkpoint。Checkpoint 只保存恢复工作所需的目的、未决问题、对象/revision 引用、约束、expected revision、恢复条件和预算摘要；恢复时重新核验当前 Authority。Prompt/cache/model hidden state 不成为认知 Authority。
+
+目标设计：第 10 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### 多 WorkContext 分配采用有界公平、紧急借用和防饥饿语义
+
+**决定：** Runtime 的资源分配必须允许有界公平份额、紧急任务临时借用、显式抢占和防饥饿。精确 utility function 与参数属于 Runtime Spec/algorithm research。
+
+目标设计：第 10 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### MaintenanceNeed 是运行工作义务而非认知领域
+
+**决定：** 依赖修订、矛盾、过期派生、Journal/Schema 重核验和 Serving rebuild 等维护需求通过 Runtime/Offline Cognition 的 durable work obligation 表达，不建立新的 Cognition Authority。
+
+目标设计：第 11 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### Hypothesis exploration 必须有有界搜索范围和停止语义
+
+**决定：** Offline hypothesis exploration 在开始时固定资源、来源、反例搜索、能力和抢占 envelope；无新独立来源、预算耗尽、反例搜索耗尽、低信息增益、循环、背压、权限变化和显式取消均可成为停止原因。停止不等同于 hypothesis 被证明或证伪。
+
+目标设计：第 11 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
 
 ## Nous Wave 与 Heptalogos
 
@@ -188,14 +267,21 @@
 
 **决定：** Nous Wave 与 Heptalogos 使用同一逻辑主体标识，但分别维护认知主体和行为主体的权威状态。Nous Wave 的认知状态只作为 Heptalogos 行为判断的输入，不直接取得行为权限。
 
-目标设计：第 3、16 章。  
+目标设计：第 3、16 章。
 论证：[认知权威与行为权威](rationale/07-authority-agency.md)
 
 ## 物理架构
 
 ### TypeScript 宿主与 Rust 内核
 
-**决定：** TypeScript 宿主负责模型、资源、上下文和离线流程编排；Rust 内核负责领域语义、认知权威、查询和服务投影生命周期。PostgreSQL 保存结构化权威数据，大型材料进入不可变对象库。
+**决定：** TypeScript 宿主负责模型、资源、上下文和离线流程编排；Rust 内核负责领域语义、认知权威、查询和服务投影生命周期。structured Authority persistence 保存结构化权威数据，大型材料进入 immutable object storage。
 
-目标设计：第 17 章。  
+目标设计：第 17 章。
 论证：[持久认知与服务投影](rationale/08-persistence-serving.md)
+
+### Generic serving/storage provider 不自动成为长期架构 Authority
+
+**决定：** Target Design 固定 TypeScript Host、Rust Kernel、structured Authority store、immutable object storage 以及可重建 lexical/dense/topology Serving family。具体 provider 若没有单独长期决定，则继续属于 implementation/Plan/Spec 层，不在 Target Design 中永久锁定。
+
+目标设计：第 17 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)

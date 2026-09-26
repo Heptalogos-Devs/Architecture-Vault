@@ -1,80 +1,122 @@
 # Nous Wave 未决问题
 
-本文件只记录尚未进入目标设计或尚未下降为可执行规格的事项。已经确定的领域划分、对象归属和跨系统职责不在这里重复讨论。
+本文件只保留仍然需要研究、实验或后续 Spec 才能决定的问题。
 
-## 领域设计仍需深入
+已经确定的领域边界、Authority、对象归属、跨系统职责以及本轮已经收敛的中层语义不再重复列为 OPEN。
 
-### Self 对象粒度
+# Memory 与认知结构
 
-认知种子、自我领域的主要内容和演化原则已经确定。仍需决定：
+## Declarative identity matcher
 
-- 自我模型、人格倾向、价值、长期偏好和叙事身份分别以多细的对象粒度维护；
-- 哪些变化创建同一对象的新修订，哪些变化形成新的自我认知对象；
-- 叙事身份如何引用既有经历、自我修订和长期变化，而不复制其权威内容。
+目标语义已经区分“同一认知事项的 revision”和“新的 world state / cognition object”。
 
-### 陈述性记忆的身份连续性
+仍需在 Spec/研究中决定：
 
-经历性记忆可以围绕同一经历保持对象连续性，程序经验可以围绕同一经验性策略保持连续性。陈述性记忆仍需进一步定义“同一认知事项”的判定：
+- referent、claim family、scope 和 valid-time 如何形成稳定 identity comparator；
+- 模型辅助 identity proposal 如何被 deterministic constraints 限制；
+- ambiguous merge/split 如何保留人工或领域 owner 可纠正性。
 
-- 指向对象、时间范围、适用范围和核心主张分别允许多大变化；
-- 澄清、修正、范围收窄和重新解释何时属于同一对象修订；
-- 泛化、归纳和新的世界状态何时形成新的认知对象。
+## CognitiveSchema formation
 
-### 证据依赖与佐证聚合
+仍需研究：
 
-来源谱系需要区分信息来源、观察过程、处理过程和认知推导。仍需决定：
+- Schema 自动形成的 minimum evidence structure；
+- 反例如何影响 scope；
+- split / merge 的触发条件；
+- Schema revision 与新 Schema object 的判定；
+- 自动形成是否能稳定优于简单 synthesized declarative memory。
 
-- 对某一具体主张，如何识别具有共同信息来源或传播依赖的证据组；
-- 部分共享来源、来源依赖未知和多个独立观察如何表示；
-- 形成、修订、认知图式和社会推断在提交前如何使用这些依赖关系，而不压缩成一个失去来源结构的统一置信分数。
+# Self
 
-### 期望条件的可评价表示
+Self 的对象粒度原则已经确定。
 
-期望条件的语义、时间形式和与 Heptalogos 主动追求的关系已经确定。仍需在进入规格前决定：
+仍需研究：
 
-- 条件本身采用何种结构化表达，使模型可以生成、系统可以稳定引用，必要时又能够确定性评价；
-- 对开放世界事实，怎样声明观察覆盖和评价所需证据；
-- 复杂条件、周期性条件和依赖外部资源的条件如何组合而不建立过重的通用规则语言。
+- Self proposal 的接受门槛；
+- personality/value/preference 的不同演化速度是否需要不同 policy；
+- Narrative Identity 何时新建 thread、何时修订同一 thread；
+- model reflection 与外部 evidence 的相对作用如何进入 proposal review。
 
-### 经历片段与认知运行时
+# Social Cognition
 
-- 经历片段是否采用层级组织，以及同一层级的重叠规则；
-- 边界信号如何形成分段提案；
-- WorkContext 的暂停、恢复和跨会话持久检查点；
-- Active Cognition 的激活来源和运行预算模型；
-- 多个 WorkContext 之间的注意分配与资源竞争。
+Relation Type 必须声明自身 degree semantics 已确定。
 
-### 社会认知与离线认知
+仍需研究：
 
-- 社会关系类型的最小声明模型；
-- 哪些关系允许程度属性，以及程度的操作含义；
-- 语言惯例的作用域编码和接受条件；
-- Maintenance Need 的对象语义、优先因素和离线认知种子选择；
-- Hypothesis 的停止规则、反例搜索和跨领域提案组织。
+- reference profile 首批 relation ontology；
+- 不同 relation type 的 degree update policy；
+- 跨平台 entity binding 的证据聚合；
+- group/community relation 的推导和冲突处理；
+- LanguageConvention 自动形成的重复次数、时间跨度和 repair 信号参数。
 
-## 与 Heptalogos 共同设计的问题
+# Motivation
 
-期望条件进入 Heptalogos 后，由行为侧建立和维护主动追求状态。Nous Wave 只要求以下跨系统语义已经成立：精确引用期望条件修订、期望修订触发重新核验、行为结果以证据和回执返回。
+Desired Condition 的 bounded typed expression、三值评价和 coverage requirement 已确定。
 
-Heptalogos 仍需进一步设计：
+仍需研究：
 
-- Pursuit 的持久状态与生命周期；
-- Pursuit、BehaviorIntent、ActionPlan、Commitment 和 WorkItem 之间的关系；
-- 什么事件产生主动追求候选，什么条件触发重新审查；
-- 期望被撤回时如何处理已经存在的计划、承诺和不可逆外部效果。
+- reference profile 首批 predicate/evaluator catalog；
+- 不同外部资源的 observation coverage 如何描述；
+- 周期性条件和滑动时间窗口的评价策略；
+- evaluator revision 与 Desired Condition revision 的兼容规则；
+- Motivation 中长期 priority relation 的形成和修订 policy。
 
-这些问题由 Heptalogos 的行为与主动性设计承担，不在 Nous Wave 内建立第二套执行状态机。
+# Cognitive Runtime
 
-## 算法研究问题
+Episode 的 hierarchy/track 语义和 WorkContext checkpoint 已确定。
 
-- 自动可访问性的默认函数和参数；
-- 联想拓扑相对无图检索的实际增量收益；
-- 个性化 PageRank、保留充分状态的竞争式传播或更简单图扩展的质量—成本比较；
-- 残差语义线索是否提高弱线索召回；
-- 修正加权协方差后，主成分方法是否仍有独立价值；
-- 固定计划的倒数排序融合是否需要被经过校准或学习得到的融合方法替代；
-- 多视图高级聚合是否值得超越“每通道最佳视图”的简单基线。
+仍需研究：
 
-## 实现选择
+- Episode boundary detector；
+- attention utility function；
+- urgency borrowing / anti-starvation 的参数；
+- WorkContext continuity cost；
+- Active Cognition 的 admission / eviction policy；
+- accessibility 的函数形式和参数。
 
-稠密检索后端、近似最近邻索引、SQL 结构、RPC 形状、crate/package 划分和具体参数默认值属于后续 Plan/Spec/implementation 决策，不作为目标设计开放问题维护。
+# Offline Cognition
+
+MaintenanceNeed 与 bounded hypothesis exploration 已确定。
+
+仍需研究：
+
+- expected information gain estimator；
+- counterexample search 的预算分配；
+- MaintenanceNeed priority function；
+- 多个 hypothesis 竞争资源时的调度；
+- offline cross-domain proposal batching / coalescing 是否有价值。
+
+# Retrieval 与 Serving 算法研究
+
+以下必须通过实验决定：
+
+- lexical / dense / entity / runtime lane 的默认融合；
+-固定 RRF 是否需要 calibrated / learned fusion；
+- multiview aggregation 是否值得超过简单 best-view baseline；
+- AssociativeTopology 的真实增量；
+- simple bounded graph expansion、PPR、competitive propagation、Wave 的质量—成本比较；
+- Residual weak-cue retrieval；
+- EPA / covariance / PCA family 在修正统计定义后是否仍有独立收益；
+- reranker 在 latency / cost / quality 上的默认启用条件；
+- dense backend / ANN implementation 的工程评测。
+
+这些研究结果只有在稳定、多场景实验显示增益后，才可晋升为 reference profile 默认策略。
+
+# 与 Heptalogos 的后续共同工作
+
+Nous Wave 已确定：
+
+- shared SubjectId；
+- cognition / behavior Authority 分离；
+- Desired Condition → Pursuit exact revision reference；
+- behavior outcome / evidence receipt。
+
+仍需与 Heptalogos 对齐：
+
+- live cognition availability / stale-state degradation contract；
+- cross-system revision notification / invalidation mechanics；
+- behavior use event 回传的 stable identity；
+- purge / permission change 对已投影行为上下文的失效；
+- maintenance lease 的产品级 admission 与抢占机制。
+
+Pursuit 自身生命周期继续由 Heptalogos 设计，不在 Nous Wave 建立第二套行为状态机。

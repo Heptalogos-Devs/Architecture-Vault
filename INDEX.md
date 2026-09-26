@@ -18,4 +18,4 @@ Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期设计知识、设�
 
 ## 构建
 
-Nous Wave 的 PDF 构建入口位于 [Nous Wave 构建说明](docs/Nous-Wave/BUILD.md)，自动构建由 `.github/workflows/build-pdf.yml` 管理。Heptalogos 的目标设计正文直接维护在 Markdown 中。
+Nous Wave 与 Heptalogos 的目标设计正文均直接维护在 Markdown 中，分别是 [Nous Wave TARGET_DESIGN.md](docs/Nous-Wave/TARGET_DESIGN.md) 和 [Heptalogos TARGET_DESIGN.md](docs/Heptalogos/TARGET_DESIGN.md)。当前没有活动的目标设计 PDF 构建流程。

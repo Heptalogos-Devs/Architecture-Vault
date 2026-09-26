@@ -1,6 +1,6 @@
 # 设计论证
 
-本目录保存 Nous Wave 目标设计背后的论证。这里可以比较可行方案、说明取舍、记录失败模式和数学候选；规范性定义仍以目标设计 PDF/LaTeX 为准。
+本目录保存 Nous Wave 目标设计背后的论证。这里可以比较可行方案、说明取舍、记录失败模式和数学候选；规范性定义仍以 [TARGET_DESIGN.md](../TARGET_DESIGN.md) 为准。
 
 - [记忆分类与认知图式](01-memory-model.md)
 - [认知图式、关联证据与联想拓扑](02-schema-association.md)
