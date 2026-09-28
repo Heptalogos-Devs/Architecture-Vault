@@ -25,6 +25,37 @@
 目标设计：第 2、3、11 章。
 论证：[认知权威与行为权威](rationale/07-authority-agency.md)
 
+### Configuration Service 是共享基础设施
+
+**决定：** Nous Wave 建立统一 Configuration Service。各 subsystem/domain owner 注册自己拥有的配置 key、类型、参考默认值、校验、暴露等级、作用域和应用方式；服务统一负责解析、覆盖、快照、来源诊断和 digest。Leaf algorithm 接收 typed policy，不直接按字符串读取全局配置。
+
+目标设计：第 2、17 章。
+论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### 配置层级与系统不变量分离
+
+**决定：** 可修改配置按 Developer、Advanced、Standard 描述暴露等级；对象身份、领域所有权、不可变修订、生命周期、并发、幂等、权限和清除等系统不变量不成为配置开关。配置元数据与配置能力同时建立，未来管理界面只消费同一份描述。
+
+目标设计：第 2 章。
+
+### Memory-only 是正式能力组合
+
+**决定：** Memory 是最小完整认知能力。Self、Social Cognition、Motivation 以及后续高级领域均为可选 owner；关闭这些领域不能削弱 Memory 的启动、查询、Serving、restart、rebuild、purge 或恢复语义。
+
+目标设计：第 1、3、17 章。
+
+### Process Capability 与 Subject Capability 分离
+
+**决定：** Process Capability 表示当前部署提供的领域上限；Subject Capability 表示某个主体已经明确供给的领域集合。主体能力不得超过进程能力，未供给领域不通过空状态或占位对象模拟存在。新主体可以使用配置提供的默认供给，但已创建主体的 typed capability set 不随默认配置变化。
+
+目标设计：第 1、3 章。
+
+### 认知 operation 使用单一不可变配置快照
+
+**决定：** 一次认知形成、查询或 Serving 构建固定一个 resolved ConfigSnapshot。reference default、部署文件、system override、subject override 按确定顺序解析；影响 Authority formation 或服务制品的 key subset digest 随相关记录保存，后续配置变化不重写历史语义。
+
+目标设计：第 2、13、15 章。
+
 ## 自我与初始化
 
 ### 认知种子是版本化来源文档
