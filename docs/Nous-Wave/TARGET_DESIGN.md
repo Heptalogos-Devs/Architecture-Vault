@@ -464,6 +464,8 @@ Heptalogos 的行为结果、外部状态变化、完成、失败、取消和拒
 - 调用方工作集（ConsumerWorkingSet）：按调用方能力、意图和预算选择的有界认知集合。
 - 受管理上下文（Managed Context）：为模型或其他有状态消费者维护的上下文同步状态。
 
+同一 Subject 可以同时服务多个 Session 和多个 consumer。它们共享 Subject 所属的 durable cognition；Session 的 ResidentSet、Focus、runtime revision 和其他需要隔离的运行时状态分别维护。ConsumerWorkingSet 与 UseEvent 按调用方和事件身份记录，不通过复制 Subject Memory 建立独立认知权威。
+
 ### 注意与即时评价
 
 注意分配在有限预算下选择当前需要处理的信息、工作上下文和认知对象。即时评价根据自我、社会认知、动机和当前环境估计相关性、机会、风险、可控性等运行时性质。

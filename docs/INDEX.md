@@ -12,6 +12,7 @@
 - [未决问题](Nous-Wave/OPEN_QUESTIONS.md)
 - [设计论证目录](Nous-Wave/rationale/README.md)
 - [研究与实验目录](Nous-Wave/research/README.md)
+- [VCP 与联想检索算法谱系](Nous-Wave/research/VCP_AND_ASSOCIATIVE_LINEAGE.md)
 
 ## Heptalogos
 

@@ -38,6 +38,14 @@
 
 目标设计：第 2 章。
 
+### 同一主体可并行服务多个会话与调用方
+
+**决定：** 一个 Subject 可以同时被多个 Session 和多个 consumer 使用。durable cognition 归 Subject 共享；ResidentSet、Focus、runtime revision 等 Session 运行时状态按 Session 隔离；ConsumerWorkingSet 与 UseEvent 按调用方和事件身份隔离。Session 或 consumer 不拥有复制的 Subject Memory。
+
+目标设计：第 3、10 章。
+
+论证：[持久认知与服务投影](rationale/08-persistence-serving.md)
+
 ### Memory-only 是正式能力组合
 
 **决定：** Memory 是最小完整认知能力。Self、Social Cognition、Motivation 以及后续高级领域均为可选 owner；关闭这些领域不能削弱 Memory 的启动、查询、Serving、restart、rebuild、purge 或恢复语义。

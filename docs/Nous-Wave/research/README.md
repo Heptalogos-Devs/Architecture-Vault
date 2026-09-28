@@ -3,6 +3,7 @@
 本目录保存支撑设计论证的外部研究、算法性质试验、数学核对和软件研究快照。它回答“我们依据什么研究过这个问题”，不承担目标设计的规范职责。
 
 - [算法研究证据](ALGORITHM_EVIDENCE.md)
+- [VCP 与联想检索算法谱系](VCP_AND_ASSOCIATIVE_LINEAGE.md)
 - [外部研究与软件来源](EXTERNAL_EVIDENCE.md)
 - [下一阶段研究综合](2026-09-next-stage-engineering-synthesis.md)
 - `references.bib`：固定论文、官方资料和软件研究快照的书目信息。
