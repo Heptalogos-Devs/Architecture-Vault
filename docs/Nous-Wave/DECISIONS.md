@@ -40,7 +40,7 @@
 
 ### 同一主体可并行服务多个会话与调用方
 
-**决定：** 一个 Subject 可以同时被多个 Session 和多个 consumer 使用。durable cognition 归 Subject 共享；ResidentSet、Focus、runtime revision 等 Session 运行时状态按 Session 隔离；ConsumerWorkingSet 与 UseEvent 按调用方和事件身份隔离。Session 或 consumer 不拥有复制的 Subject Memory。
+**决定：** 一个 Subject 可以同时被多个 Session 和多个 consumer 使用。durable cognition 归 Subject 共享；ResidentSet、foreground WorkContext binding、runtime revision 等 Session 运行时状态按 Session 隔离；WorkContext 只保存有界任务连续性和 exact cognition references，不复制 Memory；ConsumerWorkingSet 与 UseEvent 按调用方和事件身份隔离。Session 或 consumer 不拥有复制的 Subject Memory。
 
 目标设计：第 3、10 章。
 
