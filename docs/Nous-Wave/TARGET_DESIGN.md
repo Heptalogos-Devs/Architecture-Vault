@@ -459,12 +459,12 @@ Heptalogos 的行为结果、外部状态变化、完成、失败、取消和拒
 
 - 会话（Session）：一段连续运行范围，不等同于聊天线程或经历片段。
 - 活动认知（Active Cognition）：当前较容易重新激活的认知引用和少量运行元数据。
-- 工作上下文（WorkContext）：可暂停、恢复和结束的任务或问题上下文；同一主体可以同时存在多个工作上下文。
+- 工作上下文（WorkContext）：属于 Subject-level Cognitive Runtime、可暂停、恢复和结束的任务或问题上下文；同一主体可以同时存在多个工作上下文，并可由该主体的后续 Session 继续。
 - 驻留集（ResidentSet）：当前运行时直接保留的认知引用集合。淘汰只改变运行时可用性，不修改持久认知。
 - 调用方工作集（ConsumerWorkingSet）：按调用方能力、意图和预算选择的有界认知集合。
 - 受管理上下文（Managed Context）：为模型或其他有状态消费者维护的上下文同步状态。
 
-同一 Subject 可以同时服务多个 Session 和多个 consumer。它们共享 Subject 所属的 durable cognition；Session 的 ResidentSet、Focus、runtime revision 和其他需要隔离的运行时状态分别维护。ConsumerWorkingSet 与 UseEvent 按调用方和事件身份记录，不通过复制 Subject Memory 建立独立认知权威。
+同一 Subject 可以同时服务多个 Session 和多个 consumer。它们共享 Subject 所属的 durable cognition；Session 的 ResidentSet、foreground WorkContext binding、runtime revision 和其他需要隔离的运行时状态分别维护。WorkContext 保存有界的任务连续性与 exact cognition references，不复制 Memory。ConsumerWorkingSet 与 UseEvent 按调用方和事件身份记录，不通过复制 Subject Memory 建立独立认知权威。
 
 ### 注意与即时评价
 
@@ -502,6 +502,8 @@ WorkContext 属于 Cognitive Runtime。短生命周期运行细节、prompt、ca
 - 提交时依赖的 expected revision；
 - 恢复条件；
 - 资源和预算摘要。
+
+Session 只保存可选的 foreground WorkContext binding。Active Cognition 是 ResidentSet、当前 WorkContext exact references 与请求 situation references 的运行时视图，不建立新的 durable cognition Authority。
 
 恢复时以当前 Authority 重新核验检查点。检查点不得成为长期认知 Authority。
 
