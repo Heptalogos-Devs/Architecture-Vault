@@ -311,6 +311,24 @@
 
 ## 物理架构
 
+### 结构化派生与模型操作身份
+
+**决定：** structured payload 与字段支持链是来源表示的一等内容；Schema、Prompt 与 role/config snapshot 参与 producer identity。caller-stable operation 与首次固定生成条件分离，重放复用已校验 proposal/outcome，写入仍由领域 owner 决定。
+
+目标设计：第 4、14、15 章。
+
+### 外部平台是可选 Resource
+
+**决定：** Material-owned corpus 与 External Resource 按 Authority/lifecycle ownership 划分。已有知识平台通过 optional adapter 接入，不成为 Nous 默认安装底座；外部 records、模型 gateway 和部署生命周期保持各自边界。
+
+目标设计：第 14、17 章。
+
+### 便携 sidecar 与独立逻辑根
+
+**决定：** Runtime Bundle 支持宿主通过官方 Client 嵌入使用；deployment profile 统一解析独立逻辑根，普通启动不下载。第三方 runtime pack、用户配置、稳定实例数据和临时进程状态分离，发布替换不删除数据、不隐式升级数据库。
+
+目标设计：第 17 章。
+
 ### TypeScript 宿主与 Rust 内核
 
 **决定：** TypeScript 宿主负责模型、资源、上下文和离线流程编排；Rust 内核负责领域语义、认知权威、查询和服务投影生命周期。structured Authority persistence 保存结构化权威数据，大型材料进入 immutable object storage。
