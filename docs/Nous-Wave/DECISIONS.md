@@ -108,6 +108,76 @@
 目标设计：第 6、11、15 章。
 论证：[设计论证](rationale/02-schema-association.md)
 
+### Bare text 是一等 Cognitive Query
+
+**决定：** self-contained semantic text 独立走 lexical+dense、固定融合和 owner validation；context、concept enrichment 与 exploration 均可选。
+
+目标设计：第 12 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### ResultProjection 与 query intent 分离
+
+**决定：** 默认返回 Memory/Schema/Episode/Journal；Evidence/Resource 在明确 projection 或 resource intent 时成为顶层结果，exact target 同样受投影约束。
+
+目标设计：第 12 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### TemporalFrame 统一认知时间与历史修订视图
+
+**决定：** 相对时间绑定准备时捕获的 Subject CognitiveClock；多轴 filters 取交集；Authority as-of 与 current/history revision view 分别表示。
+
+目标设计：第 4、12 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### 历史查询隔离完整 Authority/Serving view
+
+**决定：** 候选生成、描述、Tag canonicalization、concept vectors 与 topology 均只读所选有效历史状态；权限和 purge 边界仍有效。
+
+目标设计：第 4、13、15 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### Tag 是可嵌入语义概念身份
+
+**决定：** effective label/description/kind 形成唯一 canonical semantic representation，表达主题、规则和经验模式；身份与显示字符串独立。
+
+目标设计：第 6 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### QueryActivation 保持 ephemeral
+
+**决定：** 各 profile 共享 explicit/inferred concepts 和 exact context；novel hypothesis 不直接创建 durable Tag。
+
+目标设计：第 6、12 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### direct Tag recall 与 associative diffusion 分离
+
+**决定：** Tag activation 可直接召回 attachments；只有显式 associative exploration 才传播，DSL 不暴露物理算法参数。
+
+目标设计：第 12、13 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### Host feedback 可进入后续 concept maintenance
+
+**决定：** 有意义 UseEvent 可关联实际 query 的有界概念反馈；阈值只 enqueue need，proposal 仍需真实 supports 和 owner 核验。
+
+目标设计：第 10、11 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### 模型工作机会由 Host 授权
+
+**决定：** form/query 明确授权各自模型工作；maintenance model 仅在 Host grant 内执行，自动 enqueue 不授权后台 LLM。
+
+目标设计：第 11、14 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
+### concept vectors 跨算法复用
+
+**决定：** Tag embedding 与 direct postings 是 profile-independent Serving；历史视图按 effective-state digest 复用，read lease 保护并可回收。
+
+目标设计：第 13、17 章。
+论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
+
 ## 自我与初始化
 
 ### 认知种子是版本化来源文档
@@ -364,7 +434,7 @@
 
 ### Generic serving/storage provider 不自动成为长期架构 Authority
 
-**决定：** Target Design 固定 TypeScript Host、Rust Kernel、structured Authority store、immutable object storage 以及可重建 lexical/dense/topology Serving family。具体 provider 若没有单独长期决定，则继续属于 implementation/Plan/Spec 层，不在 Target Design 中永久锁定。
+**决定：** Target Design 固定 TypeScript Host、Rust Kernel、structured Authority store、immutable object storage 以及可重建 lexical/dense/concept/topology Serving family。具体 provider 若没有单独长期决定，则继续属于 implementation/Plan/Spec 层，不在 Target Design 中永久锁定。
 
 目标设计：第 17 章。
 论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)

@@ -37,7 +37,7 @@
 
 ### 标签
 
-标签是稳定的语义线索或概念身份。标签身份与显示字符串分离；同名只能帮助寻找候选，不能自动证明两个标签具有同一身份。
+标签是有稳定身份、可修订文本表示的 durable semantic concept，可以表达主题、规则和经验模式。标签身份与显示字符串分离；同名只能帮助寻找候选，不能自动证明两个标签具有同一身份。其 canonical semantic representation、共享向量与 query-local activation 的边界见[时间、概念与查询](11-temporal-concept-query.md)。
 
 ### 认知图式
 

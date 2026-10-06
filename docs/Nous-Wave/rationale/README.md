@@ -12,5 +12,6 @@
 - [持久认知与服务投影](08-persistence-serving.md)
 - [认知种子与静态自我档案](09-cognitive-seed-self-profile.md)
 - [查询寻址与准备](10-query-addressing-and-preparation.md)
+- [时间、概念与查询](11-temporal-concept-query.md)
 
 阅读时区分三类内容：已经进入目标设计的决定、用于解释这些决定的论证、仍需实验验证的候选机制。候选机制不会因为出现在论证中自动成为目标设计。
