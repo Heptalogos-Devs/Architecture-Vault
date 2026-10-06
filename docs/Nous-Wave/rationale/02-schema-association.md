@@ -33,7 +33,7 @@
 
 如果系统把自身检索结果再次当作独立认知证据，这个回路会逐渐变成自我确认。
 
-## 三层职责
+## 分解后的职责
 
 ### 标签
 
@@ -77,3 +77,31 @@
 经典扩散激活研究中的竞争和扇出效应为这种约束提供了问题背景，但 Nous Wave 不把具体心理学模型直接当作软件实现规范。
 
 Anderson, J. R. (1983). *A Spreading Activation Theory of Memory*. Journal of Verbal Learning and Verbal Behavior 22(3):261–295. DOI: `10.1016/S0022-5371(83)90201-3`.
+
+## Anchor 职责的归属与吸积
+
+旧 Anchor 将长期概念、认知结构和 retrieval centrality 合并。长期价值由五个职责共同承担：
+
+| 职责 | 所有者或表示 |
+| --- | --- |
+| stable concept identity | Tag |
+| structural cognition | CognitiveSchema |
+| typed relation support | AssociationEvidence |
+| derived accumulation | Accretion |
+| Serving propagation | AssociativeTopology |
+
+Accretion 从当前认知、attachment、provenance roots、Episode recurrence、观察跨度、关系与 meaningful use 汇总概念中心的积累。它帮助安排 review、发现 reuse/merge/split 候选，也可以成为版本化 Serving feature。检索或呈现不增加独立根；反证和来源依赖保留自己的语义。将其设为可重算信号，算法变化便只影响服务与维护，而不改写认知历史。
+
+## 自动维护与关系依据
+
+Tag 的 create/reuse/revise/attach/detach/merge/split 和 AssociationEvidence 的 create/revoke 由维护提案建议，Memory owner 决定提交。后置 attachment 使用显式关系记录，历史 cognition revision 保留形成时的内容。merge/split 保存 lineage 和实际 exact supports；明确 alias 或语义分化可以由一项充分来源支持，不用统一的两独立根门槛代替领域判断。
+
+Episode membership/order、同一次 observation 或显式 support 是结构 owner 已掌握的事实，可以直接形成结构关系依据或 Serving support adjacency。semantic relation 则携带 proposal 与明确 support，由 owner 核验主体、端点、生命周期、relation type、方向、极性、producer 和 provenance。
+
+对所有 cognition 类型递归展开关系证明会把组织事实、语义判断和来源核验混在同一 theorem prover 内，迫使新增 owner 接受无关证明协议。关系自身的 typed validation 与掌握事实的 owner 足以表达当前合同。
+
+## 提案与事务粒度
+
+一次模型反思可以产生多项认知建议。若把它们绑定成一个超级事务，一项非法关系会撤销已成立的独立 Memory 或 Tag，也使崩溃恢复依赖整个 catalog 的持续有效性。逐项 typed owner mutation 让每个领域保持自己的并发、幂等、来源与生命周期语义。
+
+模型输入快照、已取得 proposal 与 workflow outcome 保存一次；每项 action 使用稳定 operation identity，重放由 owner receipt 去重。后项非法保留前项独立提交，依赖失败结果的建议跳过；陈旧 proposal 结束，新的认知变化产生新机会。瞬时 transport/infrastructure 失败继续执行同一 proposal。Tag merge/split、Episode N-to-M partition 等单项领域操作仍以自身事务保持原子。

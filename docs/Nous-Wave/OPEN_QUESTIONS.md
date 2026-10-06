@@ -26,6 +26,14 @@
 - Schema revision 与新 Schema object 的判定；
 - 自动形成是否能稳定优于简单 synthesized declarative memory。
 
+## 概念维护与 Accretion 算法
+
+- Accretion 聚合函数、参数与默认策略；
+- concept reuse/merge/split 的质量 policy；
+- Query Representation 的具体压缩策略。
+
+稳定引用、显式 identity resolution、自动概念维护和 Accretion 的 derived status 已锁定，算法研究在这些合同内进行。
+
 # Self
 
 Self 的对象粒度原则已经确定。
