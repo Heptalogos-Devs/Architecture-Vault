@@ -110,6 +110,16 @@ MaintenanceNeed 与 bounded hypothesis exploration 已确定。
 
 这些研究结果只有在稳定、多场景实验显示增益后，才可晋升为 reference profile 默认策略。
 
+# Temporal / Concept Query 的待验证策略
+
+ResultProjection、TemporalFrame、完整 historical Authority view、Tag concept semantics 与 Host 授权边界已经确定。该范围只保留以下研究问题：
+
+- Query concept enrichment 的默认启用策略；
+- existing Tag semantic activation threshold；
+- novel concept model enrichment 的质量与成本；
+- historical Serving cache retention；
+- real-source qualification 后是否改变 default cognitive profile。
+
 # 与 Heptalogos 的后续共同工作
 
 Nous Wave 已确定：

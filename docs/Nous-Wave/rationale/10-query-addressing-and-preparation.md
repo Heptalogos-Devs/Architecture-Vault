@@ -12,7 +12,9 @@ Agent 或 consumer 提供能够独立解释的 semantic intent。PrepareQuery �
 
 Representation 使用 Entity 显示名、Tag label/description、Schema/current cognition descriptor、WorkContext purpose、时间方向和 consumer/task 语义，保留对应 exact source refs。UUID、LexicalRef 和 revision IDs 负责绑定与约束，不能替代 semantic descriptor。有界、确定性的编译和显式截断诊断，让不同 retrieval profile 使用同一 prepared query semantic input；dense/sensing 和 rerank 可以共享该输入。具体压缩策略仍可研究。
 
-## 文本兼容性与 Agent loop
+## 一等纯文字查询、文本兼容性与 Agent loop
+
+self-contained semantic text 是正式 Cognitive Query 的最小完整输入；无需 exact selector、WorkContext、概念模型或探索。raw-text compatibility 则是独立研究输入模式，不替代正式纯文字路径。TemporalFrame、ResultProjection、统一 QueryActivation 和历史隔离的选择理由见[时间、概念与查询](11-temporal-concept-query.md)。
 
 外部 raw-text compatibility 独立使用原始文本，不注入 Entity/Tag/WorkContext oracle，也不冒充完整 cognitive input；实验结果单独解释。
 

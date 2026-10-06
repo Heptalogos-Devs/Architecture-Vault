@@ -194,6 +194,18 @@ Nous Wave 以可追溯来源作为认知形成的基础。来源层至少包含�
 
 未知时间保持未知。时间范围允许开放端点。读取层可以派生最早、最晚或聚合时间视图，但派生值不写回为新的来源事实。
 
+### CognitiveClock 与 TemporalFrame
+
+Subject CognitiveClock 是主体认知相对时间的唯一基准。在线 Host 可使它跟随现实时间；历史重放、模拟和测试可以独立设置或推进。查询准备捕获一次 clock，固定相对时间的绝对解释；基础设施 timeout、retry 和 worker lease 继续使用基础设施时间。
+
+TemporalFrame 统一查询的认知时间基准、Authority view 和 revision view，同时保留 scoped five-axis filters。发生、观察、有效、形成和记录时间可以在同一 scope 中同时约束，按交集解释；不同时间轴不互相替代。
+
+Authority view 默认为 current，也可以选择 as-of：读取该 Subject 在指定认知时间之前已经存在的有效状态。Memory、Tag、CognitiveSchema、Episode、Journal 的 effective revision、lifecycle、Tag aliases 与 merge/split canonicalization、有效 AssociationEvidence 都按该时刻解释。未来形成或改变的认知不得通过候选、描述、向量或拓扑进入历史查询。
+
+revision view 默认为所选 Authority view 的 effective head。显式 history 允许该视图中 eligible historical revisions 成为独立候选，保留对象和修订身份，并继续满足 as-of 与五轴约束。
+
+当前 query text 仍表达现在提出的问题；当前 WorkContext 的纯语义 purpose 可以帮助表达意图。其中引用 as-of 之后认知的 exact refs 不成为历史激活 seed，也不提供未来 cognition descriptor；排除在 inspection 中明确报告。Entity 和 Resource 的稳定身份可以表达现在的问题，但不能携带未来认知内容。
+
 ## 5. 记忆
 
 ### 记忆对象
@@ -284,7 +296,9 @@ Nous Wave 以可追溯来源作为认知形成的基础。来源层至少包含�
 
 ### 标签与关联证据
 
-标签（Tag）是稳定的语义线索或概念身份。标签身份与显示名称分离；相同字符串只能作为解析候选，不能自动证明两个标签具有同一语义身份。
+标签（Tag）是具有稳定身份、可修订文本语义表示的 durable semantic concept。它可以表达主题、规则、事件或经验模式、程序与因果概念，或一句话及较长概念描述，不限定为分类枚举或 hashtag。标签身份与显示名称分离；相同字符串只能作为解析候选，不能自动证明两个标签具有同一语义身份。
+
+Tag 的 effective label、description 和语义 kind 形成唯一、版本化、确定性且有界的 canonical semantic representation。它用于共享 embedding、query activation 与 associative retrieval；opaque TagId 和 LexicalRef 只负责身份，alias 用于发现，不默认加入概念 embedding。修订改变语义表示，稳定身份保持连续。
 
 关联证据（AssociationEvidence）记录认知对象之间有来源、有类型的关联依据，例如共现、顺序、显式关系、程序关系、共同结果或图式支持。关联证据保存来源、方向、极性、有效范围和生产者信息。
 
@@ -297,6 +311,14 @@ Tag 可以由显式管理操作或认知维护形成。认知维护读取当前�
 Tag 与既有 Cognition 的后置关联使用显式关系记录，不为了增加一个后来形成的概念而重写历史 cognition revision。Tag 自身内容发生实质语义变化时创建 Tag revision；merge/split 保留 lineage 和实际支持来源。
 
 一次模型输出可以包含多个维护建议。每个被接受的领域操作按自己的 Authority mutation 合同提交。模型建议列表本身不建立跨所有动作的超级事务语义。需要天然原子性的领域操作，例如 Tag merge、Tag split、Episode partition，自身继续保持原子。
+
+### Semantic Concept Plane
+
+Durable Tag、query-local Tag activation、concept proposal、AssociationEvidence 和 derived Accretion 共同构成 Semantic Concept Plane。长期概念由 Memory owner 维护；查询激活属于 Runtime；concept vectors 和 direct attachment postings 属于可重建 Serving，不能建立并行 Tag Authority。
+
+Host 可以在 formation 时提供已解析的 explicit Tag identity。Memory owner 验证主体、active/canonical state、合并映射与数量，作为该 cognition revision 形成时已知的概念上下文提交。后置 attachment 继续使用有来源的 AssociationEvidence，不重写历史 revision。
+
+长期 inferred Tag 统一通过 concept maintenance 形成；Memory formation model 不复制另一套长期 Tag inference。query execution 可以按配置形成既有 Tag activation 或 novel concept hypothesis，它们保持 ephemeral，不直接 create、revise、merge 或 split durable Tag。
 
 ### 语义吸积
 
@@ -543,6 +565,12 @@ Session 只保存可选的 foreground WorkContext binding。Active Cognition 是
 
 每个需要持久记录的使用事件由调用方提供稳定事件标识。重试同一事件必须得到幂等结果；相同事件标识携带不同内容时返回冲突。使用事件与由其直接触发的运行时更新保持一致提交。
 
+### Query feedback
+
+Host 报告有意义使用时可以关联实际产生该结果的 query。Runtime 保存有界、可过期的 query feedback：prepared intent/activation digest、explicit/inferred concept refs、bounded novel hypotheses、returned exact revisions、可验证的 seed context 与 profile identity。它不保存 raw artifact、完整 prompt、provider secrets 或整份 retrieved text。
+
+关联反馈验证同 Subject、有效 query correlation 和返回修订 membership。达到 review 条件后只 enqueue 现有 concept MaintenanceNeed；后续 Host grant 才允许维护读取反馈并建议 reuse/create/revise/merge/split Tag 或 AssociationEvidence。query hypothesis 只作为 meaningful-use maintenance signal；语义关联仍需真实 cognition/source supports。query exposure、presentation 和 activation 次数不构成长期强化、独立根或 Accretion 支持。
+
 ### 可访问性
 
 可访问性描述在当前线索和上下文中取得某项认知的难易程度。自动可访问性是查询时派生状态，可以考虑认知年龄、类型化使用、当前线索、工作上下文和查询预算。
@@ -560,6 +588,10 @@ Session 只保存可选的 foreground WorkContext binding。Active Cognition 是
 离线认知在宿主提供的维护租约内运行。维护租约明确允许的时段、计算资源、模型服务、网络权限、预算、取消条件和抢占规则。宿主决定何时允许维护；Nous Wave 决定在授权范围内处理哪些认知需求。
 
 维护工作可以包括经历片段整理、日记维护、派生表示重建、认知图式复核、跨领域一致性检查、假设探索和服务投影维护。
+
+### Host 授权的模型活动
+
+Host 发起 form 时授权 formation model 工作；Host 发起 query 时，可以按冻结的 Configuration 与 CapabilityPolicy 使用 query embedding 和可选 concept enrichment model。MaintenanceNeed 可以自动 enqueue，但 maintenance model 只在 Host grant 的租约和预算内运行。后台 scheduler 不自行取得 LLM 调用机会。
 
 ### MaintenanceNeed
 
@@ -623,6 +655,12 @@ accepted/revised cognition、显式有意义使用以及其他领域事件可以
 
 硬约束决定对象是否合法；软偏好只影响合法对象之间的排序。按稳定身份进行的精确读取直接访问权威对象，不经过相似度检索。
 
+### 最小查询与结果投影
+
+self-contained semantic text 本身构成完整的一等 Cognitive Query：Text → lexical + dense → fixed fusion → owner validation。Entity、Tag、Schema、WorkContext、Situation、Agent loop 和 associative exploration 都是可选增强，纯文字路径不依赖 concept model 或 concept Serving asset。
+
+Prepared Cognitive Query 从语义上分别包含 Cue Expression、TemporalFrame 与 scoped filters、Cognitive Context、ExplorationFrame、ResultProjection 和 Execution Policy。查询意图与最终返回对象类型独立；默认 recall 返回所选视图中 eligible Cognition，即 Memory、CognitiveSchema、Episode 和 Journal。Evidence 和 Resource 可以作为 provenance/material 参与；调用方明确选择 projection 或 resource intent 时才作为顶层结果。exact target 同样满足 ResultProjection。
+
 ### 查询准备与引用解析
 
 Cognitive Query 在 QueryPlan 形成前完成引用解析。
@@ -636,6 +674,14 @@ opaque identity 用于绑定和约束；显示名、Tag 描述、WorkContext pur
 外部 benchmark 的 raw-text compatibility 可以作为独立输入模式运行，不伪装成完整 cognitive query。
 
 Agent 可以把 identity discovery、query preparation、query execution 和后续 exact continuation 组合成多次工具调用；单次 Cognitive Query 不承担通用 Agent planning 或指代猜测。
+
+### QueryActivation 与检索模式
+
+准备阶段固定 semantic representation、exact context、TemporalFrame、ResultProjection 与配置，不调用 provider/model。执行阶段按允许的能力生成一份共享 query embedding，再形成统一 QueryActivation：semantic text、exact Entity/Tag/Schema、current cognition、WorkContext/Situation refs、explicit/inferred Tags 与可选 novel concept hypotheses。冻结后的 activation 是 Runtime-only state，不形成长期 Cognition Authority；各 profile 消费同一语义输入，不各自定义概念集合。
+
+exact Tag identity 与 semantic concept cue 分别表示精确引用和语义线索。概念 cue 不承诺存在同名 durable Tag；semantic/model activation 可以选取既有 Tag，却不承担歧义 identity resolution。可选 query concept model 仅从有界 catalog 选择已有概念或产生无 TagId 的 bounded hypothesis。
+
+Direct concept recall 从 explicit/inferred Tag activation 读取直接 attached cognition，不进行多跳，也不要求 associative exploration。只有调用方显式选择 associative exploration 时，QueryActivation 的 Tag、Entity、Schema、current cognition 与 lexical/dense promoted seeds 才作为传播起点。Retrieval profile 决定具体有界传播算法；Query DSL 不暴露 hop、field、EPA、DTSC 等内部参数。
 
 ### 查询计划
 
@@ -651,6 +697,7 @@ Agent 可以把 identity discovery、query preparation、query execution 和后�
 | 实体检索 | 按认知指向、实体绑定和来源提及召回相关对象。 |
 | 词项检索 | 处理短语、代码、路径、专名和其他词项线索。 |
 | 稠密检索 | 按规范表示、语义片段或来源约束的召回视图检索。 |
+| 直接概念检索 | 从 Tag activation 直接召回 attached cognition，不进行扩散。 |
 | 时间检索 | 按发生、观察、有效、形成和记录时间过滤或排序。 |
 | 运行时检索 | 从活动认知、驻留集和工作上下文中取得当前相关对象。 |
 | 拓扑检索 | 在有界关联拓扑中生成候选排序。 |
@@ -667,7 +714,7 @@ Agent 可以把 identity discovery、query preparation、query execution 和后�
 
 跨通道融合函数由查询计划固定，并满足以下约束：参数在候选生成前确定；缺失通道的贡献明确；候选集合中出现无关对象时，不改变既有通道的定义；拓扑检索以普通通道身份参与，不使用计划之外的隐藏加分。
 
-融合与可选重排完成后，返回结果前由各语义 owner 重新核验当前修订、对象生命周期、访问策略、访问控制、来源状态以及抑制和清除状态。Memory 负责认知对象，Material 负责观察与派生材料的精确 lineage、材料展开和五轴时间；Runtime 编排这些 owner 的结果。来源上的多个时间约束必须由同一实际观察元组联合满足，不能拼接不同来源的时间轴；未知时间不满足已知时间约束。服务投影过期时可以降级、重建或明确失败，不能把过期投影当作权威认知。
+融合与可选重排完成后，返回结果前由各语义 owner 重新核验所选 Authority/revision view 中的修订、对象生命周期、访问策略、访问控制、来源状态以及抑制和清除状态。Memory 负责认知对象，Material 负责观察与派生材料的精确 lineage、材料展开和五轴时间；Runtime 编排这些 owner 的结果。来源上的多个时间约束必须由同一实际观察元组联合满足，不能拼接不同来源的时间轴；未知时间不满足已知时间约束。服务投影过期时可以降级、重建或明确失败，不能把过期投影当作权威认知。
 
 ### 诊断
 
@@ -686,6 +733,18 @@ Agent 可以把 identity discovery、query preparation、query execution 和后�
 每类服务投影按照不可变代次发布。代次记录输入权威水位、实现身份、关键配置摘要、制品身份和必要的校验信息。构建完成并通过一致性检查后再切换当前代次。
 
 查询返回前仍以权威对象为最终依据。服务代次负责高效召回和排序，不拥有认知真值。
+
+### 共享概念服务资产
+
+Tag semantic embeddings 是跨 retrieval profiles 共享的 rebuildable concept Serving asset，与 direct attachment postings、必要 lexical material 和 canonicalization metadata 共同服务 direct recall 与 diffusion。Native、VCP 及其他算法复用相同 Tag representation 和 embedding；profile 切换本身不产生另一套概念向量。Embedding 绑定有效 Tag revision、表示版本、vector space 与所选 Authority view。
+
+### 历史服务视图
+
+as-of fence 在候选生成前作用于 lexical、dense、concept、topology 及 query descriptors，不能先用 current vectors/topology 召回未来候选再在末端按记录时间过滤。各 semantic owner 投影自己拥有的历史有效状态；Serving 从该 snapshot 构建可重建历史代次，不复制另一份 durable cognition 或建立独立 history database。
+
+兼容身份使用 canonical effective state 的 view digest；两个时间点投影为同一有效状态时可以复用同一资产。历史代次不发布为 current，受 request read lease、grace 与回收策略保护。不可变 revision 文本继续按内容身份复用 embedding；historical-compatible lane 不可用时显式 unavailable/degraded，不借用未来 current asset。
+
+历史查询同时遵守当前权限、抑制和清除边界；as-of 不恢复已清除内容，也不绕过管理权威。
 
 ### 联想拓扑
 
@@ -827,14 +886,14 @@ Nous Wave 宿主（TypeScript）
 Nous Wave 内核（Rust）
         ├── structured Authority persistence
         ├── immutable large-object storage
-        └── rebuildable lexical / dense / topology Serving families
+        └── rebuildable lexical / dense / concept / topology Serving families
 ~~~
 
 各具体数据库、对象存储、词项引擎、ANN 引擎和图服务均属于可替换实现组件。它们必须通过稳定能力合同接入，并能够在不改变语义所有权的前提下替换或重建。
 
 ### 持久化与检索组件
 
-结构化 Authority persistence 保存认知权威数据和事务状态。不可变对象库保存大型材料和二进制对象。词项、稠密和联想拓扑均属于可重建的 Serving family。
+结构化 Authority persistence 保存认知权威数据和事务状态。不可变对象库保存大型材料和二进制对象。词项、稠密、共享概念和联想拓扑均属于可重建的 Serving family。
 
 Serving 组件不拥有认知真值。具体 provider 的选择由工作负载、过滤能力、多视图支持、资源占用、备份恢复和运维成本的下游评测决定；除非另有独立的长期设计决定，Target Design 不锁定 provider。
 
@@ -861,7 +920,11 @@ Serving 组件不拥有认知真值。具体 provider 的选择由工作负载�
 | 经历片段（Episode） | 对连续经历流进行组织并可修订的事件结构。 |
 | 日记（Journal） | 对一段经历或时期进行组织的可修订叙事对象。 |
 | 认知图式（CognitiveSchema） | 从多个经历和认知中形成的、具有适用范围和反例的结构性认知。 |
-| 标签（Tag） | 稳定的语义线索或概念身份。 |
+| 标签（Tag） | 有稳定身份、可修订文本表示的 durable semantic concept。 |
+| CognitiveClock | Subject 的认知相对时间基准。 |
+| TemporalFrame | 捕获 clock、Authority view 与 revision view 的查询时间语义。 |
+| QueryActivation | 冻结且临时的统一 query-side 概念与上下文激活。 |
+| ResultProjection | 与 query intent 分离的返回对象类型选择。 |
 | 关联证据（AssociationEvidence） | 认知对象之间具有来源和类型的关联依据。 |
 | 自我（Self） | 主体对自身身份、角色、能力、倾向、价值和叙事连续性的长期认知领域。 |
 | 社会认知（Social Cognition） | 依赖具体个人、关系、群体、频道或社区语境的长期认知领域。 |
@@ -892,10 +955,10 @@ Serving 组件不拥有认知真值。具体 provider 的选择由工作负载�
 
 1. 调用方提交认知查询和计算预算。
 2. 系统先完成引用解析、上下文与配置快照，形成有界确定性的 Query Representation，再绑定硬约束、软偏好、主体范围和调用方能力。
-3. 查询计划在候选生成前固定检索通道、预算和融合参数。
+3. 在所选 TemporalFrame 内形成统一 QueryActivation，随后在候选生成前固定检索通道、预算和融合参数。
 4. 各检索通道生成服务视图命中，并在对象修订层聚合。
 5. 跨通道融合和可选重排产生候选顺序。
-6. 返回前重新核验权威修订、生命周期、访问策略和来源状态。
+6. 返回前重新核验所选 Authority/revision view、生命周期、当前访问策略和来源状态，应用 ResultProjection。
 7. 实际进入调用方上下文的对象可以记录呈现事件；进一步引用、行动或结果另行记录类型化使用事件。
 
 ## 离线认知
