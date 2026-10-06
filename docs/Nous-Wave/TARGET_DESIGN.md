@@ -116,6 +116,18 @@ Configuration Service 是与主体基础同层的共享基础设施，负责配�
 
 领域间通过稳定引用连接。引用必须指向对象和必要的修订身份，不通过复制另一领域的完整状态建立一致性。来源发生修订、撤回、抑制或清除时，依赖对象根据自身合同进入重新核验、冲突或失效状态。
 
+### 认知对象的可引用地址
+
+面向模型、Agent 和人类工具的可引用地址与显示名称、内部权威身份分别维护。
+>
+显示名称和别名用于发现候选，可以变化，也可能在同一主体内产生多个候选。发现结果唯一时可以绑定到稳定引用；存在多个候选时返回歧义及候选，不通过语义相似度、向量检索或模型猜测选择身份。
+>
+系统为需要被模型或 Agent 精确继续引用的对象提供稳定、语义中立的 Lexical Reference。Lexical Reference 解析到对应领域的 Authority identity；它不承担对象的可变语义描述。对象改名、Tag 修订或显示描述变化不会重新分配既有稳定地址。已经进入历史引用的地址不得重新绑定给另一个对象。
+>
+Nous 自己拥有的认知对象继续由各领域 Authority identity 决定真实对象身份。Host-owned Entity 和 Resource 继续保留宿主 canonical identity；Lexical Reference 不创建第二套实体权威。
+>
+具体地址编码、词表、prefix 和存储方式属于代码仓库 Spec。
+
 ### 主体供给与能力配置
 
 主体创建时由宿主或独立客户端分配 SubjectId，并按所需能力组合供给对应认知领域。未启用的领域没有隐式默认状态，也不通过空表、空插件或占位对象模拟存在。
@@ -277,6 +289,22 @@ Nous Wave 以可追溯来源作为认知形成的基础。来源层至少包含�
 关联证据（AssociationEvidence）记录认知对象之间有来源、有类型的关联依据，例如共现、顺序、显式关系、程序关系、共同结果或图式支持。关联证据保存来源、方向、极性、有效范围和生产者信息。
 
 检索图中的中心性、传播质量和边权不构成认知对象。系统不定义同时承担认知结构和检索中心性的统一权威对象。认知结构由认知图式表达；检索拓扑由服务层根据当前有效关联证据重建。
+
+### 概念形成与演化
+
+Tag 可以由显式管理操作或认知维护形成。认知维护读取当前认知、来源、实体、既有 Tag 和关联上下文，形成 create、reuse、revise、attach、detach、merge、split 等提案；Memory owner 对实际 Tag 操作负责。
+
+Tag 与既有 Cognition 的后置关联使用显式关系记录，不为了增加一个后来形成的概念而重写历史 cognition revision。Tag 自身内容发生实质语义变化时创建 Tag revision；merge/split 保留 lineage 和实际支持来源。
+
+一次模型输出可以包含多个维护建议。每个被接受的领域操作按自己的 Authority mutation 合同提交。模型建议列表本身不建立跨所有动作的超级事务语义。需要天然原子性的领域操作，例如 Tag merge、Tag split、Episode partition，自身继续保持原子。
+
+### 语义吸积
+
+系统可以从当前有效 Cognition、Tag attachment、AssociationEvidence、Episode recurrence、来源谱系、时间跨度和有意义 UseEvent 派生语义吸积信号。
+
+吸积信号用于发现稳定概念中心、提高 concept review 优先级、提供 Tag reuse/merge/split 候选信号，并可在版本化检索算法中作为 feature。
+
+吸积信号可删除和重算，不构成新的 Cognition Authority，不替代底层 provenance，不把检索次数或普通呈现转换成认知支持。系统不重新建立同时承担认知结构和 retrieval centrality 的 Anchor Authority。
 
 ## 7. 自我与人格
 
@@ -554,6 +582,18 @@ MaintenanceNeed 可以由以下情况产生：
 
 离线运行期间发生的新提交不自动进入既有快照。运行结果在提交前重新核验当前权威状态。
 
+### 概念与关联维护
+
+accepted/revised cognition、显式有意义使用以及其他领域事件可以产生 concept/association MaintenanceNeed。
+
+维护工作固定当前输入快照，模型或确定性过程提出有限的 Tag 和 AssociationEvidence 操作。结构所有者已经直接掌握的事实可以直接产生结构关系依据，无需经通用模型重新推断。
+
+语义关系提案携带明确支持来源。目标 owner 核验引用、主体、生命周期、relation type、support 与 provenance 后提交。
+
+模型 proposal 被领域 owner 判为非法时，本次 proposal 结束；新的认知变化或显式 review 可以形成新的维护机会。provider、transport 等瞬时失败可以复用已经保存的 proposal 或输入快照重试，不因重试重复模型付费调用。
+
+一次提案可以包含多个 ordered suggestions；每项接受的操作使用由 workflow 身份、动作顺序与动作类型稳定派生的 operation identity。领域 owner 的幂等回执支持崩溃后继续执行；后项非法不回滚已成功的独立前项，依赖失败结果的后项跳过。输入修订已陈旧的提案结束，由新的领域变化或显式 review 产生新的维护机会。owner invariant 或数据损坏暴露为工程失败。
+
 ### 假设
 
 离线探索首先产生假设（Hypothesis）。假设包含候选主张、适用范围、输入修订、支持证据、反例证据、不确定性、目标领域、拟议操作、生产者和运行标识。
@@ -582,6 +622,20 @@ MaintenanceNeed 可以由以下情况产生：
 认知查询表达调用方的语义意图，而不暴露具体检索算法开关。查询可以指定主体、领域和对象范围，以及实体、时间、语义线索、硬约束、软偏好、调用方能力、计算预算、材料展开要求和诊断需求。
 
 硬约束决定对象是否合法；软偏好只影响合法对象之间的排序。按稳定身份进行的精确读取直接访问权威对象，不经过相似度检索。
+
+### 查询准备与引用解析
+
+Cognitive Query 在 QueryPlan 形成前完成引用解析。
+
+自然语言名称和别名用于 identity discovery；稳定引用用于 exact continuation。未知引用和歧义引用以显式结果返回。调用方或 Agent 可以补充上下文、选择候选并重新提交。查询执行器不通过 embedding 或模型隐式决定对象身份。
+
+需要语义检索的输入由调用方提供能够独立解释的 semantic intent。当前 Session、WorkContext、Active Cognition、显式 request situation 和已解析 Entity/Tag/Schema 可以作为查询上下文。系统把它们编译为有界、确定性的 query semantic representation，并保留形成该 representation 的 exact source references。
+
+opaque identity 用于绑定和约束；显示名、Tag 描述、WorkContext purpose 等 semantic descriptor 用于 semantic representation。改变算法 profile 不能改变同一 prepared query 的 semantic input。
+
+外部 benchmark 的 raw-text compatibility 可以作为独立输入模式运行，不伪装成完整 cognitive query。
+
+Agent 可以把 identity discovery、query preparation、query execution 和后续 exact continuation 组合成多次工具调用；单次 Cognitive Query 不承担通用 Agent planning 或指代猜测。
 
 ### 查询计划
 
@@ -613,7 +667,7 @@ MaintenanceNeed 可以由以下情况产生：
 
 跨通道融合函数由查询计划固定，并满足以下约束：参数在候选生成前确定；缺失通道的贡献明确；候选集合中出现无关对象时，不改变既有通道的定义；拓扑检索以普通通道身份参与，不使用计划之外的隐藏加分。
 
-融合与可选重排完成后，返回结果前重新核验当前修订、对象生命周期、访问策略、访问控制、来源状态以及抑制和清除状态。服务投影过期时可以降级、重建或明确失败，不能把过期投影当作权威认知。
+融合与可选重排完成后，返回结果前由各语义 owner 重新核验当前修订、对象生命周期、访问策略、访问控制、来源状态以及抑制和清除状态。Memory 负责认知对象，Material 负责观察与派生材料的精确 lineage、材料展开和五轴时间；Runtime 编排这些 owner 的结果。来源上的多个时间约束必须由同一实际观察元组联合满足，不能拼接不同来源的时间轴；未知时间不满足已知时间约束。服务投影过期时可以降级、重建或明确失败，不能把过期投影当作权威认知。
 
 ### 诊断
 
@@ -640,6 +694,8 @@ MaintenanceNeed 可以由以下情况产生：
 拓扑构建遵守有限资源原则：出边质量具有固定或归一化预算；高连接度节点受到枢纽或扇出抑制；查询扩展具有跳数、节点、状态、时间和计算预算；共同来源祖先在需要时去重；被截断或未探索的质量能够进入诊断。
 
 负向、矛盾和反例关系具有独立语义，不能在没有定义转换规则时直接作为普通非负传播边使用。
+
+AssociativeTopology 可以消费版本化的 derived Accretion feature，其权重属于 Serving generation。Accretion 的改变只触发服务或维护重算，不写回为 Cognition truth。
 
 ### 关联证据与服务权重
 
@@ -835,7 +891,7 @@ Serving 组件不拥有认知真值。具体 provider 的选择由工作负载�
 ## 认知检索
 
 1. 调用方提交认知查询和计算预算。
-2. 系统解析硬约束、软偏好、主体范围和调用方能力。
+2. 系统先完成引用解析、上下文与配置快照，形成有界确定性的 Query Representation，再绑定硬约束、软偏好、主体范围和调用方能力。
 3. 查询计划在候选生成前固定检索通道、预算和融合参数。
 4. 各检索通道生成服务视图命中，并在对象修订层聚合。
 5. 跨通道融合和可选重排产生候选顺序。

@@ -64,6 +64,50 @@
 
 目标设计：第 2、13、15 章。
 
+## 寻址、查询与概念维护
+
+### AI/Agent 可引用地址与 Authority identity 分离
+
+**决定：** Name/Alias 用于 discovery，稳定且语义中立的 LexicalRef 用于 exact continuation；各 owner Authority identity 决定对象身份。歧义显式返回候选，Host-owned Entity/Resource 保持宿主 canonical identity。
+
+目标设计：第 3 章。
+论证：[设计论证](rationale/10-query-addressing-and-preparation.md)
+
+### Query preparation precedes QueryPlan
+
+**决定：** 引用解析和 exact context/config snapshot 在 QueryPlan 前完成；unknown/ambiguous 以显式结果返回，Agent 可以补充上下文、选择候选并多轮 resolve。
+
+目标设计：第 12 章。
+论证：[设计论证](rationale/10-query-addressing-and-preparation.md)
+
+### Query semantic representation 包含当前认知上下文
+
+**决定：** semantic intent、resolved semantic descriptors、当前认知、WorkContext 与 Situation 编译为有界、确定性的表示，保留 exact source refs；opaque IDs 只负责绑定和约束。同一 prepared query 的 semantic input 不随 profile 改变。
+
+目标设计：第 12 章。
+论证：[设计论证](rationale/10-query-addressing-and-preparation.md)
+
+### Tag 与 AssociationEvidence 支持自动认知维护
+
+**决定：** accepted/revised cognition、有意义 UseEvent 或显式 review 可以触发有界模型或确定性提案，各领域 owner 验证并执行 mutation；后置 Tag attachment 不改写历史 cognition revision。
+
+目标设计：第 6、11 章。
+论证：[设计论证](rationale/02-schema-association.md)
+
+### Semantic Accretion 是派生信号
+
+**决定：** 从 provenance、recurrence、association 和有意义 use 派生吸积信号，用于概念演化和版本化检索；可删除重算，不构成 Anchor Authority、认知 truth 或通用 strength。
+
+目标设计：第 6、13 章。
+论证：[设计论证](rationale/02-schema-association.md)
+
+### 模型建议列表不建立超级事务
+
+**决定：** 每项建议按领域 owner mutation 合同提交；Tag merge/split 和 Episode partition 等天然原子操作继续原子。稳定 action identity 支持 crash retry，基础设施重试复用已保存 proposal，不重复模型调用；后项非法保留前项独立提交。
+
+目标设计：第 6、11、15 章。
+论证：[设计论证](rationale/02-schema-association.md)
+
 ## 自我与初始化
 
 ### 认知种子是版本化来源文档
