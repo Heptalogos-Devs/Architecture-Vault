@@ -8,6 +8,12 @@ Nous Wave 维护长期认知：记忆、自我、社会认知、动机、认知�
 
 Heptalogos 维护行为与产品运行：交互输入、主动性、行为决定、承诺、外部效果、系统管理和运行可靠性。
 
+## 认知输入的 Authority
+
+Nous Wave 的持久 cognition 表示 Subject 当前或历史认知及演化，不认证命题客观为真。Heptalogos 接收 cognition 时保留 exact object/revision identity、provenance、实际 formation basis、适用范围和可修订的 epistemic judgment；来源真实、形成时使用过与语义上支持某命题分别表达。
+
+误解、矛盾、过时认知和后续 correction 都可以是合法认知输入。模型 producer identity 和 grounded formation 不赋予事实证明或行为权限。Heptalogos 按自己的行为合同审查这些输入；Nous Wave 的 owner 继续负责 Subject 归属、身份、权限、生命周期、幂等、清除和历史视图等结构保证。新 cognition 不改写此前历史。
+
 ## 期望条件
 
 Nous Wave 的 Motivation 可以形成期望条件。期望条件描述主体希望某个状态在指定时间语义下成立或保持不成立。

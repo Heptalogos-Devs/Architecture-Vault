@@ -13,6 +13,10 @@
 
 Target Design 只描述长期目标语义、领域边界、对象关系和系统约束。代码状态、实现差距、施工顺序和资格证据不进入本目录。
 
+## 核心语义阅读
+
+认知 Authority、provenance / formation basis / epistemic judgment 与模型执行路线见[认知、形成依据与模型执行](rationale/12-cognition-basis-model-execution.md)；可复用 WorkContext、QueryContextSnapshot 与可选指称显式化见[查询寻址与准备](rationale/10-query-addressing-and-preparation.md)。NousQL 具体字符 grammar、Agent CLI 与 provider/SDK 控制留在代码仓库。
+
 ## 发布物
 
 本目录当前没有活动的 LaTeX authoring source 或自动 PDF 构建流程。未来阶段性发布如需 PDF，应从 TARGET_DESIGN.md 建立并验证确定性的派生流程后单独执行；发布物不形成并行 Authority。

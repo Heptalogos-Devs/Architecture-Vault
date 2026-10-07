@@ -23,3 +23,7 @@ Nous Wave 与 Heptalogos 的文档入口分别见 [Nous Wave](docs/Nous-Wave/REA
 - [Nous Wave 认知系统仓库](https://github.com/Heptalogos-Devs/Nous-Wave)
 
 代码仓库负责当前实现、Specs、Plans、Qualification 和工程治理。跨仓库知识所有权见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。
+
+## 文档检查
+
+提交前运行 `python3 scripts/check-markdown-links.py` 和 `git diff --check`。CI 使用同一 local-link 检查，并核验 PR patch 的空白格式；不访问外部链接或生成发布物。

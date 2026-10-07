@@ -158,7 +158,7 @@ Pursuit 可以跨多个 Reaction、会话和时间窗口持续。它可以：
 
 Nous Wave 是 Subject 的长期认知系统。Heptalogos 通过稳定的认知查询、上下文贡献、提案与回执、可用性和生命周期合同与其协作。
 
-认知系统返回的内容必须能够保留其对象身份、修订、来源和适用范围。Heptalogos 可以据此调整注意、Reaction、Pursuit 和行为判断，但不复制 Nous Wave 的内部认知模型。
+认知系统返回的内容必须能够保留其对象身份、修订、provenance、实际 formation basis、适用范围和可修订的 epistemic judgment。Nous Wave 的 cognition 表示 Subject 当前或历史认知，可能包含误解、矛盾与后续纠正；grounded、真实来源与模型生产者身份不保证客观正确性。Heptalogos 可以据此调整注意、Reaction、Pursuit 和行为判断，但不复制 Nous Wave 的内部认知模型。
 
 消息、认知和其他上下文材料保留来源、用途和敏感范围。授权作用域先于语义相关性筛选；相关性不能扩大数据的允许用途。外部内容、检索结果和认知提案也不能成为系统指令或行为 Authority。
 

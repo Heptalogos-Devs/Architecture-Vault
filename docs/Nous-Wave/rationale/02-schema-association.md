@@ -45,7 +45,7 @@
 
 ### 联想拓扑
 
-联想拓扑属于检索服务。它可以计算中心性、边导通率、过渡概率、枢纽抑制或针对当前查询的激活值，但这些量都不是主体认知真值。
+联想拓扑属于检索服务。它可以计算中心性、边导通率、过渡概率、枢纽抑制或针对当前查询的激活值，但这些量都不是主体认知权威状态。
 
 ## 关联证据
 
@@ -94,9 +94,9 @@ Accretion 从当前认知、attachment、provenance roots、Episode recurrence�
 
 ## 自动维护与关系依据
 
-Tag 的 create/reuse/revise/attach/detach/merge/split 和 AssociationEvidence 的 create/revoke 由维护提案建议，Memory owner 决定提交。后置 attachment 使用显式关系记录，历史 cognition revision 保留形成时的内容。merge/split 保存 lineage 和实际 exact supports；明确 alias 或语义分化可以由一项充分来源支持，不用统一的两独立根门槛代替领域判断。
+Tag 的 create/reuse/revise/attach/detach/merge/split 和 AssociationEvidence 的 create/revoke 由维护提案建议，Memory owner 决定提交。后置 attachment 使用显式关系记录，历史 cognition revision 保留形成时的内容。merge/split 保存 lineage 和实际 exact formation basis；明确 alias 或语义分化可以依据一项实际来源形成判断，不用统一的两独立根门槛代替领域合同。概念判断仍可能错误并需要后续修订。
 
-Episode membership/order、同一次 observation 或显式 support 是结构 owner 已掌握的事实，可以直接形成结构关系依据或 Serving support adjacency。semantic relation 则携带 proposal 与明确 support，由 owner 核验主体、端点、生命周期、relation type、方向、极性、producer 和 provenance。
+Episode membership/order 和同一次 observation 是结构 owner 已掌握的事实，可以直接形成 typed structural relation 或 Serving adjacency。Formation basis 记录实际输入，不认证支持关系。semantic relation 则携带 proposal、真实 basis 与明确的 epistemic judgment，由 owner 核验主体、端点、生命周期、relation type、方向、极性、producer 和 provenance。
 
 对所有 cognition 类型递归展开关系证明会把组织事实、语义判断和来源核验混在同一 theorem prover 内，迫使新增 owner 接受无关证明协议。关系自身的 typed validation 与掌握事实的 owner 足以表达当前合同。
 
