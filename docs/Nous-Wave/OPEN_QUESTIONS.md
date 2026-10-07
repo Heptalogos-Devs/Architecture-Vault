@@ -30,7 +30,8 @@
 
 - Accretion 聚合函数、参数与默认策略；
 - concept reuse/merge/split 的质量 policy；
-- Query Representation 的具体压缩策略。
+- QueryRepresentation section budget、压缩策略与 representation 总预算的质量—成本关系；
+- ResidentSet attachments 是否值得自动投影为额外 Tag activation。
 
 稳定引用、显式 identity resolution、自动概念维护和 Accretion 的 derived status 已锁定，算法研究在这些合同内进行。
 
@@ -71,7 +72,7 @@ Desired Condition 的 bounded typed expression、三值评价和 coverage requir
 
 # Cognitive Runtime
 
-Episode 的 hierarchy/track 语义和 WorkContext checkpoint 已确定。
+Episode 的 hierarchy/track、可复用 WorkContext context_text 与 typed anchors、先冻结 QueryContextSnapshot 的语义已确定。
 
 仍需研究：
 
@@ -119,6 +120,10 @@ ResultProjection、TemporalFrame、完整 historical Authority view、Tag concep
 - novel concept model enrichment 的质量与成本；
 - historical Serving cache retention；
 - real-source qualification 后是否改变 default cognitive profile。
+
+# Role × Execution Profile 的待验证策略
+
+ModelRole / ExecutionProfile / ModelProfile 分离、显式 route fallback、冻结执行 policy 与实际成功 producer identity 已确定。仍需通过角色级质量、latency、usage/cost 和 fallback 观测决定 reference deployment 的 profile 选择，不预设哪项认知工作必须使用营销意义上的强/小模型。
 
 # 与 Heptalogos 的后续共同工作
 

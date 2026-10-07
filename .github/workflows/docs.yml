@@ -1,0 +1,30 @@
+name: Documentation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check local Markdown links
+        run: python3 scripts/check-markdown-links.py
+      - name: Check patch whitespace
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ -n "$BASE_SHA" ]; then
+            git diff --check "$BASE_SHA" "$HEAD_SHA"
+          else
+            git show --format= --check HEAD
+          fi

@@ -8,6 +8,14 @@ Heptalogos 维护 Subject 的主动性、交互、行为决定、承诺、外部
 
 目标设计：第 1、2、4 节。
 
+### 认知输入保留结构身份与可修订判断
+
+Nous Wave 的认知 Authority 记录 Subject cognition 与演化，不认证 objective truth。Heptalogos 保留对象/revision、provenance、formation basis 与 epistemic judgment，按自身行为合同审查输入；认知错误和后续纠正不自动取得或撤销行为 Authority。
+
+目标设计：第 6 节。
+
+合同：[认知与主动性](../integration/cognition-agency.md)
+
 ### SubjectId 跨认知与行为系统保持一致
 
 Nous Wave 和 Heptalogos 共享逻辑 `SubjectId`，各自维护自己的领域状态和修订。

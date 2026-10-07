@@ -13,7 +13,7 @@
 
 ### 认知权威、认知运行时和服务投影分离
 
-**决定：** 持久认知、认知运行时、检索服务投影使用不同身份和生命周期。索引、向量、传播状态和中心性不能成为认知真值。
+**决定：** 持久认知、认知运行时、检索服务投影使用不同身份和生命周期。索引、向量、传播状态和中心性不能成为认知权威状态。
 
 目标设计：第 2、10、13、15 章。
 论证：[持久认知与服务投影](rationale/08-persistence-serving.md)
@@ -40,7 +40,7 @@
 
 ### 同一主体可并行服务多个会话与调用方
 
-**决定：** 一个 Subject 可以同时被多个 Session 和多个 consumer 使用。durable cognition 归 Subject 共享；ResidentSet、foreground WorkContext binding、runtime revision 等 Session 运行时状态按 Session 隔离；WorkContext 只保存有界任务连续性和 exact cognition references，不复制 Memory；ConsumerWorkingSet 与 UseEvent 按调用方和事件身份隔离。Session 或 consumer 不拥有复制的 Subject Memory。
+**决定：** 一个 Subject 可以同时被多个 Session 和多个 consumer 使用。durable cognition 归 Subject 共享；ResidentSet、foreground WorkContext binding、runtime revision 等 Session 运行时状态按 Session 隔离；WorkContext 保存有界任务连续性、context_text 与 typed cognition/Entity/Tag anchors，不复制 Memory；ConsumerWorkingSet 与 UseEvent 按调用方和事件身份隔离。Session 或 consumer 不拥有复制的 Subject Memory。
 
 目标设计：第 3、10 章。
 
@@ -64,6 +64,34 @@
 
 目标设计：第 2、13、15 章。
 
+### Cognition Authority 表达主体认知与演化
+
+**决定：** 持久 cognition 属于 Subject 当前或历史状态，不认证 objective truth。Owner 保证身份、真实 basis/provenance、权限、生命周期、并发、幂等、清除与历史切面；事实错误和自然语言蕴含错误属于认知质量。新 revision 不承诺真值升级，历史认知不被后来的纠正改写。
+
+目标设计：第 2、4、5 章。
+论证：[认知、形成依据与模型执行](rationale/12-cognition-basis-model-execution.md)
+
+### Provenance、formation basis 与 epistemic judgment 分离
+
+**决定：** Provenance 是真实来源谱系；basis 是形成时实际使用的输入；support/contradict/correct 等认识关系是可修订语义判断。Grounded 表示显式 basis 与 provenance，不表示客观核实；使用事件和不同模型的同源重述不制造真值或独立佐证。
+
+目标设计：第 4、5、10 章。
+论证：[认知、形成依据与模型执行](rationale/12-cognition-basis-model-execution.md)
+
+### 模型角色、执行方式与资源独立
+
+**决定：** ModelRole 表示认知工作，ExecutionProfile 表示调用控制，ModelProfile 表示资源。同一模型可服务多个 roles；一个 role 可有零、一或多个显式 routes。RolePolicy 使用 optional/required 与 route 顺序表达可用性和偏好。
+
+目标设计：第 14 章。
+论证：[认知、形成依据与模型执行](rationale/12-cognition-basis-model-execution.md)
+
+### Fallback 与实际生产者由冻结 policy 决定
+
+**决定：** Operation 冻结 RolePolicy/routes、execution/model profiles 与生成合同。Fallback 仅限配置内的 infrastructure/execution failure；owner semantic rejection 不自动换模型，已有 proposal 重试不重新生成。ProducerSignature 绑定实际成功 route 与执行控制，attempt/fallback 在 receipt 中可观察。
+
+目标设计：第 14 章。
+论证：[认知、形成依据与模型执行](rationale/12-cognition-basis-model-execution.md)
+
 ## 寻址、查询与概念维护
 
 ### AI/Agent 可引用地址与 Authority identity 分离
@@ -75,10 +103,17 @@
 
 ### Query preparation precedes QueryPlan
 
-**决定：** 引用解析和 exact context/config snapshot 在 QueryPlan 前完成；unknown/ambiguous 以显式结果返回，Agent 可以补充上下文、选择候选并多轮 resolve。
+**决定：** 引用解析后先冻结 QueryContextSnapshot 与 ConfigSnapshot，再形成 QueryRepresentation、共享 QueryActivation 和 QueryPlan；unknown/ambiguous 以显式结果返回，Agent 可以补充上下文、选择候选并多轮 resolve。
 
 目标设计：第 12 章。
 论证：[设计论证](rationale/10-query-addressing-and-preparation.md)
+
+### Runtime context 可复用且先冻结
+
+**决定：** Foreground WorkContext 和 Session ResidentSet 自动接纳；显式 pinned Entity/Tag/cognition、one-shot Situation 与 query cues 共同形成 QueryContextSnapshot。Snapshot 保存实际 context revisions、digest、admitted refs、历史排除与截断；所有 profiles 共用由此产生的 representation/activation，不自行推断另一套 Tags。
+
+目标设计：第 10、12 章。
+论证：[查询寻址与准备](rationale/10-query-addressing-and-preparation.md)
 
 ### Query semantic representation 包含当前认知上下文
 
@@ -110,7 +145,7 @@
 
 ### Bare text 是一等 Cognitive Query
 
-**决定：** self-contained semantic text 独立走 lexical+dense、固定融合和 owner validation；context、concept enrichment 与 exploration 均可选。
+**决定：** 非空自然语言 intent 独立走 lexical+dense、固定融合和 owner validation；代词与指示词不阻止执行，contextualization、concept enrichment 与 exploration 均为可选质量增强。纯 selector/时间/context 不能代替 text intent。
 
 目标设计：第 12 章。
 论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
@@ -159,7 +194,7 @@
 
 ### Host feedback 可进入后续 concept maintenance
 
-**决定：** 有意义 UseEvent 可关联实际 query 的有界概念反馈；阈值只 enqueue need，proposal 仍需真实 supports 和 owner 核验。
+**决定：** 有意义 UseEvent 可关联实际 query 的有界概念反馈；阈值只 enqueue need，proposal 仍需真实 formation basis/provenance、明确认识关系与 owner 核验。
 
 目标设计：第 10、11 章。
 论证：[时间、概念与查询](rationale/11-temporal-concept-query.md)
@@ -323,7 +358,7 @@
 
 ### 自动可访问性是查询时状态
 
-**决定：** 自动可访问性不是长期认知真值；固定年龄不能自动删除或永久隐藏仍合法存在的认知。
+**决定：** 自动可访问性不是长期认知权威状态；固定年龄不能自动删除或永久隐藏仍合法存在的认知。
 
 目标设计：第 5、10 章。
 论证：[使用事件与可访问性](rationale/04-runtime-accessibility-use.md)
@@ -388,7 +423,7 @@
 
 ### Durable WorkContext checkpoint 属于 Runtime state
 
-**决定：** WorkContext 在需要长暂停、跨进程或跨 Session 恢复时可以形成 durable checkpoint。Checkpoint 只保存恢复工作所需的目的、未决问题、对象/revision 引用、约束、expected revision、恢复条件和预算摘要；恢复时重新核验当前 Authority。Prompt/cache/model hidden state 不成为认知 Authority。
+**决定：** WorkContext 在需要长暂停、跨进程或跨 Session 恢复时可以形成 durable checkpoint。WorkContext 保存可复用 purpose/context_text、未决问题、cognition/Entity/Tag anchors、约束、expected revision、恢复条件和预算摘要；storage bound 与 query projection budget 分离；恢复时重新核验当前 Authority。Prompt/cache/model hidden state 不成为认知 Authority。
 
 目标设计：第 10 章。
 论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)

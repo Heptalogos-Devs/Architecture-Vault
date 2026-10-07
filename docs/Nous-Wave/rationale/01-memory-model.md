@@ -6,6 +6,12 @@
 
 认知图式具有独立对象身份、修订和生命周期，但归属于记忆领域；它不是普通记忆的一个类型，也不单独建立顶层领域。
 
+## 认知接受与事实正确性
+
+接受一条 Memory 只确认它属于 Subject 的 cognition。将 basis 当作蕴含证明，会使真实来源上的错误解释无法被保存、纠正和分析；将新 revision 当作绝对更真，又会掩盖新解释可能引入的错误。系统因此精确记录实际 provenance 与 formation basis，另外表达支持、反驳和纠正等可修订判断。
+
+Grounded 表示有显式 basis 且保留 provenance。错误的 grounded cognition 仍有真实谱系；后续 revision 可以纠正或持续误解。历史查询显示当时实际接受的内容，同时保留当前 permission/purge 边界。完整论证见[认知、形成依据与模型执行](12-cognition-basis-model-execution.md)。
+
 ## 记忆分类
 
 一条记忆至少需要回答两个问题：

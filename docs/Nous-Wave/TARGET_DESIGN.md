@@ -44,6 +44,14 @@ Nous Wave 负责认知语义与认知权威。通用数据库、索引、向量�
 
 ## 2. 系统不变量与权威模型
 
+### 认知 Authority 的含义
+
+持久接受一项 cognition 表示它属于 Subject 当前或历史认知状态，不表示其命题客观为真。Memory、Tag、Schema、Journal、Self 和其他认知领域可以保存误解、局部解释、矛盾、过时判断、后续纠正和持续错误；内容错误不会使其精确身份、来源与演化历史失效。
+
+Owner 严格保证自己控制的结构事实：Subject 归属、对象与不可变 revision 身份、provenance lineage、真实 formation basis 引用、权限、生命周期、并发、幂等、清除、类型化时间与历史视图。自然语言蕴含和事实正确性属于认知质量，不能作为所有 owner 的通用不变量。模型即使返回结构化输出，也只产生提案或派生表示；领域按自身合同提交结构合法的认知，后续认知可以纠正、反驳或保留它。
+
+结构破坏与认知质量错误分别评价。跨 Subject 引用、缺失 basis、可变 head 冒充 exact revision、未来状态进入历史切面、越权或 purge bypass 必须阻止；错误归因、时间解释错误、Tag 过度合并和未能纠正属于可追踪的认知质量问题。
+
 ### 核心不变量
 
 | 不变量 | 含义 |
@@ -51,6 +59,7 @@ Nous Wave 负责认知语义与认知权威。通用数据库、索引、向量�
 | 主体身份与模型身份分离 | 主体可以更换模型、供应商和运行进程而保持同一逻辑身份。 |
 | 材料、观察事件与认知对象分离 | 原始内容、主体的一次实际接触和长期认知分别拥有独立身份。 |
 | 来源提及与认知指向分离 | 来源中出现某实体，不等于形成的认知必然以该实体为语义对象。 |
+| 来源、形成依据与认识判断分离 | provenance 保证实际 lineage，formation basis 表示实际输入，epistemic judgment 表示可修订的语义解释。 |
 | 证据谱系与独立佐证数量分离 | 多个派生表示如果共享同一来源祖先，只构成同源证据。 |
 | 认知权威、认知运行时与服务投影分离 | 可重建索引、运行时驻留状态和持久认知分别维护。 |
 | 候选提案与权威认知分离 | 模型、离线认知和跨领域推理默认只产生提案，目标领域所有者决定是否提交。 |
@@ -66,7 +75,7 @@ Nous Wave 负责认知语义与认知权威。通用数据库、索引、向量�
 
 系统不使用一条覆盖所有语义的全局优先级。不同权威类型分别作用于其负责的事实和操作。
 
-- 来源与证据权威：记录材料内容、观察事件、来源区域、派生过程和可验证外部事实。
+- 来源与证据权威：精确记录材料内容、观察事件、来源区域与实际派生过程；来源中的自然语言主张不因被记录而成为客观事实。
 - 认知权威：由记忆、自我、社会认知和动机等领域维护主体当前接受的认知及其修订。
 - 行为与规范权威：由 Heptalogos 维护允许、禁止、承诺、义务、行为决策和外部效果。
 - 管理权威：负责主体生命周期、抑制、恢复、清除、配置和其他显式管理操作。
@@ -75,7 +84,7 @@ Nous Wave 负责认知语义与认知权威。通用数据库、索引、向量�
 
 ### 跨领域提案
 
-跨领域变化统一通过类型明确的提案传递。提案至少引用目标领域、目标操作、输入对象及其修订、支持证据、生产者身份和形成上下文。目标领域在提交前重新核验来源可用性、当前对象版本、生命周期、访问控制和并发版本。
+跨领域变化统一通过类型明确的提案传递。提案至少引用目标领域、目标操作、实际输入对象及其修订、formation basis、provenance、生产者身份和形成上下文；需要认识关系时另行声明 typed epistemic judgment。目标领域在提交前重新核验来源可用性、当前对象版本、生命周期、访问控制和并发版本。
 
 一个领域不得直接修改另一个领域的权威对象。跨领域原子一致性通过提案引用、提交序号和结果回执建立，而不是通过共享可变对象实现。
 
@@ -157,7 +166,17 @@ Nous Wave 以可追溯来源作为认知形成的基础。来源层至少包含�
 
 所有派生表示保存完整来源链。多个摘要、转写或模型派生如果来自同一原始来源，只构成同一来源祖先的不同表示。系统计算独立佐证时以来源祖先和形成过程为依据，不按文本数量、向量点数量或派生表示数量计数。
 
-生产者签名记录生成派生表示或提案所需的实现身份，包括模型、版本、工作流和关键配置。生产者签名用于重建、失效判断和审计，不成为认知真值本身。
+生产者签名记录生成派生表示或提案所需的实现身份，包括模型、版本、工作流和关键配置。生产者签名用于重建、失效判断和审计，不成为认知权威状态本身。
+
+### Provenance、formation basis 与 epistemic judgment
+
+三层语义分别维护：
+
+- **Provenance** 回答对象实际源自哪些来源、观察、表示和生产者，是由 owner 精确核验的结构谱系。
+- **Formation basis** 回答形成该 cognition 或 proposal 时实际使用了哪些来源或 cognition 输入。合法 basis 不证明输入蕴含认知文本；错误解释仍可以具有真实且精确的 basis。
+- **Epistemic judgment** 表示 Subject 或系统认为某项 cognition/evidence supports、contradicts、corroborates、weakens、corrects、counterexample 或 inferred-from 另一项内容。这些关系是可修订、可争议的语义判断，不能从“形成时使用过”自动推得。
+
+Episode/Journal 的成员、来源区域与表示映射等结构关系按自身类型表达，不伪装为认识支持。`support` 只用于实际认识关系；query result 的 source/basis/derived-from handle 暴露 lineage，不承诺事实证明。模型生产者身份帮助分析错误，但不能替代来源根独立性。
 
 ### 证据依赖与独立佐证
 
@@ -204,7 +223,9 @@ Authority view 默认为 current，也可以选择 as-of：读取该 Subject 在
 
 revision view 默认为所选 Authority view 的 effective head。显式 history 允许该视图中 eligible historical revisions 成为独立候选，保留对象和修订身份，并继续满足 as-of 与五轴约束。
 
-当前 query text 仍表达现在提出的问题；当前 WorkContext 的纯语义 purpose 可以帮助表达意图。其中引用 as-of 之后认知的 exact refs 不成为历史激活 seed，也不提供未来 cognition descriptor；排除在 inspection 中明确报告。Entity 和 Resource 的稳定身份可以表达现在的问题，但不能携带未来认知内容。
+当前 query text 与 WorkContext 的 purpose/context_text 可以表达现在提出的问题。QueryContextSnapshot 排除 as-of 之后的 cognition anchors、未来 Tag meaning/attachment 和在切面尚不存在的 Tag；这些内容不成为历史激活 seed，也不提供未来 descriptor。排除在 inspection 中明确报告。Entity 和 Resource 的稳定身份可以表达现在的问题，但不能携带未来认知内容。
+
+历史视图保留当时实际 cognition，即使它后来被判为错误。更新的 correction 不把过去的误解改写成新认知；当前 permission/purge fences 仍然有效。
 
 ## 5. 记忆
 
@@ -212,7 +233,7 @@ revision view 默认为所选 Authority view 的 effective head。显式 history
 
 记忆是主体接受并决定长期保留的认知。每个记忆对象具有稳定身份，内容通过不可变修订演化；当前修订、对象生命周期和并发版本分别维护。
 
-记忆形成可以由确定性流程或模型辅助流程提出。所有形成请求必须给出主张内容、语义指向、来源证据和形成上下文。模型生成的内容以提案进入记忆域，记忆域核验来源、当前对象状态和写入权限后提交。
+记忆形成可以由确定性流程或模型辅助流程提出。所有形成请求必须给出主张内容、语义指向、实际 formation basis、provenance 和形成上下文。模型生成的内容以提案进入记忆域，记忆域核验来源、当前对象状态和写入权限后提交。
 
 ### 认知角色
 
@@ -228,7 +249,7 @@ revision view 默认为所选 Authority view 的 effective head。显式 history
 
 形成方式描述某一修订依据什么形成。
 
-- 经历落地形成（Grounded）：主要依据一个有界经历、观察事件或来源上下文形成，可以同时引用其他佐证。
+- 经历落地形成（Grounded）：具有显式来源或 cognition basis 并保留 provenance，主要依据一个有界经历、观察事件或来源上下文形成；它不表示文本已被客观验证。
 - 综合形成（Synthesized）：依据多个认知对象、多个经历或多个独立来源综合形成。
 
 认知角色和形成方式是独立属性。同一种认知角色可以采用不同形成方式；同一种形成方式也可以产生不同认知角色。对象身份不通过一个混合所有含义的单一类型枚举定义。
@@ -250,7 +271,7 @@ revision view 默认为所选 Authority view 的 effective head。显式 history
 
 ### 修订与关系
 
-对同一认知的修正、澄清或重新解释创建新修订；独立的新事件或新认知创建新对象。当前修订表示该对象当前被采用的内容版本。
+对同一认知的修正、澄清或重新解释创建新修订；独立的新事件或新认知创建新对象。当前修订表示该对象当前被采用的内容版本。新 revision 表示较新的 cognition，可能是纠正、澄清、重新解释、收窄或改述，不承诺普遍的真值升级。
 
 对象之间可以建立显式关系，包括推导、支持、矛盾、替代依据和其他具有领域语义的关系。矛盾关系不自动撤回任一对象；撤回表示领域所有者不再接受某项认知，必须由独立生命周期操作表达。
 
@@ -308,7 +329,7 @@ Tag 的 effective label、description 和语义 kind 形成唯一、版本化、
 
 Tag 可以由显式管理操作或认知维护形成。认知维护读取当前认知、来源、实体、既有 Tag 和关联上下文，形成 create、reuse、revise、attach、detach、merge、split 等提案；Memory owner 对实际 Tag 操作负责。
 
-Tag 与既有 Cognition 的后置关联使用显式关系记录，不为了增加一个后来形成的概念而重写历史 cognition revision。Tag 自身内容发生实质语义变化时创建 Tag revision；merge/split 保留 lineage 和实际支持来源。
+Tag 与既有 Cognition 的后置关联使用显式关系记录，不为了增加一个后来形成的概念而重写历史 cognition revision。Tag 自身内容发生实质语义变化时创建 Tag revision；merge/split 保留 lineage 和实际 formation basis。Tag 的概念解释和关联判断也可以出错并被修订。
 
 一次模型输出可以包含多个维护建议。每个被接受的领域操作按自己的 Authority mutation 合同提交。模型建议列表本身不建立跨所有动作的超级事务语义。需要天然原子性的领域操作，例如 Tag merge、Tag split、Episode partition，自身继续保持原子。
 
@@ -505,7 +526,7 @@ Heptalogos 的行为结果、外部状态变化、完成、失败、取消和拒
 
 ### 运行时状态
 
-认知运行时组织当前可供推理和调用方使用的认知状态。运行时可以丢失并从权威数据重建，任何持久认知真值都不依赖进程内缓存存活。
+认知运行时组织当前可供推理和调用方使用的认知状态。临时运行状态可以丢失并从 Authority 与 durable Runtime checkpoints 重建，任何持久认知状态都不依赖进程内缓存存活。
 
 - 会话（Session）：一段连续运行范围，不等同于聊天线程或经历片段。
 - 活动认知（Active Cognition）：当前较容易重新激活的认知引用和少量运行元数据。
@@ -514,7 +535,7 @@ Heptalogos 的行为结果、外部状态变化、完成、失败、取消和拒
 - 调用方工作集（ConsumerWorkingSet）：按调用方能力、意图和预算选择的有界认知集合。
 - 受管理上下文（Managed Context）：为模型或其他有状态消费者维护的上下文同步状态。
 
-同一 Subject 可以同时服务多个 Session 和多个 consumer。它们共享 Subject 所属的 durable cognition；Session 的 ResidentSet、foreground WorkContext binding、runtime revision 和其他需要隔离的运行时状态分别维护。WorkContext 保存有界的任务连续性与 exact cognition references，不复制 Memory。ConsumerWorkingSet 与 UseEvent 按调用方和事件身份记录，不通过复制 Subject Memory 建立独立认知权威。
+同一 Subject 可以同时服务多个 Session 和多个 consumer。它们共享 Subject 所属的 durable cognition；Session 的 ResidentSet、foreground WorkContext binding、runtime revision 和其他需要隔离的运行时状态分别维护。WorkContext 保存有界的任务连续性、可复用 context_text 与 typed cognition/Entity/Tag anchors，不复制 Memory。ConsumerWorkingSet 与 UseEvent 按调用方和事件身份记录，不通过复制 Subject Memory 建立独立认知权威。
 
 ### 注意与即时评价
 
@@ -537,23 +558,28 @@ Heptalogos 的行为结果、外部状态变化、完成、失败、取消和拒
 
 目标运行语义要求有界公平分配、紧急借用、显式抢占和防饥饿。具体 utility function 和参数由下游 Runtime Spec 与实验确定。
 
-### WorkContext 持久检查点
+### 可复用 WorkContext 与持久检查点
 
 WorkContext 属于 Cognitive Runtime。短生命周期运行细节、prompt、cache、候选排序和模型内部状态可以丢失并重建。
 
-只有当认知工作需要长时间暂停、跨进程恢复或跨 Session 继续时，Runtime 才保存 durable WorkContext checkpoint。
+WorkContext 是可持久保存、更新、暂停和复用的 Runtime state。Host/Agent 可以一次保存长任务背景，后续 query 自动读取 foreground WorkContext；跨进程或跨 Session 恢复时使用 durable checkpoint。
 
 检查点保存继续该认知工作所必需的有界状态，例如：
 
-- 工作目的；
-- 尚未解决的问题；
-- 对认知对象及其 revision 的稳定引用；
+- purpose；
+- context_text：Host/Agent 编写的任务历史、决定、当前调查和操作背景；
+- unresolved_questions；
+- cognition_anchors：用于精确续接的对象/revision 引用；
+- entity_anchors：已解析的稳定 EntityRef；
+- tag_anchors：稳定 durable Tag identity；
 - 当前约束；
 - 提交时依赖的 expected revision；
 - 恢复条件；
 - 资源和预算摘要。
 
-Session 只保存可选的 foreground WorkContext binding。Active Cognition 是 ResidentSet、当前 WorkContext exact references 与请求 situation references 的运行时视图，不建立新的 durable cognition Authority。
+context_text 是操作上下文，不是 evidence，也不因持久保存而成为 Memory。显式 pin 的 Entity/Tag 不改写原始 query text；可选模型推断的 Tag 不自动写入 WorkContext。持久存储的上限与单次表示的投影预算分别管理，不能因 embedding 输入有界而把长期任务文本压成同一小窗口。
+
+Session 保存可选的 foreground WorkContext binding。Active Cognition 是 ResidentSet、当前 WorkContext cognition anchors 与请求 Situation refs 的运行时视图，不建立新的 durable cognition Authority。
 
 恢复时以当前 Authority 重新核验检查点。检查点不得成为长期认知 Authority。
 
@@ -561,7 +587,7 @@ Session 只保存可选的 foreground WorkContext binding。Active Cognition 是
 
 长期使用事件记录调用方对某项认知的真实使用及后续结果。候选生成、检索命中、排序和过滤属于检索轨迹，不直接成为长期使用事件。
 
-使用事件可以区分呈现、引用、据此行动、结果支持、结果反驳、纠正和显式固定等语义。仅进入调用方上下文的呈现不等于有意义使用，也不自动改变长期关联或可访问性。
+使用事件可以区分呈现、引用、据此行动、结果支持、结果反驳、纠正和显式固定等语义。它可以影响 ResidentSet、accessibility、review priority 和维护信号，不能把 cognition 投票成真；result_refuted 保留负反馈含义。仅进入调用方上下文的呈现不等于有意义使用，也不自动改变长期关联或可访问性。
 
 每个需要持久记录的使用事件由调用方提供稳定事件标识。重试同一事件必须得到幂等结果；相同事件标识携带不同内容时返回冲突。使用事件与由其直接触发的运行时更新保持一致提交。
 
@@ -569,13 +595,13 @@ Session 只保存可选的 foreground WorkContext binding。Active Cognition 是
 
 Host 报告有意义使用时可以关联实际产生该结果的 query。Runtime 保存有界、可过期的 query feedback：prepared intent/activation digest、explicit/inferred concept refs、bounded novel hypotheses、returned exact revisions、可验证的 seed context 与 profile identity。它不保存 raw artifact、完整 prompt、provider secrets 或整份 retrieved text。
 
-关联反馈验证同 Subject、有效 query correlation 和返回修订 membership。达到 review 条件后只 enqueue 现有 concept MaintenanceNeed；后续 Host grant 才允许维护读取反馈并建议 reuse/create/revise/merge/split Tag 或 AssociationEvidence。query hypothesis 只作为 meaningful-use maintenance signal；语义关联仍需真实 cognition/source supports。query exposure、presentation 和 activation 次数不构成长期强化、独立根或 Accretion 支持。
+关联反馈验证同 Subject、有效 query correlation 和返回修订 membership。达到 review 条件后只 enqueue 现有 concept MaintenanceNeed；后续 Host grant 才允许维护读取反馈并建议 reuse/create/revise/merge/split Tag 或 AssociationEvidence。query hypothesis 只作为 meaningful-use maintenance signal；语义关联仍需真实 cognition/source basis 与明确的 epistemic judgment。query exposure、presentation 和 activation 次数不构成长期强化、独立根或 Accretion 支持。
 
 ### 可访问性
 
 可访问性描述在当前线索和上下文中取得某项认知的难易程度。自动可访问性是查询时派生状态，可以考虑认知年龄、类型化使用、当前线索、工作上下文和查询预算。
 
-自动可访问性不修改认知真值和生命周期。显式固定、精确访问限制、抑制和清除分别由独立策略或管理状态表达。自动策略不得仅依据固定年龄把仍然合法存在的认知永久变成不可恢复对象。
+自动可访问性不修改认知权威状态和生命周期。显式固定、精确访问限制、抑制和清除分别由独立策略或管理状态表达。自动策略不得仅依据固定年龄把仍然合法存在的认知永久变成不可恢复对象。
 
 ### 受管理上下文
 
@@ -606,7 +632,7 @@ MaintenanceNeed 可以由以下情况产生：
 - Serving generation 需要重建；
 - 跨领域 proposal 等待复核。
 
-优先级由当前影响、陈旧程度、依赖范围、预期修正价值、成本和宿主预算派生，不成为持久认知真值。
+优先级由当前影响、陈旧程度、依赖范围、预期修正价值、成本和宿主预算派生，不成为持久认知权威状态。
 
 ### 输入快照
 
@@ -620,7 +646,7 @@ accepted/revised cognition、显式有意义使用以及其他领域事件可以
 
 维护工作固定当前输入快照，模型或确定性过程提出有限的 Tag 和 AssociationEvidence 操作。结构所有者已经直接掌握的事实可以直接产生结构关系依据，无需经通用模型重新推断。
 
-语义关系提案携带明确支持来源。目标 owner 核验引用、主体、生命周期、relation type、support 与 provenance 后提交。
+语义关系提案携带实际 formation basis、provenance 与明确的 epistemic judgment。目标 owner 核验引用、主体、生命周期、relation type 和 lineage 后按领域合同提交，不以通用自然语言蕴含证明代替结构核验。
 
 模型 proposal 被领域 owner 判为非法时，本次 proposal 结束；新的认知变化或显式 review 可以形成新的维护机会。provider、transport 等瞬时失败可以复用已经保存的 proposal 或输入快照重试，不因重试重复模型付费调用。
 
@@ -628,7 +654,7 @@ accepted/revised cognition、显式有意义使用以及其他领域事件可以
 
 ### 假设
 
-离线探索首先产生假设（Hypothesis）。假设包含候选主张、适用范围、输入修订、支持证据、反例证据、不确定性、目标领域、拟议操作、生产者和运行标识。
+离线探索首先产生假设（Hypothesis）。假设包含候选主张、适用范围、实际输入修订与 formation basis、provenance、明确的支持/反例等 epistemic judgment、不确定性、目标领域、拟议操作、生产者和运行标识。
 
 假设没有跨领域写入权限。提交前执行来源重新核验、共同来源祖先展开、反例搜索、对象版本核验、访问控制核验和清除状态核验；随后由目标领域所有者接受、拒绝、标记冲突或判定过期。
 
@@ -651,13 +677,13 @@ accepted/revised cognition、显式有意义使用以及其他领域事件可以
 
 ### 认知查询
 
-认知查询表达调用方的语义意图，而不暴露具体检索算法开关。查询可以指定主体、领域和对象范围，以及实体、时间、语义线索、硬约束、软偏好、调用方能力、计算预算、材料展开要求和诊断需求。
+认知查询必须包含非空自然语言 intent，而不暴露具体检索算法开关。Selector、Tag、概念、时间、上下文、projection 与 exploration 只能丰富意图，不能代替文本；纯结构读取属于 exact domain API。查询可以指定主体、领域和对象范围，以及实体、时间、语义线索、硬约束、软偏好、调用方能力、计算预算、材料展开要求和诊断需求。
 
 硬约束决定对象是否合法；软偏好只影响合法对象之间的排序。按稳定身份进行的精确读取直接访问权威对象，不经过相似度检索。
 
 ### 最小查询与结果投影
 
-self-contained semantic text 本身构成完整的一等 Cognitive Query：Text → lexical + dense → fixed fusion → owner validation。Entity、Tag、Schema、WorkContext、Situation、Agent loop 和 associative exploration 都是可选增强，纯文字路径不依赖 concept model 或 concept Serving asset。
+非空 natural-language intent 本身构成完整的一等 Cognitive Query：Text → lexical + dense → fixed fusion → owner validation。Entity、Tag、Schema、WorkContext、Situation、Agent loop 和 associative exploration 都是可选增强，纯文字路径不依赖 concept model 或 concept Serving asset。
 
 Prepared Cognitive Query 从语义上分别包含 Cue Expression、TemporalFrame 与 scoped filters、Cognitive Context、ExplorationFrame、ResultProjection 和 Execution Policy。查询意图与最终返回对象类型独立；默认 recall 返回所选视图中 eligible Cognition，即 Memory、CognitiveSchema、Episode 和 Journal。Evidence 和 Resource 可以作为 provenance/material 参与；调用方明确选择 projection 或 resource intent 时才作为顶层结果。exact target 同样满足 ResultProjection。
 
@@ -667,17 +693,23 @@ Cognitive Query 在 QueryPlan 形成前完成引用解析。
 
 自然语言名称和别名用于 identity discovery；稳定引用用于 exact continuation。未知引用和歧义引用以显式结果返回。调用方或 Agent 可以补充上下文、选择候选并重新提交。查询执行器不通过 embedding 或模型隐式决定对象身份。
 
-需要语义检索的输入由调用方提供能够独立解释的 semantic intent。当前 Session、WorkContext、Active Cognition、显式 request situation 和已解析 Entity/Tag/Schema 可以作为查询上下文。系统把它们编译为有界、确定性的 query semantic representation，并保留形成该 representation 的 exact source references。
+自然语言 referent 显式化是强推荐的质量增强：明确名称有利于 lexical、embedding 和 concept activation；它不是查询资格条件。包含任何语言的代词或指示词的普通 text 均可执行，Runtime 不实现多语言 coreference/pronoun hard gate。Raw intent、context-assisted representation 与 Host 显式 contextualized intent 都是正式路径；原始文本保持可识别。显式未解析的机器占位符与 typed identity 的 unknown/ambiguity 仍可返回结构错误。
 
-opaque identity 用于绑定和约束；显示名、Tag 描述、WorkContext purpose 等 semantic descriptor 用于 semantic representation。改变算法 profile 不能改变同一 prepared query 的 semantic input。
+准备按统一流水线执行：Original Intent + query-local cues + foreground WorkContext + Session Runtime/ResidentSet + one-shot Situation → QueryContextSnapshot → QueryRepresentation → QueryActivation → QueryPlan → retrieval profiles。
 
-外部 benchmark 的 raw-text compatibility 可以作为独立输入模式运行，不伪装成完整 cognitive query。
+QueryContextSnapshot 冻结实际使用的 WorkContext identity/revision、适用的 Session/runtime revision、context text digest、Entity/Tag/cognition anchors、实际接纳的 resident/runtime refs、one-shot Situation、历史排除与截断/降级。它是 ephemeral prepared state，不是新的 durable Authority。准备阶段无 provider/model 调用；同一查询的后续 representation、activation 与所有 profiles 只消费这份冻结输入。
 
-Agent 可以把 identity discovery、query preparation、query execution 和后续 exact continuation 组合成多次工具调用；单次 Cognitive Query 不承担通用 Agent planning 或指代猜测。
+opaque identity 用于绑定和约束；显示名、Tag 描述、WorkContext purpose/context_text 等 semantic descriptor 用于 QueryRepresentation。统一 representation policy 分配总预算与 section 预算，保留 Intent，依次优先接纳 explicit query cues、pinned Entity/Tag、任务文本、exact cognition anchors、Session runtime 和较低优先级材料；实际截断显式报告。持久 context 存储和 query projection 上限分别配置。改变算法 profile 不能改变同一 prepared query 的 semantic input。
+
+Bare text 是普通产品路径；研究 plain baseline 通过显式能力与配置关闭增强，不建立 product-level text-only compatibility 模式。
+
+Agent 可以把 identity discovery、query preparation、query execution 和后续 exact continuation 组合成多次工具调用。可选 model-assisted contextualizer 可以由 Host 在 Runtime 之上提供，不成为 deterministic prepare 的必需调用。NousQL 的长期输入模型是 unquoted Unicode text + syntax islands；具体 grammar、escaping、CLI 命令、显示与 local receipts 由代码仓库 Specs/Reference 维护。
 
 ### QueryActivation 与检索模式
 
-准备阶段固定 semantic representation、exact context、TemporalFrame、ResultProjection 与配置，不调用 provider/model。执行阶段按允许的能力生成一份共享 query embedding，再形成统一 QueryActivation：semantic text、exact Entity/Tag/Schema、current cognition、WorkContext/Situation refs、explicit/inferred Tags 与可选 novel concept hypotheses。冻结后的 activation 是 Runtime-only state，不形成长期 Cognition Authority；各 profile 消费同一语义输入，不各自定义概念集合。
+准备阶段先冻结 QueryContextSnapshot，再固定 QueryRepresentation、TemporalFrame、ResultProjection 与配置，不调用 provider/model。执行阶段按允许的能力从同一 prepared input 生成共享 query embedding，再形成统一 QueryActivation：semantic text、exact Entity/Tag/Schema、current cognition、WorkContext/Situation refs、explicit/inferred Tags 与可选 novel concept hypotheses。冻结后的 activation 是 Runtime-only state，不形成长期 Cognition Authority；各 profile 消费同一语义输入，不各自定义概念集合。
+
+QueryActivation 保留 Tag origin：explicit_query、work_context、existing_semantic_match、model_inferred、runtime_situation。Pinned WorkContext Tags 持续贡献 context activation，无需 Agent 每轮重复；各 profile 不自行推断另一套 Tags。Resident cognition 继续通过 exact refs 提供 runtime/topology context，不自动把全部 resident attachments 转成 Tag activation。
 
 exact Tag identity 与 semantic concept cue 分别表示精确引用和语义线索。概念 cue 不承诺存在同名 durable Tag；semantic/model activation 可以选取既有 Tag，却不承担歧义 identity resolution。可选 query concept model 仅从有界 catalog 选择已有概念或产生无 TagId 的 bounded hypothesis。
 
@@ -732,7 +764,7 @@ Direct concept recall 从 explicit/inferred Tag activation 读取直接 attached
 
 每类服务投影按照不可变代次发布。代次记录输入权威水位、实现身份、关键配置摘要、制品身份和必要的校验信息。构建完成并通过一致性检查后再切换当前代次。
 
-查询返回前仍以权威对象为最终依据。服务代次负责高效召回和排序，不拥有认知真值。
+查询返回前仍以权威对象为最终依据。服务代次负责高效召回和排序，不拥有认知权威状态。
 
 ### 共享概念服务资产
 
@@ -754,7 +786,7 @@ as-of fence 在候选生成前作用于 lexical、dense、concept、topology 及
 
 负向、矛盾和反例关系具有独立语义，不能在没有定义转换规则时直接作为普通非负传播边使用。
 
-AssociativeTopology 可以消费版本化的 derived Accretion feature，其权重属于 Serving generation。Accretion 的改变只触发服务或维护重算，不写回为 Cognition truth。
+AssociativeTopology 可以消费版本化的 derived Accretion feature，其权重属于 Serving generation。Accretion 的改变只触发服务或维护重算，不写回为 Cognition Authority state。
 
 ### 关联证据与服务权重
 
@@ -785,6 +817,32 @@ AssociativeTopology 可以消费版本化的 derived Accretion feature，其权�
 能力合同描述输入输出结构、模型或实现身份、隐私边界、可用性、成本和资源限制。所有派生内容和提案保存生产者签名，使后续重建和失效判断能够识别生成条件。
 
 本地模型网关与远程接口在认知语义中承担相同角色。部署位置不改变权威边界；主体身份和认知状态不得绑定到某个具体模型服务。
+
+### ModelRole、ExecutionProfile 与 ModelProfile
+
+模型工作与模型资源按三层独立表达：
+
+| 概念 | 所有语义 |
+| --- | --- |
+| ModelRole | 正在执行的认知工作及其 Prompt/structured-output 合同，例如 formation、consolidation、concept maintenance 与 query enrichment。 |
+| ModelProfile | 实际模型资源、gateway、protocol、model identifier/revision、capabilities 与适用的 embedding contract。 |
+| ExecutionProfile | 调用方式：model profile ref、reasoning/inference controls、temperature、top_p、output budget、timeout、有界 provider options 与可表达的 service/latency preference。 |
+
+同一 ModelProfile 可供多个 roles 使用，也可有不同 ExecutionProfiles；同一 ExecutionProfile 可被多个 roles 引用。模型营销档位不成为硬编码语义。控制组合必须符合实际 protocol/capabilities，不支持的配置显式拒绝。
+
+### RolePolicy、fallback 与执行快照
+
+RolePolicy 将一个 ModelRole 绑定到有序 ExecutionProfile routes 与 optional/required availability。一个 role 可以有零、一或多个 executable routes；Capability 清楚报告未配置、不可用、可降级或必需能力阻塞。Route 顺序表达偏好，不另建 preferred requirement。
+
+Fallback 仅按显式配置的有限 route 顺序处理 execution/infrastructure failure，例如缺失凭据、gateway 不可用、transport、timeout、rate/resource error、protocol/output 或 structured-output failure。Core 不按模型名称或相似能力自动发现替代资源。Owner semantic rejection 不静默触发下一模型；新语义尝试必须由 workflow/Host 的授权和预算拥有。
+
+Operation 开始时冻结 RolePolicy、route 顺序、ExecutionProfiles、ModelProfiles、Prompt/structured contract 与 provider destination policy。配置改变不改写执行中的路线；已有保存 proposal 的基础设施重试复用 proposal，不重新生成。允许 fallback 时，每次 attempt 有稳定执行身份。
+
+### 实际生产者身份
+
+ProducerSignature 记录成功生成 cognition/representation 的实际执行，至少保留 role、model profile、实际 model/revision、successful ExecutionProfile、reasoning/inference controls digest、Prompt id/digest、structured contract digest、RolePolicy digest 与 implementation/protocol。原始媒体或直接协议派生也遵守同一身份合同。
+
+Operation receipt/telemetry 记录 attempted routes、失败分类、fallback transition、成功 route、usage 与 latency；凭据和 raw provider body 不进入这些元数据。ProducerSignature 不把模型输出升级为事实证明，也不把共享 source root 的不同生产者算成独立佐证。
 
 ## 15. 持久化、一致性与清除
 
@@ -895,7 +953,7 @@ Nous Wave 内核（Rust）
 
 结构化 Authority persistence 保存认知权威数据和事务状态。不可变对象库保存大型材料和二进制对象。词项、稠密、共享概念和联想拓扑均属于可重建的 Serving family。
 
-Serving 组件不拥有认知真值。具体 provider 的选择由工作负载、过滤能力、多视图支持、资源占用、备份恢复和运维成本的下游评测决定；除非另有独立的长期设计决定，Target Design 不锁定 provider。
+Serving 组件不拥有认知权威状态。具体 provider 的选择由工作负载、过滤能力、多视图支持、资源占用、备份恢复和运维成本的下游评测决定；除非另有独立的长期设计决定，Target Design 不锁定 provider。
 
 ### 部署原则
 
@@ -923,6 +981,8 @@ Serving 组件不拥有认知真值。具体 provider 的选择由工作负载�
 | 标签（Tag） | 有稳定身份、可修订文本表示的 durable semantic concept。 |
 | CognitiveClock | Subject 的认知相对时间基准。 |
 | TemporalFrame | 捕获 clock、Authority view 与 revision view 的查询时间语义。 |
+| QueryContextSnapshot | 冻结实际接纳的任务、Session、typed anchors、Situation、历史排除与截断的 prepared context。 |
+| QueryRepresentation | 从 frozen context 编译的有界确定性语义表示。 |
 | QueryActivation | 冻结且临时的统一 query-side 概念与上下文激活。 |
 | ResultProjection | 与 query intent 分离的返回对象类型选择。 |
 | 关联证据（AssociationEvidence） | 认知对象之间具有来源和类型的关联依据。 |
@@ -931,7 +991,10 @@ Serving 组件不拥有认知真值。具体 provider 的选择由工作负载�
 | 语言惯例（LanguageConvention） | 特定社会作用域内的词义、称呼、简称、黑话或语用约定。 |
 | 动机（Motivation） | 主体关于愿望、目标、关切和未来状态优先关系的认知领域。 |
 | 认知运行时（Cognitive Runtime） | 组织活动认知、工作上下文、注意、驻留集和调用方工作集的运行状态。 |
-| 工作上下文（WorkContext） | 可暂停、恢复和结束的任务或问题上下文。 |
+| 工作上下文（WorkContext） | 保存任务文本与 cognition/Entity/Tag anchors、可持久复用的 Runtime state。 |
+| Formation basis | 形成 cognition 或 proposal 时实际使用的精确输入，不证明自然语言蕴含。 |
+| Epistemic judgment | 可修订的支持、反驳、纠正等认识关系。 |
+| ModelRole / ExecutionProfile / ModelProfile | 分别表达认知工作、执行控制与实际模型资源。 |
 | 使用事件（UseEvent） | 调用方对认知对象的真实使用及结果回执。 |
 | 可访问性（Accessibility） | 某项认知在当前线索和上下文中被取得的难易程度。 |
 | 假设（Hypothesis） | 需要目标领域所有者核验后才能形成权威认知的候选主张。 |
@@ -954,7 +1017,7 @@ Serving 组件不拥有认知真值。具体 provider 的选择由工作负载�
 ## 认知检索
 
 1. 调用方提交认知查询和计算预算。
-2. 系统先完成引用解析、上下文与配置快照，形成有界确定性的 Query Representation，再绑定硬约束、软偏好、主体范围和调用方能力。
+2. 系统完成引用解析，冻结 QueryContextSnapshot 与配置，再编译有界确定性的 QueryRepresentation，绑定硬约束、软偏好、主体范围和调用方能力。
 3. 在所选 TemporalFrame 内形成统一 QueryActivation，随后在候选生成前固定检索通道、预算和融合参数。
 4. 各检索通道生成服务视图命中，并在对象修订层聚合。
 5. 跨通道融合和可选重排产生候选顺序。
