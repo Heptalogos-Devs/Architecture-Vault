@@ -87,7 +87,7 @@
 
 ### Fallback 与实际生产者由冻结 policy 决定
 
-**决定：** Operation 冻结 RolePolicy/routes、execution/model profiles 与生成合同。Fallback 仅限配置内的 infrastructure/execution failure；owner semantic rejection 不自动换模型，已有 proposal 重试不重新生成。ProducerSignature 绑定实际成功 route 与执行控制，attempt/fallback 在 receipt 中可观察。
+**决定：** 本次调用在内存中固定 RolePolicy/routes、execution/model profiles 与生成合同。Fallback 仅限配置内的 infrastructure/execution failure；owner semantic rejection 不自动换模型。ProducerSignature 绑定实际成功 route 与执行控制；不要求持久化调用快照、失败尝试或中间提案以恢复执行。
 
 目标设计：第 14 章。
 论证：[认知、形成依据与模型执行](rationale/12-cognition-basis-model-execution.md)
@@ -138,7 +138,7 @@
 
 ### 模型建议列表不建立超级事务
 
-**决定：** 每项建议按领域 owner mutation 合同提交；Tag merge/split 和 Episode partition 等天然原子操作继续原子。稳定 action identity 支持 crash retry，基础设施重试复用已保存 proposal，不重复模型调用；后项非法保留前项独立提交。
+**决定：** 每项建议按领域 owner mutation 合同直接提交；Tag merge/split 和 Episode partition 等天然原子操作继续原子。后项非法保留前项独立提交。运行失败明确报告，已完成领域结果保留；不维护跨进程恢复提案执行的检查点。
 
 目标设计：第 6、11、15 章。
 论证：[设计论证](rationale/02-schema-association.md)
