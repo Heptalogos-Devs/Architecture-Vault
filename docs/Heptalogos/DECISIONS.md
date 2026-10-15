@@ -65,3 +65,10 @@ Nous Wave 和 Heptalogos 共享逻辑 `SubjectId`，各自维护自己的领域�
 
 目标设计：第 4、6、8 章。
 共享合同：[认知与主动性](../integration/cognition-agency.md)。
+
+### QQ 日常宿主、单一派发与实际恢复
+
+**决定：** 第一方 QQ Channel 统一同账号协议接收和发送；Messaging 先保存事实，Life 再决定实际接触。行为采纳后交唯一 OpenClaw durable send，未知发送不自动重放。管理进程先于模型可用，OS 服务管理器监督进程，产品不复制通用运行图。活动、历史覆盖与真实结果支持同一 Subject 停止后续接，虚拟时间不替代实际跨日恢复。
+
+目标设计：第 4、7、8、11、17 章。
+共享合同：[认知与主动性](../integration/cognition-agency.md)。
