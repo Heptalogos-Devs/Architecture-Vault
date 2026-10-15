@@ -473,3 +473,10 @@
 
 目标设计：第 17 章。
 论证：[下一阶段研究综合](research/2026-09-next-stage-engineering-synthesis.md)
+
+### 正式 OpenClaw 认知集成先行，宿主解耦施工
+
+**决定：** Nous 在原生 OpenClaw 中提供可独立安装、逐模型自动应用的正式认知集成；Heptalogos 原样消费它。Self、Social/LanguageConvention 与 Motivation 沿同一真实消费者按完整领域功能交付，不等待 Heptalogos 大面积重建。Seed 可选，Subject 是独立个体。无第二份可写认知、兼容 shim 或替代 Agent Runtime；原生入口缺少必需控制时直接修正正式分发。
+
+目标设计：第 3、7、10、16 章。
+共享合同：[认知与主动性](../integration/cognition-agency.md)。
