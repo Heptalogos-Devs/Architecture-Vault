@@ -58,3 +58,10 @@ Nous Wave 和 Heptalogos 共享逻辑 `SubjectId`，各自维护自己的领域�
 正常产品宿主拥有产品 Authority。高权限机器维护位于独立机器运维平面，通过管理合同与宿主协作。
 
 目标设计：第 3、8 节。
+
+## 原生 OpenClaw 与持续主体生活
+
+**决定：** Heptalogos 复用 Nous 正式认知集成与 OpenClaw 原生模型/工具/渠道/子 Agent 能力，继续拥有生活活动、消息感知、行为采纳、外部效果和产品管理。一次生成可以包含候选与草稿，真实执行/外发前必须获得行为许可。管理 API/CLI 不依赖模型或 GUI；运维 OpenClaw 具有独立实例、凭据及生命周期。旧 AIRuntime、Foundation 和固定第二次 Expression 调用不作为新产品结构前提。
+
+目标设计：第 4、6、8 章。
+共享合同：[认知与主动性](../integration/cognition-agency.md)。
