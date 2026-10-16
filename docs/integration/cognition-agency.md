@@ -20,6 +20,14 @@ RESET 真正替换当前 slice；原生压缩不吸收当前认知为永久摘�
 
 OpenClaw 保有原生工具、渠道、Computer use、skills、子 Agent、模型连接和 transcript。Host 明确配置工具可见性、执行政策、目标凭据及 OS/节点范围；认知提示词不代替权限控制。未进入主体感知的后台来信不能通过通用 ingest 偷渡进认知。
 
+## 单前台与工作连续性
+
+Heptalogos Reactor 组织 Subject 范围的机会与一条前台主观决定链；世界、专业任务、压缩和认知反思可并行。多会话隔离历史不产生多个同时决策的主体。前台占据/让出、焦点修订及晚到候选的采用资格属于产品，原生执行/调度属于 OpenClaw，不新增 Reactor 数据库或通用运行图。
+
+情境卡与对象目录由实际 owner 读取构成。手机/QQ/浏览器/世界动作通过同一正式动作合同执行，preview/full/media 与后台取得分别记接触；结果 ready 不统一解释为已被主体查看。角色身份、权限、来源与受众从认证 caller 绑定，不能从动作句柄或模型参数扩大。
+
+重要进展同步保存于 Activity/WorkContext 的适当 owner，共同引用真实结果；原生摘要与长期认知分别保存。唯一原生 compactor 可后台压缩固定已结束前缀，以 generation/前缀/来源权限 CAS 发布并保留新尾部；当前认知/世界片段排除于历史摘要，硬超窗才要求前台等待。来源收窄使受影响 transcript/摘要失效，不能通过恢复或新用途继续传播。
+
 ## 用途、视角与接触性质
 
 同一 Subject 的 world authoring、deliberation、execution、render、review 与 reflection 使用不同用途、视角和执行历史。认证 Host 上下文绑定 role/native caller、活动/工作、允许来源与工具、受众、世界域和时间；模型不能自行声明这些字段。Host 保存角色到原生 Agent/Profile 的映射与职责预算，原生配置唯一保存 provider/model/凭据/生成参数，Nous 保持认知角色配置所有权。
@@ -100,7 +108,7 @@ Heptalogos 将行为结果、承诺状态和可观察外部事实作为带来源
 
 ## 生活、时间与运行
 
-Heptalogos 维护生活日程、已采纳活动、消息感知、注意、自然回应节点与打断。Subject 可以继续工作、等待、休息或延后来信；来信先由产品保存，真正接触时才形成 Nous Observation。WorldLife 以正式规则或叙事实现场景和虚拟事件，计划、设定与已实现生活分别维护；真实外部效果仍需实际结果。世界存在和内部机会不依赖 QQ account/conversation；世界时钟不加速基础设施超时。
+Heptalogos 维护重复课表/例外/范围日历、世界 Profile 与可选 Seed 的独立采用、已采纳活动、局部设备视图、精力、全局注意、自然回应节点与打断。精力按已实现世界区间积分，真实费用与机器资源独立计量。Subject 可以继续工作、等待、休息或延后来信；来信先由产品保存，真正接触时才形成 Nous Observation。WorldLife 以正式规则或叙事实现场景和虚拟事件，计划、设定与已实现生活分别维护；真实外部效果仍需实际结果。世界存在和内部机会不依赖 QQ account/conversation；世界时钟不加速基础设施超时。
 
 无图形管理进程、API 和 CLI 可独立控制已交付功能。主体与机器运维 OpenClaw 是不同运行实例，凭据、权限、入口及生命周期隔离。系统维护实例不依赖主体认知或正常产品启动，普通主体渠道不能取得维护能力。
 
