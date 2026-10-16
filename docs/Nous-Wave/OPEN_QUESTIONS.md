@@ -134,12 +134,8 @@ Nous Wave 已确定：
 - Desired Condition → Pursuit exact revision reference；
 - behavior outcome / evidence receipt。
 
-仍需与 Heptalogos 对齐：
+共同角色用途、受信虚拟来源、后台成果释放、EpistemicView、域时间与故事/真实提交切面已在[共享合同](../integration/cognition-agency.md)确定。结果使用稳定操作身份回传，必需认知缺失停止相关调用，来源禁止继续使用时失效现有投影与受影响历史；这些不再作为待定架构。
 
-- live cognition availability / stale-state degradation contract；
-- cross-system revision notification / invalidation mechanics；
-- behavior use event 回传的 stable identity；
-- purge / permission change 对已投影行为上下文的失效；
-- maintenance lease 的产品级 admission 与抢占机制。
+仍可研究跨系统通知的延迟/成本、可选资料的陈旧容忍、维护预算与前台工作的分配参数。具体接线和可执行状态由代码仓 Spec/Plan 维护。
 
 Pursuit 自身生命周期继续由 Heptalogos 设计，不在 Nous Wave 建立第二套行为状态机。
