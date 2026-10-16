@@ -571,7 +571,7 @@ Heptalogos 的行为结果、外部状态变化、完成、失败、取消和拒
 
 一次调用明确绑定 Subject、Session、执行者、工作、用途与受众。当前语义事实和相关证据通过正式 Projection/ContextCompiler 共同选取，调用方不逐域复制选择逻辑。身份与情境指导、原始材料及认知 Authority 保留不同地位；认知内容不能授予系统、工具或行为权限。
 
-每次实际模型提交，包括工具后续、重试、handoff、子执行者和压缩后的下一步，自动准备并应用适用认知。RESET 替换当前 slice，APPEND 仅续接已同步的不可变前缀；应用成功后才推进 cursor。当前认知 slice 不进入长期历史摘要，不成为第二份可写状态。必需认知不可用时终止相关调用。
+每次实际模型提交，包括工具后续、重试、handoff、子执行者和压缩后的下一步，自动准备并应用适用认知。RESET 替换当前 slice，APPEND 仅续接已同步的不可变前缀；应用成功后才推进 cursor。当前认知 slice 不进入长期历史摘要，不成为第二份可写状态。 原生 compactor 仅对已结束回合固定前缀后台生成，并核对 generation、前缀与当前来源许可后发布，保留未覆盖历史和新增尾部；与手动及硬超窗压缩共享同一所有者。当前世界/时钟/权限每次重建，摘要不替代实际进展或长期认识。必需认知不可用时终止相关调用。
 
 Nous 提供可独立安装的正式 OpenClaw 集成，并由 Heptalogos 原样复用。模型连接、工具循环、渠道、Computer use、skills、子 Agent 与 transcript/压缩复用原生执行能力；缺少必需控制时在受控分发修正唯一正式入口，不以 best-effort hook 或第二个 Agent Runtime 替代。跨系统职责见[认知与主动性合同](../integration/cognition-agency.md)。
 
@@ -619,7 +619,7 @@ context_text 是操作上下文，不是 evidence，也不因持久保存而成�
 
 Session 保存可选的 foreground WorkContext binding。Active Cognition 是 ResidentSet、当前 WorkContext cognition anchors 与请求 Situation refs 的运行时视图，不建立新的 durable cognition Authority。
 
-恢复时以当前 Authority 重新核验检查点。检查点不得成为长期认知 Authority。
+恢复时以当前 Authority 重新核验检查点。检查点不得成为长期认知 Authority。 有意义结果、目标切换、委派让出、取消和完成前同步保留最小继续信息，引用已有成果，不等摘要或反思完成，不以逐 token 日记恢复运行。Heptalogos 的单前台与焦点属于产品语义，Nous 不建立第二个 Reactor。
 
 ### 使用事件
 

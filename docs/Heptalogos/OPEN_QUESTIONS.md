@@ -1,6 +1,6 @@
 # Heptalogos 未决问题
 
-世界/日程、多角色、独立人格渲染、Claim/NarrativeCommit、主体知识范围、虚拟离线实现与独立维护的职责已确定，见[目标设计](TARGET_DESIGN.md)及[共享合同](../integration/cognition-agency.md)。可执行状态、Pursuit 生命周期、正式操作和实施差距由代码仓所属 Spec 与唯一 active Plan 维护，不在这里继续作为架构未决。
+单前台 Reactor、情境动作、重复课表/例外、全局注意/精力、同步继续信息与单原生固定前缀压缩，以及世界/日程、多角色、独立人格渲染、Claim/NarrativeCommit、主体知识范围、虚拟离线实现与独立维护的职责已确定，见[目标设计](TARGET_DESIGN.md)及[共享合同](../integration/cognition-agency.md)。可执行状态、Pursuit 生命周期、正式操作和实施差距由代码仓所属 Spec 与唯一 active Plan 维护，不在这里继续作为架构未决。
 
 ## 持续生活质量
 

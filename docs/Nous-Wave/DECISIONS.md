@@ -494,3 +494,9 @@
 
 目标设计：第 4、7、10、16 章。理由：同一 Subject 的多角色技术能力、个人认识与世界事实各有 Authority；复用现有认知 owner，避免第二知识库和隐藏资料泄漏。
 共享合同：[认知与主动性](../integration/cognition-agency.md)。
+
+### 认知、继续信息与原生压缩分别拥有
+
+**决定：** Nous 保持唯一认知与 WorkContext；Host 组织单一前台与同步继续信息，原生 compactor 独占固定前缀摘要发布并保留新尾部。当前认知/世界/权限片段重建，摘要不是 Memory 或新 Evidence。理由：保持来源传播与执行连续，避免第二可写人格、摘要库或 Runtime。
+
+目标设计：第 10、16 章。共享合同：[认知与主动性](../integration/cognition-agency.md)。
