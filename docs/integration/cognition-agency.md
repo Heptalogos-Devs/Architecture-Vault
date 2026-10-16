@@ -6,7 +6,7 @@ Nous Wave 与 Heptalogos 服务同一个逻辑 Subject，并共享稳定 `Subjec
 
 Nous Wave 维护长期认知：记忆、自我、社会认知、动机、认知运行时以及这些认知的来源和修订。
 
-Heptalogos 维护行为与产品运行：交互输入、主动性、行为决定、承诺、外部效果、系统管理和运行可靠性。
+Heptalogos 维护行为与产品运行：世界/日程与已实现生活、交互输入、主观审议、人格表达、行为与叙事提交、Claim、承诺、外部效果、系统管理和运行可靠性。
 
 ## 正式认知集成与原生执行
 
@@ -19,6 +19,32 @@ Subject 可无 Seed，也可采用人类可读 soul 来源。它是独立个体�
 RESET 真正替换当前 slice；原生压缩不吸收当前认知为永久摘要。必需模式缺失认知时停止相关调用，不能退回默认路径继续执行。原生接口覆盖不了该语义时，在受控 OpenClaw 分发修正唯一正式入口，不套 best-effort hook 冒充保证，也不另造通用 Agent Runtime。
 
 OpenClaw 保有原生工具、渠道、Computer use、skills、子 Agent、模型连接和 transcript。Host 明确配置工具可见性、执行政策、目标凭据及 OS/节点范围；认知提示词不代替权限控制。未进入主体感知的后台来信不能通过通用 ingest 偷渡进认知。
+
+## 用途、视角与接触性质
+
+同一 Subject 的 world authoring、deliberation、execution、render、review 与 reflection 使用不同用途、视角和执行历史。认证 Host 上下文绑定 role/native caller、活动/工作、允许来源与工具、受众、世界域和时间；模型不能自行声明这些字段。Host 保存角色到原生 Agent/Profile 的映射与职责预算，原生配置唯一保存 provider/model/凭据/生成参数，Nous 保持认知角色配置所有权。
+
+SDK/原生执行在 provider 前使用正式用途准备 Projection，并在候选检索前筛选视角和来源权限。Subject/renderer 取得本次适用认知与知识立场；world author/review 只取得对应范围，不默认读取全部私人认知。工具 schema 与真正执行入口均受当前 binding 约束。
+
+正式区分 `execution_only` 与 `subject_experience` 接触性质。world author/review 草稿、未释放 worker 工具与专业结果保存在所属 RoleRun/世界能力，不自动作为该 Subject 的 Observation、Episode 或 reflection 输入。Host 依据确切父子 handoff 和终态结果释放有限成果；主体实际接触时创建新的 contact，引用原运行与实际资料，不能重跑付费 worker 或把其全部历史复制给主体。
+
+受信虚拟来源保留 world/event 身份、角色可见内容、规则/生成 producer、共同起源和时间。只有世界 owner 已采用事件的可见投影可声明 `world_realized`；任意模型文本或初始设定不能自授。Statement 来源证明实际采用/说过的版本，不自动证明所说内容为真。真实 QQ/tool、canonical virtual、主观 belief/Claim 和普通模型提案均可区分。
+
+## 世界、知识与叙事交接
+
+WorldLife 维护计划与已实现生活；Nous 只接纳 Subject 实际获得的可见经历。隐藏 NPC 状态和导演提示不进入 Subject 检索、reranker 或历史。Host EntityRef 表达真实人物和各世界虚拟 actor，虚拟人物不冒充真实独立证人；同批生成仍保留共享来源谱系。
+
+Nous 从 Self 的领域知识/局限、Memory 的具体理解/学习经历、Social 惯例与当前接触提供派生 EpistemicView，不另建知识数据库。它区分熟悉范围、个人经验、转述/猜测、未知与新近性限制、尚未成为个人能力的执行协助。专业模型能回答不等于 Subject 已掌握；学习需实际释放/接触，长期概括由现有 owner 反思修订。
+
+ExpressionBrief→独立 render→最终正文读回→NarrativeCommit→唯一原生发送者。NarrativeCommit 在 Host 单库短事务采用兼容世界细化、Claim、承诺和一份待派发身份；无跨库/网络大事务。Claim adopted、实际 expressed、确定未发和 uncertain 分开，实际听众/时间变化重新核验。事先 deliberate 的听众版本和真实/信念版本分别保存，不把内部失败改写为谎言。
+
+Host 将已实现事件的可见投影、实际主体接触、正式采用的 statement 与实际发送结果分别回流 Nous，复用现有 Material/Observation/Use 和稳定待回流身份。失败补交不重复实现事件、工具或发送。虚拟生活可支持相应世界内的 Self/Social/Motivation；不得据此证明真实外部结果或增加独立现实佐证。
+
+## 共同域时间与历史
+
+CognitiveClock 与 DomainStamp 是共同时间模型；worldId 不等于 timeDomainRef。occurred/observed/valid/formed 使用明确域及点/区间/未知，recorded 与基础设施 deadline 使用真实 UTC。QQ 首次 observed 不得回填为世界中的过去。无映射跨域比较返回未知。
+
+`knowledgeAtWorldTime` 表达已实现故事中角色截至该时刻的见闻；`asRecordedAt` 表达数据库在真实提交截点实际已有的状态。晚实现虚拟见闻可进入前者，但不能穿越后者，亦不得违背先前已经确定的知情/不知情或 Claim。Query/Serving/Projection 在候选前贯通同一时间与视角约束，历史修订不被当前认识覆盖。
 
 ## 消息、人物与实际接触
 
@@ -60,7 +86,7 @@ Heptalogos 可以根据期望条件、当前情境、注意、行为政策、现
 
 一次具体行为仍通过 Reaction 和行为权威链产生。主动追求可以生成新的认知处理机会，也可以影响一次行为提议；它不会直接形成外部效果。
 
-模型可以同次形成行为候选与草稿；产品行为采纳在真实执行/外发之前成立，表达不得改变已采纳语义。message hook 超时或失败后继续发送的机制不能独自承担许可。最终出口检查当前行为、受众与敏感来源条件；缺少必需控制时修正正式入口。
+主体先审议是否参与、学习、委派、继续或表达。专业 worker 不直接以主体外发；采用交流意图后调用独立可配置的 `subject.render`，再对最终正文作一次窄 `narrative.review`。渲染保持已采用目标与技术结果，新的生活细节只是待采用候选。message hook 超时或失败后继续发送的机制不能独自承担许可。最终出口检查当前行为、受众与敏感来源条件；缺少必需控制时修正正式入口。
 
 正式采纳保存稳定行为与 payload 身份，唯一 OpenClaw durable send 接管实际网络派发。产品只负责有界交接与业务回执，不另运行网络重试 worker。最终回复、message 工具、主动/定时、子 Agent 通知和媒体经过同一出口。跨过发送点后超时或断线保存 uncertain，禁止自动重放；多段各保留实际结果。
 
@@ -74,13 +100,13 @@ Heptalogos 将行为结果、承诺状态和可观察外部事实作为带来源
 
 ## 生活、时间与运行
 
-Heptalogos 维护生活日程、已采纳活动、消息感知、注意、自然回应节点与打断。Subject 可以继续工作、等待、休息或延后来信；来信先由产品保存，真正接触时才形成 Nous Observation。虚拟环境按实际事件和结果形成经历，计划与已完成分开；显式世界时钟不加速基础设施超时。
+Heptalogos 维护生活日程、已采纳活动、消息感知、注意、自然回应节点与打断。Subject 可以继续工作、等待、休息或延后来信；来信先由产品保存，真正接触时才形成 Nous Observation。WorldLife 以正式规则或叙事实现场景和虚拟事件，计划、设定与已实现生活分别维护；真实外部效果仍需实际结果。世界存在和内部机会不依赖 QQ account/conversation；世界时钟不加速基础设施超时。
 
 无图形管理进程、API 和 CLI 可独立控制已交付功能。主体与机器运维 OpenClaw 是不同运行实例，凭据、权限、入口及生命周期隔离。系统维护实例不依赖主体认知或正常产品启动，普通主体渠道不能取得维护能力。
 
 进程由 OS 服务管理器监督，产品保存消息、活动、行为和待回流引用，OpenClaw 提供原生执行、调度与渠道持久机制；不叠加第二套通用运行图或队列。主体工具执行身份不能读取管理、协议登录与维护秘密，仅改 agentId 不构成隔离。
 
-停止先关闭新工作及接收入口，再有限等待已接纳写入和执行，保存可续接事实与真实历史游标。恢复先接实时事件，再按授权会话补拉并去重，记录实际覆盖和缺口；不将离线空白编成经历，不盲目补发旧答复或不明发送。世界时间与基础设施 deadline 分开，虚拟加速不替代真实跨日运行。
+停止先关闭新工作及接收入口，再有限等待已接纳写入和执行，保存可续接事实与真实历史游标。恢复先接实时事件，再按授权会话补拉并去重，记录实际覆盖和缺口；真实外部离线缺口保持未知，不盲目补发旧答复或不明发送。虚拟世界按显式 offline policy 有界实现过期时段，保留虚拟 occurred/seen 点与恢复时真实 recorded/交接时间。世界时间与基础设施 deadline 分开，虚拟加速不替代真实跨日运行。
 
 ## 管理与安全
 

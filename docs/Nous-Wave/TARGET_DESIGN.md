@@ -194,6 +194,14 @@ Episode/Journal 的成员、来源区域与表示映射等结构关系按自身�
 
 来源依赖未知时不得自动按独立佐证处理。认知 Authority 不保存一个能够替代来源结构的全局统一置信分数。领域可以根据具体任务计算认识状态、证据充分性或服务排序，但这些派生结果不得删除或覆盖底层 provenance。
 
+### 世界经历、运行资料与陈述来源
+
+受信 Host 世界操作已采用的 `world_realized` 事件，在相应角色实际接触可见投影时成为合法虚拟经历来源。它保留 world/event、发生范围、世界内感知点、真实生成/交接/记录时间、可见 actor 和 producer/规则及共同起源。合法虚拟经历可以支持该世界的 Self、Memory、关系、语言惯例和期望评价，不证明真实平台效果或现实社会共识。
+
+初始设定、计划、世界作者草稿、普通模型输出、主观 belief 和实际 statement 分别标明。`execution_only` 内容属于后台执行，不进入 Subject Observation/Episode/反思候选；正式释放后创建 `subject_experience` contact，引用原结果。身份与性质来自认证调用绑定，模型不能自填字段冒充世界 owner。主体说过某话只证明表达事实，不认证话中命题。
+
+虚拟 actor 使用 Host world-scoped EntityRef；多个 NPC 若共享生成源仍保留同源关系。知识/社会来源的独立性不由 actor 数、模型数量或重复自述推导。世界隐藏事实不进入主体候选、摘要或长期认识，普通删除和传播限制同样适用于这些来源。
+
 ### 来源提及与认知指向
 
 来源提及（EntityMention）记录材料某一区域明确出现的实体。认知指向（CognitionAboutness）记录某项认知在语义上涉及的实体、角色或关系。二者分别维护。
@@ -213,13 +221,17 @@ Episode/Journal 的成员、来源区域与表示映射等结构关系按自身�
 
 未知时间保持未知。时间范围允许开放端点。读取层可以派生最早、最晚或聚合时间视图，但派生值不写回为新的来源事实。
 
+发生、观察、有效和形成时间通过 DomainStamp 明确所属域、点/范围或未知；记录时间和 Authority 提交顺序保持现实 UTC 及真实提交次序。世界身份与时间域是不同引用，没有显式映射的跨域比较返回未知。真实 QQ/网页/工具接触不允许回填观察时间。
+
+已实现故事中的 `knowledgeAtWorldTime` 与数据库历史的 `asRecordedAt` 分别查询。恢复时晚实现的虚拟见闻保存原世界发生/感知点与当前实际生成、接触和提交时间；它可用于故事时间切面，不能进入早于提交的数据库切面。既有 Claim 和知情记录约束晚实现，无法相容时形成当前新发现或拒绝，不回填成早已知道。
+
 ### CognitiveClock 与 TemporalFrame
 
 Subject CognitiveClock 是主体认知相对时间的唯一基准。在线 Host 可使它跟随现实时间；历史重放、模拟和测试可以独立设置或推进。查询准备捕获一次 clock，固定相对时间的绝对解释；基础设施 timeout、retry 和 worker lease 继续使用基础设施时间。
 
 TemporalFrame 统一查询的认知时间基准、Authority view 和 revision view，同时保留 scoped five-axis filters。发生、观察、有效、形成和记录时间可以在同一 scope 中同时约束，按交集解释；不同时间轴不互相替代。
 
-Authority view 默认为 current，也可以选择 as-of：读取该 Subject 在指定认知时间之前已经存在的有效状态。Memory、Tag、CognitiveSchema、Episode、Journal 的 effective revision、lifecycle、Tag aliases 与 merge/split canonicalization、有效 AssociationEvidence 都按该时刻解释。未来形成或改变的认知不得通过候选、描述、向量或拓扑进入历史查询。
+Authority view 默认为 current，也可以选择 as-of：读取该 Subject 在指定现实提交截点之前已经存在的有效状态。Memory、Tag、CognitiveSchema、Episode、Journal 的 effective revision、lifecycle、Tag aliases 与 merge/split canonicalization、有效 AssociationEvidence 都按该时刻解释。未来形成或改变的认知不得通过候选、描述、向量或拓扑进入历史查询。
 
 revision view 默认为所选 Authority view 的 effective head。显式 history 允许该视图中 eligible historical revisions 成为独立候选，保留对象和修订身份，并继续满足 as-of 与五轴约束。
 
@@ -381,6 +393,14 @@ Self 不以一份不断全文重写的单一 Profile 作为全部自我 Authorit
 产品安全规则、操作权限、管理员强制行为和不可绕过的行为限制由宿主或 Heptalogos 的规范权威维护，不写入认知种子承担安全责任。
 
 可读 soul 可以是初始化来源，也可以是当前认知的派生视图。当前视图从正式对象投影，编辑必须通过显式提案/采用操作；不得与数据库双写。Seed 的虚构背景保留设定或叙事来源，不创建冒充真实接触的 Occurrence。
+
+### 主体知识与 EpistemicView
+
+Self 的 domain-knowledge facet 保存可独立修订的领域/主题、当前熟悉程度、能做与不会的内容、适用情境、学习兴趣引用、支持和反例。具体知识和学习经历仍由 Memory 等原 owner 保存。熟悉程度可表达 unfamiliar/aware/conversational/practiced/specialized，是本人认识的说明，不是模型能力或工具权限等级；亲历、听说、阅读、练习的来源性质分别保留。
+
+EpistemicView 是 Runtime/Projection 按用途、话题、世界时间、参与者、受众和 WorkContext 形成的派生认识视图，组合相关领域知识、具体认识、经验、未知/新近性限制、执行协助和学习机会。权限与角色可见性在候选检索前执行，覆盖不足不等于永远不知道；必需知识立场和反例先于可选正文进入预算。
+
+无 Seed 不造专业经历或学校背景；普通语言常识和推理可用，不为每句话登记 Memory。后台专家知识、未交给主体的阅读和工具结果不自动成为个人知识；正式 handoff/接触后可作为刚获得的信息，解释、练习与实际结果为后续认识修订提供来源。一次看过不机械晋升为专业掌握。当前临时理解可用于当前工作，长期能力概括由已有反思与 owner 形成。
 
 ### 自我演化
 
@@ -620,6 +640,12 @@ Host 报告有意义使用时可以关联实际产生该结果的 query。Runtim
 可访问性描述在当前线索和上下文中取得某项认知的难易程度。自动可访问性是查询时派生状态，可以考虑认知年龄、类型化使用、当前线索、工作上下文和查询预算。
 
 自动可访问性不修改认知权威状态和生命周期。显式固定、精确访问限制、抑制和清除分别由独立策略或管理状态表达。自动策略不得仅依据固定年龄把仍然合法存在的认知永久变成不可恢复对象。
+
+### 多角色认知交付
+
+同一 Subject 的多个 Agent/用途共享唯一认知，每个执行者保有独立 binding、cursor 和工作历史。Host 的 world/deliberation/execution/render/review 职责与 Nous 的认知 ModelRole 配置分别拥有；认证用途决定读取视角和接触性质。新 role 不继承污染的旧私有 transcript，RESET/压缩后重新获取当前世界与认识。
+
+Subject 审议与人格渲染必须取得适用的 EpistemicView、Self、社会用语和相关经历；world author 与专业执行仅取得其任务需要且允许的内容。依赖缺失时停止相关必需调用，不能退回默认助手，维护实例保持独立。正式 SDK 在首轮、工具后续、子 Agent 和压缩后持续应用同一合同，不另建每域拼装或 provider registry。
 
 ### 受管理上下文
 

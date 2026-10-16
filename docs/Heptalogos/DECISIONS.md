@@ -61,7 +61,7 @@ Nous Wave 和 Heptalogos 共享逻辑 `SubjectId`，各自维护自己的领域�
 
 ## 原生 OpenClaw 与持续主体生活
 
-**决定：** Heptalogos 复用 Nous 正式认知集成与 OpenClaw 原生模型/工具/渠道/子 Agent 能力，继续拥有生活活动、消息感知、行为采纳、外部效果和产品管理。一次生成可以包含候选与草稿，真实执行/外发前必须获得行为许可。管理 API/CLI 不依赖模型或 GUI；运维 OpenClaw 具有独立实例、凭据及生命周期。旧 AIRuntime、Foundation 和固定第二次 Expression 调用不作为新产品结构前提。
+**决定：** Heptalogos 复用 Nous 正式认知集成与 OpenClaw 原生模型/工具/渠道/子 Agent 能力，继续拥有生活活动、消息感知、行为采纳、外部效果和产品管理。主体审议先决定行为，所有生成式主体表达和人格动作经过独立可配置 renderer，再由窄语义读回与 NarrativeCommit 采用；真实执行/外发前必须获得行为许可。管理 API/CLI 不依赖模型或 GUI；运维 OpenClaw 具有独立实例、凭据及生命周期。旧 AIRuntime 与 Foundation 不作为产品结构前提；独立渲染职责必须存在，不以执行模型末段或框架自动 announce 代替。
 
 目标设计：第 4、6、8 章。
 共享合同：[认知与主动性](../integration/cognition-agency.md)。
@@ -71,4 +71,11 @@ Nous Wave 和 Heptalogos 共享逻辑 `SubjectId`，各自维护自己的领域�
 **决定：** 第一方 QQ Channel 统一同账号协议接收和发送；Messaging 先保存事实，Life 再决定实际接触。行为采纳后交唯一 OpenClaw durable send，未知发送不自动重放。管理进程先于模型可用，OS 服务管理器监督进程，产品不复制通用运行图。活动、历史覆盖与真实结果支持同一 Subject 停止后续接，虚拟时间不替代实际跨日恢复。
 
 目标设计：第 4、7、8、11、17 章。
+共享合同：[认知与主动性](../integration/cognition-agency.md)。
+
+### 世界生活、认识与听众版本分别连续
+
+**决定：** WorldLife 拥有规则/日程、稳定人物/场景和正式已实现虚拟事件；无 IM 也能推进，默认离线按现实经过时间有界实现。专业执行、主观审议、人格渲染与窄语义读回分别绑定原生职责。NarrativeCommit 在短本地事务采用兼容生活细化、Claim、承诺和一份待派发请求。事先明确的隐瞒/谎言保留真实与听众版本，实际工具和发送状态不受改写。后台知识只有正式交给主体并接触后才可能成为个人认识。
+
+目标设计：第 4、6、11、13 章。理由：持续独立主体的生活与知识连续性需要正式 owner，渠道或单次模型文本不能替代；短事务与原生执行仍然沿用。
 共享合同：[认知与主动性](../integration/cognition-agency.md)。
