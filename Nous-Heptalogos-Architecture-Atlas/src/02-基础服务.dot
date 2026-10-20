@@ -1,0 +1,50 @@
+digraph infra {
+ graph [rankdir=TB,bgcolor="#fbfcfe",pad=.35,nodesep=.38,ranksep=.65,fontname="Noto Sans CJK SC",fontsize=25,label="02  基础设施｜成熟机制、普通库与各产品实例",labelloc=t];
+ node [shape=box,style="rounded,filled",fontname="Noto Sans CJK SC",fontsize=16,margin=".22,.15",width=3.5,color="#52a587",fillcolor="#e8f6ef"];
+ edge [fontname="Noto Sans CJK SC",fontsize=12,color="#60768f",arrowsize=.8];
+ library [label="@nous-wave/platform\n源码在 Nous packages/platform\n正式 npm / tarball 供 Hept 使用",URL="../../设计/整体架构与模块合同.md"];
+ subgraph cluster_exports {
+  label="独立 exports｜普通共享机制，各产品各实例";fontsize=20;color="#52a587";style=rounded;
+  bootstrap [label="bootstrap\n逻辑路径 / 启动 / 服务 / 离线适配\n显式取得 runtime",URL="../../设计/基础设施/安装与生命周期.md"];
+  settings [label="settings\nSchema / 稀疏覆盖 / 来源\n保存修订与实际生效",URL="../../设计/基础设施/配置与生效.md"];
+  credentials [label="credentials\nBetter Auth 接线 / SecretRef\nOS、环境与受保护文件",URL="../../设计/基础设施/身份权限与密钥.md"];
+  network [label="network\n原生 Fetch + Undici\n代理 / TLS / 流 / 目标范围",URL="../../设计/基础设施/网络与外部资源.md"];
+  models [label="models\nAI SDK / Provider / Role\n真实派发 / 用量 / unknown",URL="../../设计/基础设施/模型供应与调用.md"];
+  prompts [label="prompts\n资源 / 版本 / slot / preview\n保留当步原生历史与真实输入",URL="../../设计/基础设施/Prompt与上下文.md"];
+  telemetry [label="telemetry\nPino / OpenTelemetry\n操作、调用、任务、效果关联",URL="../../设计/基础设施/观测错误与诊断.md"];
+  data [label="data\n引用闭包 / 导入导出 / 发行机械\n领域内容及保留归真实 owner",URL="../../设计/基础设施/数据生命周期与发行.md"];
+  time [label="time\nTemporal / 微秒纯运算\n同域比较 / deadline 投影",URL="../../设计/基础设施/时间与调度.md"];
+  storage [label="storage\npg / Kysely / 官方 datasource\n连接、迁移、普通事务",URL="../../设计/基础设施/存储事务与缓存.md"];
+  operations [label="operations\nDBOS 状态、等待 / 取消 / 恢复\n长工作语义归实际 owner",URL="../../设计/基础设施/存储事务与缓存.md"];
+  {rank=same;bootstrap;settings;credentials;network;}
+  {rank=same;models;prompts;telemetry;data;}
+  {rank=same;time;storage;operations;}
+  bootstrap -> settings -> credentials -> network [style=invis];
+  models -> prompts -> telemetry -> data [style=invis];
+  time -> storage -> operations [style=invis];
+  bootstrap -> models -> time [style=invis];
+  network -> data -> operations [style=invis];
+ }
+ library -> bootstrap [style=dashed,label="library dependency"];
+ library -> settings [style=dashed];library -> credentials [style=dashed];library -> network [style=dashed];
+ n [label="Nous 产品实例\n自己的定义、owner 与数据\n通用认知时间 / 来源 / 查询",fillcolor="#eaf3fe",color="#5687c5",URL="../../设计/整体架构与模块合同.md"];
+ h [label="Hept 产品实例\n自己的定义、owner 与数据\nWorldClock / 生活 / 交往",fillcolor="#fff1e6",color="#cc8958",URL="../../设计/整体架构与模块合同.md"];
+ {rank=same;n;h;}
+ time -> n [style=dashed,label="各自实例化"];
+ operations -> h [style=dashed,label="各自实例化"];
+ subgraph cluster_operations {
+  label="产品执行与存储｜业务状态归真实 owner";fontsize=20;color="#a4acba";style=rounded;
+  tx [label="普通领域操作\nKysely / PostgreSQL 短事务\n规则与修订直接采用",fillcolor="#f2f4f7",color="#a4acba",URL="../../设计/基础设施/存储事务与缓存.md"];
+  dbos [label="DBOS + Kysely datasource\n长工作、持久等待与崩溃继续\n使用官方事务 checkpoint",fillcolor="#f2f4f7",color="#a4acba",URL="../../设计/基础设施/存储事务与缓存.md"];
+  blob [label="Blob / 解析 / 多模态派生\ncacache / 文档库 / sharp / FFmpeg\n实际 consumer、来源与费用",fillcolor="#f2f4f7",color="#a4acba",URL="../../设计/基础设施/媒体与材料基础.md"];
+  {rank=same;tx;dbos;blob;}
+ }
+ junction [shape=point,width=.06,label="",color="#60768f",fillcolor="#60768f"];
+ n -> junction;h -> junction;
+ junction -> tx;junction -> dbos;junction -> blob;
+ pure [label="纯 contracts / 正式 Clients\n浏览器安全，独立发行\nRef / TimePoint / Policy / Problem",URL="../../设计/基础设施/共同值与调用上下文.md"];
+ ui [label="@nous-wave/management-ui\nVue / Vuetify 普通组件包\n各 apps/web 持有领域页面",fillcolor="#eef0fd",color="#8d9ace",URL="../../设计/基础设施/管理呈现与扩展.md"];
+ {rank=same;pure;ui;}
+ tx -> pure [style=dashed,dir=back,label="普通库依赖"];
+ blob -> ui [style=invis];
+}

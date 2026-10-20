@@ -1,21 +1,35 @@
-# Architecture-Vault 索引
+# 当前方案索引
 
-Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期设计知识、设计决定、设计论证、研究材料和跨系统合同，并按各系统声明的来源发布目标设计。
+## 入口与施工
 
-## 从这里开始
+| 文件 | 负责内容 |
+|---|---|
+| [README](README.md) | 当前目的、权威、状态与阅读顺序 |
+| [项目宪纲](项目宪纲.md) / [定位](宪纲定位.md) | 最高需求原文及各领域落点 |
+| [整体架构](设计/整体架构与模块合同.md) | 产品、共享库、owner、依赖、部署与事务 |
+| [公开操作目录](公开操作目录.md) | 正式操作名、HTTP/CLI/SDK入口与消费者 |
+| [依赖来源](依赖来源.md) | 成熟库、固定源码、实际复制/改编与许可 |
+| [施工顺序](施工顺序.md) / [GOAL](GOAL.md) | 基础底座至完整领域接线的实际交付 |
+| [图谱](图谱.md) / [六图图集](Nous-Heptalogos-Architecture-Atlas/README.md) | 六张一致系统图、离线浏览与关键时序 |
 
-- [仓库说明](README.md)：职责边界、设计入口和代码仓库指针。
-- [文档集入口](docs/README.md)：阅读路径与维护范围。
-- [文档目录](docs/INDEX.md)：活动文档的主题索引。
-- [文档职责与权威](docs/DOCUMENT_MODEL.md)：目标设计、决定、论证、研究和代码仓库各自维护的事实。
+## 设计合同
 
-## 主要工作区
+| 文件 | 内容 |
+|---|---|
+| [基础设施详规目录](设计/基础设施/README.md) | 所有底座专题与真实消费者 |
+| [NousQL与检索合同](设计/NousQL与检索合同.md) | 原正式语言、绑定、查询计划/历史、结果与Agent续读 |
+| [能力保全与现有代码纠偏](设计/能力保全与现有代码纠偏.md) | 全领域能力和具体保留/移动/替换/删除 |
+| [示例与资源](示例/README.md) | Bootstrap、稀疏配置、模型/Prompt、时间/媒体和原检索预设 |
 
-- [Nous Wave 长期认知设计](docs/Nous-Wave/README.md)：目标设计、设计决定、未决问题、论证与研究。
-- [Heptalogos 产品与主动性设计](docs/Heptalogos/README.md)：目标设计、设计决定、未决问题与论证。
-- [认知与主动性协作合同](docs/integration/README.md)：Nous Wave 与 Heptalogos 的唯一跨系统合同入口。
-- [仓库组织模型](docs/repository-governance/README.md)：跨仓库职责和维护边界。
+## 研究事实
 
-## 构建
+| 文件 | 负责问题 |
+|---|---|
+| [研究入口](研究/README.md) | Objective/Decisions/Current Work、源码基线与研究范围 |
+| [目的与能力保全](研究/目的与能力保全.md) | 产品目的、已有能力与贯通场景 |
+| [Nous查询与检索](研究/Nous查询与检索.md) | 正式语言、数学/算法、参数、已有缺陷与迁入切口 |
+| [Hept时间生活与消息](研究/Hept时间生活与消息.md) | 时间/日历/生活、完整消息/媒体、物理效果 |
+| [第三方模型Prompt与管理](研究/第三方模型Prompt与管理.md) | MaiBot/AstrBot/OpenClaw/AI SDK实际源码与复用 |
+| [基础设施与现有结构](研究/基础设施与现有结构.md) | 配置默认、网络组合、事务、路径与共享包判断 |
 
-Nous Wave 与 Heptalogos 的目标设计正文均直接维护在 Markdown 中，分别是 [Nous Wave TARGET_DESIGN.md](docs/Nous-Wave/TARGET_DESIGN.md) 和 [Heptalogos TARGET_DESIGN.md](docs/Heptalogos/TARGET_DESIGN.md)。当前没有活动的目标设计 PDF 构建流程。
+[归档说明](归档/README.md)保留旧材料压缩快照与摘要，归档退出当前施工路径。原Vault压缩包不作为设计来源。研究文件记录源码事实，实施要求以当前设计合同和宪纲为准。

@@ -1,0 +1,52 @@
+digraph hept {
+ graph [rankdir=TB,bgcolor="#fbfcfe",pad=.35,nodesep=.38,ranksep=.62,fontname="Noto Sans CJK SC",fontsize=25,label="04  Heptalogos｜生活、选择、执行与真实效果",labelloc=t];
+ node [shape=box,style="rounded,filled",fontname="Noto Sans CJK SC",fontsize=16,margin=".2,.14",width=3.45,fillcolor="#fff1e6",color="#cc8958"];
+ edge [fontname="Noto Sans CJK SC",fontsize=12,color="#bb8257",arrowsize=.8];
+ subgraph cluster_world {
+  label="World / Clock / Living";fontsize=20;color="#cc8958";style=rounded;
+  clock [label="WorldClock / TimeDomain\nClockSegment / Revision\n纯 read 与持久 capture",URL="../../设计/基础设施/时间与调度.md"];
+  world [label="World / Calendar / Character\n规则、地点、路线、作者范围\n计划与已实现历史",URL="../../设计/能力保全与现有代码纠偏.md"];
+  living [label="Activity / LifeState / Percept\n实际参与、精力与设备\n局部见闻、中断和恢复",URL="../../设计/基础设施/时间与调度.md"];
+  clock -> world [label="世界点与自然边界"];
+  world -> living [label="采用事实与角色感知"];
+ }
+ subgraph cluster_communication {
+  label="Communication / Media";fontsize=20;color="#cc8958";style=rounded;
+  channel [label="默认 OneBot 源码 fork\nxucheng/onebot + 旧保真模块\nOpenClaw Channel / ingress SDK",fillcolor="#f2f4f7",color="#a4acba",URL="../../设计/基础设施/媒体与材料基础.md"];
+  messages [label="Message / Media / Forward\n原件、有序 parts、作者与修订\n补拉覆盖、当前来源许可",URL="../../设计/基础设施/媒体与材料基础.md"];
+  notices [label="通知与可操作目录\n到达 / 察觉 / 打开 / 阅读分开\n按选择取得完整实际区域",URL="../../设计/基础设施/媒体与材料基础.md"];
+  channel -> messages [label="完整收件、原始来源"];
+  messages -> notices [label="元信息，不提前成为经历"];
+ }
+ living -> attention;notices -> attention;
+ attention [label="Agency / Attention\n消息、日程、任务、动机竞争\nfocus scope、精力与合理打断",URL="../../设计/能力保全与现有代码纠偏.md"];
+ reactor [label="单一主观前台 Reactor\nAI SDK 审议与正式 Decision\n参与、拒绝、等待、沉默",URL="../../设计/能力保全与现有代码纠偏.md"];
+ pursuits [label="Pursuit / Activity / Commitment\n持续投入、约定与后果\n语义 due、目标与恢复线索",URL="../../设计/基础设施/时间与调度.md"];
+ attention -> reactor [label="有界情境与已选材料"];
+ reactor -> pursuits [label="短事务采用"];
+ subgraph cluster_work {
+  label="Work / Native Task";fontsize=20;color="#a4acba";style=rounded;
+  task [label="Task / Workspace\n原目标、范围、预算、回传目标\nqueued / waiting / result_ready",URL="../../设计/能力保全与现有代码纠偏.md"];
+  native [label="OpenClaw 原生执行\ntools / subagent / Skills / history\n保持原 run，不另建工具循环",fillcolor="#f2f4f7",color="#a4acba",URL="../../设计/基础设施/模型供应与调用.md"];
+  publish [label="保留原生成果 → 选定发布\nworker 私有过程继续隔离\nSubject 选择后实际消费",URL="../../设计/基础设施/媒体与材料基础.md"];
+  task -> native [label="正式 native SDK"];
+  native -> publish [label="实际已保存结果"];
+ }
+ reactor -> task [label="按需委派"];
+ publish -> notices [label="结果待看",constraint=false];
+ expression [label="Expression / Claim\nAI SDK 自然表达\n已采用意图、认识立场与听众",URL="../../设计/基础设施/模型供应与调用.md"];
+ effect [label="Effect / 逐物理回执\n当前授权、真实派发与 native ack\naccepted / not_sent / unknown",URL="../../设计/基础设施/媒体与材料基础.md"];
+ reactor -> expression [label="普通交往直接表达"];
+ pursuits -> expression [label="明确对外承担",constraint=false];
+ expression -> effect [label="原生 durable sender"];
+ effect -> messages [label="真实交往事实",constraint=false];
+ nous [label="正式 Nous Client（可选接入）\n长期认知、当前上下文\nMaterial / 实际消费 / 后续形成",fillcolor="#eaf3fe",color="#5687c5",URL="../../设计/基础设施/Prompt与上下文.md"];
+ nous -> reactor [label="人格 / 关系 / 动机 / 知识",constraint=false];
+ publish -> nous [label="选定结果和来源"];
+ living -> nous [label="已获准实际见闻",constraint=false];
+ wait [label="DBOS 独立持久等待\nnextNode、clock revision 重验\n到期再入同一前台",fillcolor="#e8f6ef",color="#52a587",URL="../../设计/基础设施/时间与调度.md"];
+ pursuits -> wait [label="安排语义 due"];
+ wait -> attention [label="自然机会",constraint=false];
+ optional [label="AstrBot 可选渠道插件\n管理机制与 UI 的复制来源",fillcolor="#f2f4f7",color="#a4acba",URL="../../设计/基础设施/管理呈现与扩展.md"];
+ optional -> messages [style=dashed,label="可选接入",constraint=false];
+}

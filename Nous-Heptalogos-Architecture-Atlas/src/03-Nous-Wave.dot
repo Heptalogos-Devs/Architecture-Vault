@@ -1,0 +1,53 @@
+digraph nous {
+ graph [rankdir=TB,bgcolor="#fbfcfe",pad=.4,nodesep=.38,ranksep=.6,fontname="Noto Sans CJK SC",fontsize=25,label="03  Nous Wave｜完整认知、原查询与数值算法",labelloc=t,compound=true];
+ node [shape=box,style="rounded,filled",fontname="Noto Sans CJK SC",fontsize=16,margin=".2,.14",width=3.4,fillcolor="#eaf3fe",color="#5687c5"];
+ edge [fontname="Noto Sans CJK SC",fontsize=12,color="#5687c5",arrowsize=.8];
+ subgraph cluster_ts {
+  label="同一 Nous TypeScript 服务\n各领域拥有正式语义与 PostgreSQL 事务";fontsize=20;color="#5687c5";style=rounded;
+  identity [label="Identity / Subject / Time\n可选领域供给与 LexicalRef\n非 World 时间域、五轴与历史",URL="../../设计/基础设施/共同值与调用上下文.md"];
+  material [label="Material / Source\n原件、区域、表示、谱系\nConsumer 私有范围与当前许可",URL="../../设计/基础设施/媒体与材料基础.md"];
+  encounter [label="Encounter / 实际消费\n固定 portions、真实 consumer\n观察 capture 与实际执行回执",URL="../../设计/基础设施/媒体与材料基础.md"];
+  {rank=same;identity;material;encounter;}
+  identity -> material [style=dashed,label="身份 / 时间 / 权限"];
+  material -> encounter [label="实际执行后保存"];
+  memory [label="Memory / Episode / Journal\n事项、证据、分段、叙事\n形成与修订历史",URL="../../设计/能力保全与现有代码纠偏.md"];
+  concepts [label="Schema / Concept / Association\n支持、反例、成员与 lineage\n正式关系及独立来源根",URL="../../设计/能力保全与现有代码纠偏.md"];
+  self [label="Self / Knowledge Profile\n身份、人格、叙事、知识边界\n独立事项、scope 与例外",URL="../../设计/能力保全与现有代码纠偏.md"];
+  social [label="Social / LanguageConvention\n关系、认识充分性、人物线索\n圈子语言与形成来源",URL="../../设计/能力保全与现有代码纠偏.md"];
+  motive [label="Motivation\nDesire / Concern / Condition\n时间、coverage 与 unknown",URL="../../设计/能力保全与现有代码纠偏.md"];
+  context [label="Cognition / WorkContext\n当前认知、完整语义单元\n跨步骤与跨会话继续",URL="../../设计/基础设施/Prompt与上下文.md"];
+  growth [label="Formation / Maintenance\n原形成成果、分组与冲突继续\n反思、整合及各领域正式采用",URL="../../设计/整体架构与模块合同.md"];
+  {rank=same;memory;concepts;self;}
+  {rank=same;social;motive;context;}
+  encounter -> growth [label="实际来源"];
+  growth -> concepts [label="正式采用各 owner"];
+  memory -> concepts -> self [style=invis];
+  social -> motive -> context [style=invis];
+  memory -> social [style=invis];concepts -> motive [style=invis];self -> context [style=invis];
+  growth -> memory [style=invis];
+ subgraph cluster_query {
+  label="NousQL / Query / Retrieval";fontsize=20;color="#5687c5";style=rounded;
+  query [label="原 @ / # / $ 语法岛\nquery.prepare / run / expand / explain\n绑定、时间视图、权限、预算",URL="../../设计/NousQL与检索合同.md"];
+  repr [label="QueryRepresentation / Activation\n同次表示与概念激活\n内容、空间、producer 签名",URL="../../设计/基础设施/检索服务与认知消费者.md"];
+  lanes [label="真实召回 lanes 与原 RRF\nlexical / dense / Tag / owner direct\n原偏好与最终 owner 重验",URL="../../设计/基础设施/检索服务与认知消费者.md"];
+  result [label="自然正文与精确返回目录\n来源 / 时间 / 认识立场\n短引用、完整对象与继续动作",URL="../../设计/NousQL与检索合同.md"];
+  {rank=same;query;repr;}
+  {rank=same;lanes;result;}
+  query -> repr [label="正式计划"];
+  repr -> lanes [label="表示与激活"];
+  lanes -> result [label="重验后返回"];
+ }
+ }
+ context -> query [label="适用认识与当前问题"];
+ motive -> query [style=dashed,label="各领域元数据与正文"];
+ serving [shape=cylinder,label="Lance 可重建 Serving\n文档级 FTS / dense / 资产版本\n不代替正式领域事实",URL="../../设计/基础设施/检索服务与认知消费者.md"];
+ rust [label="原 Rust 数值库 · napi-rs\nNative Wave / VCP DTSC / V3\nnalgebra · 内部 USearch\n同进程调用、保留原数学与 profile",fillcolor="#f2f4f7",color="#a4acba",URL="../../设计/基础设施/检索服务与认知消费者.md"];
+ ai [label="AI SDK · 按配置调用\nembedding / rerank / 形成角色\nProvider / Role / Prompt\n用量、费用与 trace",fillcolor="#e8f6ef",color="#52a587",URL="../../设计/基础设施/模型供应与调用.md"];
+ {rank=same;serving;rust;ai;}
+ result -> serving [style=invis];
+ lanes -> serving [dir=back,label="已授权候选"];
+ repr -> rust [label="按实际 profile 探索"];
+ rust -> lanes [label="数值 readout",constraint=false];
+ repr -> ai [label="可选增强"];
+ lanes -> ai [label="可选模型重排",constraint=false];
+}

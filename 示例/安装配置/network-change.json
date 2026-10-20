@@ -1,0 +1,15 @@
+{
+  "namespace": "platform.network",
+  "scope": {
+    "kind": "installation",
+    "installationId": "019c8000-0000-7000-8000-000000000001"
+  },
+  "expectedRevision": 0,
+  "patch": [
+    {"op": "add", "path": "/profiles", "value": {}},
+    {"op": "add", "path": "/profiles/default", "value": {}},
+    {"op": "add", "path": "/profiles/default/timeout", "value": {}},
+    {"op": "add", "path": "/profiles/default/timeout/connectMs", "value": 8000}
+  ],
+  "reason": "调整本安装默认网络连接超时"
+}

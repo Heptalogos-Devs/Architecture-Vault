@@ -1,0 +1,89 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "我们周末讨论的那家咖啡店和之前的见面安排，有哪些相关概念？"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "tool-call",
+          "toolCallId": "call-source-1",
+          "toolName": "read_source",
+          "input": {
+            "ref": {
+              "product": "nous",
+              "installationId": "nous-example",
+              "subjectId": "019f032a-0000-7000-8000-000000000001",
+              "kind": "material",
+              "id": "019f032a-0000-7000-8000-000000000010",
+              "revision": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "content": [
+        {
+          "type": "tool-result",
+          "toolCallId": "call-source-1",
+          "toolName": "read_source",
+          "output": {
+            "type": "json",
+            "value": {
+              "ref": {
+                "product": "nous",
+                "installationId": "nous-example",
+                "subjectId": "019f032a-0000-7000-8000-000000000001",
+                "kind": "material",
+                "id": "019f032a-0000-7000-8000-000000000010",
+                "revision": 1
+              },
+              "text": "周末讨论了咖啡店营业时间，并约定下周再确认见面安排。"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "请只选择已有概念或给出待检索的短假设，不推断咖啡店名称。"
+        }
+      ]
+    }
+  ],
+  "contextContribution": {
+    "contextViewRef": {
+      "product": "nous",
+      "installationId": "nous-example",
+      "subjectId": "019f032a-0000-7000-8000-000000000001",
+      "kind": "context_view",
+      "id": "019f032a-0000-7000-8000-000000000020"
+    },
+    "instructions": "本次可用目录：c0=咖啡店；c1=见面安排。来源为工具返回的固定材料修订。店名未知；输出只用于当前查询，不创建长期概念。",
+    "inputPortions": [
+      {
+        "ref": {
+          "product": "nous",
+          "installationId": "nous-example",
+          "subjectId": "019f032a-0000-7000-8000-000000000001",
+          "kind": "material",
+          "id": "019f032a-0000-7000-8000-000000000010",
+          "revision": 1
+        }
+      }
+    ],
+    "estimatedTokens": 80
+  }
+}

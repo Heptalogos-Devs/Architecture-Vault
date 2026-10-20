@@ -1,0 +1,45 @@
+{
+  "repository": "https://github.com/Heptalogos-Devs/Nous-Wave",
+  "commit": "412b062082afb75ccfae4c3f69fc606d3e3cc862",
+  "license": "Apache-2.0",
+  "resources": [
+    {
+      "file": "数值预设/retrieval-ranking.json",
+      "mode": "verbatim",
+      "source": "config/reference/retrieval-ranking.json",
+      "sha256": "08a6a8e720217201b62e2b7621bc1e48d208b30cc51a4ceb4e6f7d5c898309cc"
+    },
+    {
+      "file": "数值预设/topology-wave.json",
+      "mode": "verbatim",
+      "source": "config/reference/topology-wave.json",
+      "sha256": "1b7dea681347e32fda80c93befb2789399e9f65127161cb258907c9a92825d5d"
+    },
+    {
+      "file": "数值预设/query-concept-activation.json",
+      "mode": "verbatim",
+      "source": "config/reference/query-concept-activation.json",
+      "sha256": "ce4d94de54dca83881e5a1d9750b7f7a16d1f1010a30da664dd61b2b1e4e0f1b"
+    },
+    {
+      "file": "数值预设/epa.json",
+      "mode": "verbatim",
+      "source": "config/reference/epa.json",
+      "sha256": "a5f60a7a91f7118fcda541cb487a3e7d30ebe9db4312eadb58edf6fd6538a474"
+    },
+    {
+      "file": "LICENSE-APACHE-2.0.txt",
+      "mode": "verbatim",
+      "source": "LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "file": "NOTICE",
+      "mode": "verbatim",
+      "source": "NOTICE",
+      "sha256": "6f85a0c9015a455de083bfcbbe86849b0222d380b8637f976ebb116f89f78d1b"
+    }
+  ],
+  "querySource": "docs/agent/NOUSQL.md",
+  "querySelection": "查询.json中text原样摘录；中文requires/check为本轮新增说明"
+}
