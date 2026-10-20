@@ -1,23 +1,13 @@
-# Repository Instructions
+# Working Scope
 
-Architecture-Vault owns long-term target design, accepted design decisions, design rationale, research evidence, and cross-system semantic contracts for Nous Wave and Heptalogos.
+Treat `项目宪纲.md` as the highest requirement authority. Preserve its bytes. Apply the user's current corrections directly to the responsible design.
 
-## Ownership
+Current work is research into product objectives, original implementations, and third-party mechanics. Develop the resulting infrastructure after its design is understood. Do not resume domain rewrites from the interrupted product branches.
 
-- Follow `docs/DOCUMENT_MODEL.md` when deciding where a fact belongs.
-- Target-design sources describe the system's intended semantics and architecture. The directly authored sources are `docs/Heptalogos/TARGET_DESIGN.md` and `docs/Nous-Wave/TARGET_DESIGN.md`. Keep current implementation status, executable specifications, active plans, qualification evidence, and temporary repository-migration progress in the owning code repositories or task records.
-- `docs/integration/cognition-agency.md` is the canonical cross-system contract. System target designs may project its requirements into each system's local boundary; keep those summaries synchronized with the contract.
-- Keep accepted decisions, rationale, research evidence, and open questions in their existing roles. Do not present unresolved research as an accepted design decision.
+Read `README.md`, `研究/README.md`, the relevant constitution sections, and the owning source before writing a design. Distinguish source facts, experiments, selected designs, and open questions. Preserve existing capabilities while replacing redundant mechanics.
 
-## Language and editing
+Never read or use the archived original Architecture-Vault contents. The published repository is being replaced by the current Specs.
 
-- Write human-facing documents in Chinese. Preserve technical identifiers and established English terms where translation would reduce precision.
-- Write agent instructions in concise technical English.
-- Do not preserve obsolete active documents solely for history; Git history retains their prior contents.
-- Generated PDFs and LaTeX intermediates are build outputs. No target-design PDF workflow is currently active; do not restore or commit LaTeX authoring sources or generated outputs unless a repository policy explicitly changes.
+Keep downloads, caches, experimental installations, and research scripts under workspace `temp/`. Existing `data/` research sources may be read in place. Keep secrets out of documents and artifacts.
 
-## Verification
-
-- For target-design sources, verify semantics and local links. The current workflow does not generate PDFs; any future publication pipeline requires its own explicit task and validation.
-- Heptalogos is authored in `docs/Heptalogos/TARGET_DESIGN.md`; Nous Wave is authored in `docs/Nous-Wave/TARGET_DESIGN.md`.
-- Check local Markdown links and run `git diff --check` before finishing documentation changes.
+Human documents use Chinese. Write implementation instructions for the current engineering work, with concrete owners, types, operations, lifecycle, dependencies, failures, and consumers. Avoid duplicate full documents or procedural proof platforms.

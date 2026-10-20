@@ -1,0 +1,34 @@
+formatVersion = 1
+product = "nous"
+installationId = "019c8000-0000-7000-8000-000000000001"
+
+# 路径相对本locator；复制到自己的实例位置后调整。
+[paths]
+instance = "."
+data = "./data"
+blob = "./blob"
+cache = "./cache"
+secret = "./secret"
+log = "./log"
+run = "./run"
+temp = "./temp"
+backup = "./backup"
+exports = "./exports"
+
+[database]
+mode = "external"
+urlRef = "database-url"
+maxConnections = 10
+
+[listen]
+host = "127.0.0.1"
+port = 4333
+publicBaseURL = "http://127.0.0.1:4333"
+trustedOrigins = ["http://127.0.0.1:4333"]
+
+[service]
+mode = "foreground"
+autoStartHost = false
+
+[logging]
+level = "info"

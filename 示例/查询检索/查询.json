@@ -1,0 +1,58 @@
+{
+  "format": "nousql-examples-v1",
+  "queries": [
+    {
+      "id": "entity-cue",
+      "text": "deployment approval @e(\"Alice\")",
+      "sourceLine": 66,
+      "requires": [
+        "正式Identity目录中可唯一绑定Alice"
+      ],
+      "check": "绑定人物后采用普通候选通道；歧义返回可披露候选，不用向量猜身份。"
+    },
+    {
+      "id": "same-occurrence-time",
+      "text": "evidence received $time(occurred,from=\"2026-01-01T00:00:00Z\") $time(observed,to=\"2026-02-01T00:00:00Z\")",
+      "sourceLine": 149,
+      "requires": [
+        "相关来源的发生与实际接触时间证据"
+      ],
+      "check": "两轴由同一合格source occurrence满足，时间入口归一为UTC六位微秒。"
+    },
+    {
+      "id": "historical-revisions",
+      "text": "support status $history $asof(\"2025-01-01T00:00:00Z\")",
+      "sourceLine": 187,
+      "requires": [
+        "截点前正式记录的对象修订"
+      ],
+      "check": "返回该现实cut下合格旧修订；当前撤权仍生效。"
+    },
+    {
+      "id": "explicit-projection",
+      "text": "migration $return(memory,schema)",
+      "sourceLine": 224,
+      "requires": [],
+      "check": "结果仅为memory/schema，projection在候选配额前生效。"
+    },
+    {
+      "id": "bounded-association",
+      "text": "stale consumer problem $explore",
+      "sourceLine": 207,
+      "requires": [
+        "Host已选Native/DTSC/V3 profile及兼容资产"
+      ],
+      "check": "按Host profile执行有界联想；保留真实中间测量和degradation。"
+    },
+    {
+      "id": "persistent-concept",
+      "text": "Recall relevant cognition @tag(\"active-reader reclamation\") $explore",
+      "sourceLine": 203,
+      "requires": [
+        "可唯一绑定的正式Concept和一跳membership",
+        "兼容数值资产"
+      ],
+      "check": "持久Tag与临时#线索分开；TagDirect和有界联想共享概念身份。"
+    }
+  ]
+}

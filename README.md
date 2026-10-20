@@ -1,29 +1,29 @@
-# Architecture-Vault
+# Nous Wave × Heptalogos 工程设计
 
-Architecture-Vault 保存 Heptalogos 与 Nous Wave 的长期目标设计、设计决定、设计论证、研究资料和跨系统合同。代码仓库保存当前实现、规格、计划、资格记录和工程事实。
+本目录是两个产品当前重建方案的唯一入口。目标是保留并增强既有能力，以成熟依赖、直接源码复用和清楚的数据所有权，减少内部机械、重复抽象与交叉流程。
 
-## 文档入口
+[项目宪纲](项目宪纲.md)是最高需求权威，原文保持不变。当前用户修正优先落实到设计。原Architecture-Vault内容已整体压缩[归档](归档/README.md)，本轮未查看或参考；该仓库改为发布本目录。历史批注与上一轮设计在恢复能力调查后也压缩归档，退出当前导航和施工依据。
 
-- [文档集入口](docs/README.md)
-- [文档目录](docs/INDEX.md)
-- [文档职责与权威](docs/DOCUMENT_MODEL.md)
+## 当前状态
 
-## 目标设计
+研究与详细基础设施方案已经形成：两个独立TS/Node产品、独立数据权威，普通共享发行包组合成熟库；旧NousQL、VCP/Native数值、Prompt、认知时间和Hept生活/交往能力均有归属与施工合同。源码、实际API、数值参数、第三方复制切口和少量隔离实验记录见研究。
 
-- Nous Wave：`docs/Nous-Wave/TARGET_DESIGN.md`
-- Heptalogos：`docs/Heptalogos/TARGET_DESIGN.md`
+当前提交设计资料，两个产品生产源码尚未修改。后续施工仍由当前工程承担，按本包顺序从基础底座开始；中断的领域重写保持暂停。完整算法/领域接线安排在底座可用之后。
 
-目标设计只陈述系统的目标语义、职责、对象关系和长期约束。方案比较、外部研究和算法实验进入 `rationale/` 或 `research/`。当前代码状态、实施计划、可执行规格和资格记录留在对应代码仓库。
+## 开始阅读
 
-Nous Wave 与 Heptalogos 的文档入口分别见 [Nous Wave](docs/Nous-Wave/README.md) 和 [Heptalogos](docs/Heptalogos/README.md)。Nous Wave 的目标设计正文见 [TARGET_DESIGN.md](docs/Nous-Wave/TARGET_DESIGN.md)。跨系统语义由[认知与主动性合同](docs/integration/cognition-agency.md)维护；仓库职责见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。
+1. [项目宪纲](项目宪纲.md)、[宪纲定位](宪纲定位.md)：需求与各owner的落点。
+2. [整体架构与模块合同](设计/整体架构与模块合同.md)、[六张系统图](Nous-Heptalogos-Architecture-Atlas/README.md)：产品、模块、共享库、原生执行与部署。
+3. [基础设施详规](设计/基础设施/README.md)、[共同值](设计/基础设施/共同值与调用上下文.md)、[公开操作](公开操作目录.md)：类型、存储、配置、调用、错误与生命周期。
+4. [能力保全与代码纠偏](设计/能力保全与现有代码纠偏.md)、[NousQL与检索](设计/NousQL与检索合同.md)：原功能、算法和两个分支的实际替换方式。
+5. [依赖与源码采用](依赖来源.md)、[施工顺序](施工顺序.md)、[当前Goal](GOAL.md)：先复用什么、在哪改、每个单元交付什么。
 
-## 代码仓库
+完整文件导航见[索引](INDEX.md)，可直接使用的资源见[示例](示例/README.md)，源码事实和仍需领域测量的问题见[研究](研究/README.md)。必需的内部文档、图、配置和数值资源包含在本目录；源码大副本以固定commit的可访问GitHub链接定位。
 
-- [Heptalogos 产品与工程仓库](https://github.com/Heptalogos-Devs/Heptalogos)
-- [Nous Wave 认知系统仓库](https://github.com/Heptalogos-Devs/Nous-Wave)
+## 工程边界
 
-代码仓库负责当前实现、Specs、Plans、Qualification 和工程治理。跨仓库知识所有权见[仓库组织模型](docs/repository-governance/REPOSITORY_MODEL.md)。
+Nous拥有长期认知；Hept拥有世界、生活、行为与外部效果。二者共享逻辑Subject身份，通过可独立构建的正式SDK协作，不跨读数据库或依赖相邻源码。通用能力放普通platform库，各产品独立实例；没有第三个持有两边业务状态的服务。
 
-## 文档检查
+普通短事务直接Kysely；DBOS负责持久等待/长工作和恢复；OpenClaw保留原生工具、历史、压缩、沙箱、子代理和渠道。AI SDK承担模型协议与循环；Prompt作为可管理资源。实际模型输入、消费身份、当前权限、时间捕获、费用和trace从首条运行链落地。
 
-提交前运行 `python3 scripts/check-markdown-links.py` 和 `git diff --check`。CI 使用同一 local-link 检查，并核验 PR patch 的空白格式；不访问外部链接或生成发布物。
+新增下载、缓存、研究安装与临时输出全部进入工作区temp；已有data资料就地读取。Windows临时根为`C:\dev\Heptalogos-Devs\temp\`，当前Linux为工作区`temp/`。业务源码仍在各自仓库。

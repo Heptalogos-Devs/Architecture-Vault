@@ -1,35 +1,6 @@
-# Obsidian machine-local state
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
-.obsidian/cache/
-
-# Obsidian local trash
-.trash/
-
-# Operating-system noise
+node_modules/
+__pycache__/
+*.pyc
 .DS_Store
-Thumbs.db
-desktop.ini
-
-# Local editor and backup artifacts
-*.bak
-*.swp
-
-# LaTeX build outputs
-*.aux
-*.bbl
-*.bbl-SAVE-ERROR
-*.bcf
-*.bcf-SAVE-ERROR
-*.blg
-*.fdb_latexmk
-*.fls
-*.lof
-*.log
-*.lot
-*.out
-*.run.xml
-*.synctex*
-*.toc
-*.xdv
-/tmp/
+temp/
+data/

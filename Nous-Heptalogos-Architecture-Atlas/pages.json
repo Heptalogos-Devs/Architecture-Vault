@@ -1,0 +1,73 @@
+[
+  {
+    "id": "overview",
+    "file": "01-总体架构",
+    "title": "总体架构",
+    "description": "两个独立 TypeScript 产品和数据库，通过正式 Client 协作；platform、contracts 与 management-ui 是构建和普通库依赖。",
+    "sources": [
+      "设计/整体架构与模块合同.md",
+      "设计/能力保全与现有代码纠偏.md",
+      "设计/基础设施/共同值与调用上下文.md"
+    ]
+  },
+  {
+    "id": "infra",
+    "file": "02-基础服务",
+    "title": "基础设施",
+    "description": "各产品各自实例化共享库。普通领域直接短事务；DBOS 承担长工作、持久等待与恢复，成熟依赖承担网络、模型、媒体和观测。",
+    "sources": [
+      "设计/基础设施/存储事务与缓存.md",
+      "设计/基础设施/配置与生效.md",
+      "设计/基础设施/网络与外部资源.md",
+      "设计/基础设施/模型供应与调用.md",
+      "设计/基础设施/时间与调度.md"
+    ]
+  },
+  {
+    "id": "nous",
+    "file": "03-Nous-Wave",
+    "title": "Nous Wave",
+    "description": "保全全部认知领域、原 NousQL、Lance 文档 FTS/dense 和原 Rust 数值库。napi-rs 调用的数值库保留 Native/VCP、nalgebra 与内部 USearch。",
+    "sources": [
+      "设计/NousQL与检索合同.md",
+      "设计/基础设施/检索服务与认知消费者.md",
+      "设计/能力保全与现有代码纠偏.md"
+    ]
+  },
+  {
+    "id": "hept",
+    "file": "04-Heptalogos",
+    "title": "Heptalogos",
+    "description": "Hept 拥有世界映射、生活、注意、活动、追求、交往和效果。普通审议/表达使用 AI SDK；专业工作和 QQ 通信复用 OpenClaw 原生能力。",
+    "sources": [
+      "设计/基础设施/时间与调度.md",
+      "设计/基础设施/媒体与材料基础.md",
+      "设计/基础设施/模型供应与调用.md"
+    ]
+  },
+  {
+    "id": "flows",
+    "file": "05-跨系统流",
+    "title": "跨系统实际流",
+    "description": "收件和保全形成材料；每次实际执行后记录消费，后续才形成长期认知。表达采用、专业执行与逐物理效果分开，clock.read 和 clock.capture 各有边界。",
+    "sources": [
+      "设计/基础设施/媒体与材料基础.md",
+      "设计/基础设施/Prompt与上下文.md",
+      "设计/基础设施/身份权限与密钥.md",
+      "设计/基础设施/时间与调度.md"
+    ]
+  },
+  {
+    "id": "operations",
+    "file": "06-运行与管理",
+    "title": "运行与数据",
+    "description": "交往、System、Machine 与 Recovery 权限独立。两产品数据、原生私有记录与可重建资产分别管理，生命周期保存来源、时间回执和已发生效果的闭包。",
+    "sources": [
+      "设计/基础设施/安装与生命周期.md",
+      "设计/基础设施/身份权限与密钥.md",
+      "设计/基础设施/管理呈现与扩展.md",
+      "设计/基础设施/数据生命周期与发行.md",
+      "设计/基础设施/观测错误与诊断.md"
+    ]
+  }
+]
