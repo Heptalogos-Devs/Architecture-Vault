@@ -38,7 +38,7 @@
     "timeoutMs": 60000,
     "prompt": {
       "promptId": "nous.query.concept-enrichment",
-      "locale": "zh-CN",
+      "locale": "en",
       "revision": 1
     },
     "inference": {
@@ -49,7 +49,7 @@
   },
   "promptSave": {
     "promptId": "nous.query.concept-enrichment",
-    "locale": "zh-CN",
+    "locale": "en",
     "scope": {
       "kind": "installation",
       "installationId": "nous-example"
@@ -61,7 +61,7 @@
   "promptPreview": {
     "binding": {
       "promptId": "nous.query.concept-enrichment",
-      "locale": "zh-CN",
+      "locale": "en",
       "revision": 1
     },
     "scope": {

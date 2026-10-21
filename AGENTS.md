@@ -2,7 +2,7 @@
 
 Treat `项目宪纲.md` as the highest requirement authority. Preserve its bytes. Apply the user's current corrections directly to the responsible design.
 
-Current work is research into product objectives, original implementations, and third-party mechanics. Develop the resulting infrastructure after its design is understood. Do not resume domain rewrites from the interrupted product branches.
+Current work implements the researched infrastructure in dependency order. Study the responsible original and third-party source before adopting each feature. Complete the shared foundation and its real consumers before resuming domain rewrites.
 
 Read `README.md`, `研究/README.md`, the relevant constitution sections, and the owning source before writing a design. Distinguish source facts, experiments, selected designs, and open questions. Preserve existing capabilities while replacing redundant mechanics.
 

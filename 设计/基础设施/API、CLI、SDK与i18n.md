@@ -45,7 +45,7 @@ server.post('/v1/subjects/:subjectId/query/run',{
 
 schema-only 生成只实例化 Fastify 路由/合同，不连接数据库、启动 DBOS、解析秘密、启用 Subject 或探测模型。生成器不会创建一个可作为正式服务运行的“关闭认证模式”。正常 Host 的业务 handler 始终有真实 factory/认证。
 
-模型管理固定使用`/v1/model-providers`、`/v1/models`、`/v1/roles`、`/v1/model-invocations`；原生调用prepare为`/v1/model-invocations/native/prepare`，dispatch/completion为`/v1/model-invocations/{id}/dispatch`与`/{id}/completion`。tags/operationId、SDK和所有管理消费者同形，删除旧嵌套别名。
+模型管理固定使用`/v1/model-providers`、`/v1/models`、`/v1/roles`、`/v1/model-invocations`；原生调用prepare为`S/model-invocations/prepare`，dispatch/completion为`S/model-invocations/{id}/dispatch`与`/{id}/completion`，S提供主体范围，body直接采用正式NativeInvocation合同。tags/operationId、SDK和所有管理消费者同形。
 
 日期与微秒时间在合同中是字符串，Money/数量是精确十进制字符串，Ref/OriginIdentity 保持不同命名类型。OpenAPI 的 nullable、递归 `$ref`、discriminator、additionalProperties 和可选字段按3.0.3导出；生成后验证这些具体形状与序列化结果。JSON object/array 不塞成 `content:string` 规避生成问题。
 

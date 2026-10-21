@@ -276,8 +276,8 @@ LiquidJS 静态变量分析当前为 experimental；可用于编辑预览的提�
 - **发现**：稳定 PromptId、领域/职责、语言、默认文件、说明、可见层级、参数 schema、可选组成块。程序资源原路径可保留，便于持续查看与改进。
 - **覆盖**：明确程序默认、安装覆盖、主体/职责绑定的优先级；返回每个生效值及来源。数据库修订为运行权威，文件经带 baseRevision 的同一保存/激活操作导入。
 - **修订**：保存新文本或 partial 依赖形成不可变 revision/digest；激活指针单独更新。角色绑定可锁定某修订，或使用当前激活项。
-- **预览**：同一个正式 renderer，使用明确的示例参数/已获准输入，返回组成块、实际文本、资源与依赖版本、缺失参数和预算估计。预览没有模型派发与 Encounter。
-- **热生效**：Chokidar 负责文件稳定与通知；候选完整校验并成功 compile/render 后原子替换当前 RegistrySnapshot。失败保留现用快照并展示未生效原因。新调用取新快照，进行中的调用保留所采用版本。
+- **预览**：同一个正式 renderer，使用明确的示例参数/已获准输入，返回实际文本、字节数及资源/依赖版本。未保存文字的 preview 不持久化正文、参数或伪造 SnapshotRef；token 估算由实际模型 owner 完成。预览没有模型派发与 Encounter。
+- **热生效**：Chokidar 负责文件稳定与初始目录清单；候选完整校验并成功 render 后，通过同一 save/activate 修改数据库 head。新 snapshot 直接读 SQL，正在使用的快照保留全部冻结正文。停机编辑在 watcher ready 后按 manifest.baseRevision 核对导入，冲突保留数据库 active。
 - **调用追踪**：同时保存 PromptSnapshot、ConfigSnapshot、最终语义输入与实际 Provider attempt；日志/预览是它们的显示视图，不再建立一份可单独修改的 prompt 历史库。
 
 ### 8.3 稀疏覆盖的实际错误

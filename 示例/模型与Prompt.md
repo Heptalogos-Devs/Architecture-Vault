@@ -8,7 +8,7 @@
 
 1. 先用secrets owner创建秘密并取得不透明SecretRef，配置network profile与该模型的ResourceNetworkScope。示例回环地址须明确configured_private及精确目标范围；profile负责连接，目标许可归实际资源owner。普通页面读取这些定义不会调用模型。
 2. Provider定义通过`/v1/model-providers`管理；ModelDefinition通过`/v1/models`管理。角色在`/v1/roles/{id}`采用对应policy；resources中的revision取实际保存结果。SDK/native资源分别使用自己的定义分支。
-3. 注册`query_concept_enrichment`领域RoleDescriptor，其kind=language、PromptId=`nous.query.concept-enrichment`、参数schema为空对象，输出合同仍由query owner持有。默认Prompt位于`prompts/zh-CN/query/concept-enrichment.md`。
+3. 注册`query_concept_enrichment`领域RoleDescriptor，其kind=language、PromptId=`nous.query.concept-enrichment`、参数schema为空对象，输出合同仍由query owner持有。原始英文Prompt位于`packages/nous/prompts/en/query/concept-enrichment.md`，本例明确采用en；新增中文正文单独进入zh-CN资源。
 4. 示例text完整迁入原Nous `412b0620`的查询Prompt；保留existing_tags/novel_concepts、目录key、数量上限、假设与长期事实区分。正式字段改动由该领域合同与资源一起迁移。
 5. `promptSave`是owner函数输入；HTTP将promptId置于`POST /v1/prompts/{id}/revisions`路径，其余字段为body。调用携带稳定submissionId；激活通过`POST /v1/prompts/{id}/activate`，expectedRevision按真实head。
 6. `promptPreview`发送到`POST /v1/prompts/preview`。预览只使用明确params和已选资源快照，不派发模型，不创建Encounter或observed。
