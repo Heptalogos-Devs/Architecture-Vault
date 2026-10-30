@@ -1,13 +1,5 @@
-# Working Scope
+# 工作范围
 
-Treat `项目宪纲.md` as the highest requirement authority. Preserve its bytes. Apply the user's current corrections directly to the responsible design.
+以 [项目宪纲](项目宪纲.md)为最高需求权威；阅读 [README](README.md)、[整体架构](设计/整体架构与模块合同.md)及相关宪纲章节，再修改对应设计。Heptalogos 基于 MaiBot，Nous Wave 是独立 Python/Native 认知服务；产品实现状态以各自仓库为准。
 
-Current work is research into product objectives, original implementations, and third-party mechanics. Develop the resulting infrastructure after its design is understood. Do not resume domain rewrites from the interrupted product branches.
-
-Read `README.md`, `研究/README.md`, the relevant constitution sections, and the owning source before writing a design. Distinguish source facts, experiments, selected designs, and open questions. Preserve existing capabilities while replacing redundant mechanics.
-
-Never read or use the archived original Architecture-Vault contents. The published repository is being replaced by the current Specs.
-
-Keep downloads, caches, experimental installations, and research scripts under workspace `temp/`. Existing `data/` research sources may be read in place. Keep secrets out of documents and artifacts.
-
-Human documents use Chinese. Write implementation instructions for the current engineering work, with concrete owners, types, operations, lifecycle, dependencies, failures, and consumers. Avoid duplicate full documents or procedural proof platforms.
+研究材料记录固定源码的历史事实，技术决策以现行宪纲和设计为准。文档使用中文，清楚描述产品责任、来源和实际未完成项。下载、缓存与实验放在工作区 `temp/`，保护凭据与用户数据。

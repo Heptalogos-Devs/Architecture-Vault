@@ -1,10 +1,13 @@
 # Nous 查询、检索与认知关联研究
 
+> 历史源码调查：其中的旧实现方案与施工选择属于当时背景。现行架构见[整体架构](../设计/整体架构与模块合同.md)。
+
+
 ## 结论与范围
 
 NousQL、领域投影和认知检索已经具有相当完整的语义合同。原实现同时包含直接词项/向量召回、持久概念直接召回、原生 Wave、VCP DTSC 和 RiverMemo V3；这些算法共享认知与来源，拥有不同的数学步骤。新 Specs 应先完整承接这些能力，再决定实现与默认策略。
 
-本报告固定读取 Nous 原 `master` 提交 **`412b062082afb75ccfae4c3f69fc606d3e3cc862`**。需求依据为[项目宪纲](../项目宪纲.md)第五编与[目的及能力保全](目的与能力保全.md)。原认知批注、查询/身份/工作上下文和成长图谱已完成调查线索用途，随历史材料归档退出当前目录；本报告自包含记录确认的语言、算法、消费者和源码定位。当前施工采用[NousQL合同](../设计/NousQL与检索合同.md)与[检索底座](../设计/基础设施/检索服务与认知消费者.md)，算法质量、规模与默认选择的未决问题列于末节。
+本报告固定读取 Nous 原 `master` 提交 **`412b062082afb75ccfae4c3f69fc606d3e3cc862`**。需求依据为[项目宪纲](../项目宪纲.md)第五编与[目的及能力保全](目的与能力保全.md)。原认知批注、查询/身份/工作上下文和成长图谱已完成调查线索用途，随历史材料归档退出当前目录；本报告自包含记录确认的语言、算法、消费者和源码定位。当前施工采用[NousQL合同](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/NousQL与检索合同.md)与[检索底座](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/检索服务与认知消费者.md)，算法质量、规模与默认选择的未决问题列于末节。
 
 | 层次 | 本轮确认的内容 | 对修正 Specs 的意义 |
 |---|---|---|
@@ -283,11 +286,11 @@ A = ln(.02 + 1×(1+formation_age_days/30)^(-.5)
 
 ## 本轮已确定的合同修正
 
-省略`$return`保留原实际行为：Memory四域加已供给Self两域；显式`$return(cognition)`仍是Memory四域。新增`$return(concept)`补齐概念精确返回的实际缺口，原13域全部保留。这是本轮依据宪纲与真实消费者作出的修正，正式合同见[NousQL与检索](../设计/NousQL与检索合同.md)。
+省略`$return`保留原实际行为：Memory四域加已供给Self两域；显式`$return(cognition)`仍是Memory四域。新增`$return(concept)`补齐概念精确返回的实际缺口，原13域全部保留。这是本轮依据宪纲与真实消费者作出的修正，正式合同见[NousQL与检索](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/NousQL与检索合同.md)。
 
-数值采用与最小依赖闭包也已确定：`reference/**`共22文件只需serde/schemars/nalgebra/std及小型数值Error；Native四模块与VCP组合再需serde_json/blake3/Roaring/USearch。原USearch2.26.2的真实闭包包含cxx、cxx-build和默认numkong，构建需要C++；原toolchain为1.99.0、workspace最低1.98。napi-rs3提供普通`.node`与生成`.d.ts`，不拉入SQLx/tokio业务runtime/tonic。源码迁入表、TypedArray binding、构建/发布和唯一身份映射边界已写入[检索底座](../设计/基础设施/检索服务与认知消费者.md)。这些是当前施工选择，原算法公式尚未改写。
+数值采用与最小依赖闭包也已确定：`reference/**`共22文件只需serde/schemars/nalgebra/std及小型数值Error；Native四模块与VCP组合再需serde_json/blake3/Roaring/USearch。原USearch2.26.2的真实闭包包含cxx、cxx-build和默认numkong，构建需要C++；原toolchain为1.99.0、workspace最低1.98。napi-rs3提供普通`.node`与生成`.d.ts`，不拉入SQLx/tokio业务runtime/tonic。源码迁入表、TypedArray binding、构建/发布和唯一身份映射边界已写入[检索底座](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/检索服务与认知消费者.md)。这些是当前施工选择，原算法公式尚未改写。
 
-历史两个截点的正式合同已由[时间与调度](../设计/基础设施/时间与调度.md)确定；以下保留算法测量和具体消费者接线的问题。
+历史两个截点的正式合同已由[时间与调度](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/时间与调度.md)确定；以下保留算法测量和具体消费者接线的问题。
 
 ## 十、Specs修正前的未决问题
 

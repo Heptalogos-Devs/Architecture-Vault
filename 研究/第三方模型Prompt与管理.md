@@ -1,5 +1,8 @@
 # 第三方模型、Prompt 与管理设施
 
+> 历史源码调查：其中的旧实现方案与施工选择属于当时背景。现行架构见[整体架构](../设计/整体架构与模块合同.md)。
+
+
 研究日期：2026-10-20。本文为本轮源码研究与采用决策，需求依据是项目宪纲及用户当前修正。AstrBot 用于管理设施与界面复用，Hept 自己承载产品；OpenClaw 按实际能力模块采用。旧分支、旧提示词和已有改编均是研究材料。
 
 ## 1. 采用结论
@@ -192,9 +195,9 @@ Focus 上游常量 `FOCUS_SLOT_LIMIT=1`，是**每个 focus scope** 一个位置
 
 默认OneBot源码为[`xucheng/openclaw-onebot@c926fe62db49f6ba66fe67ff0dba240efa8fc9dd`](https://github.com/xucheng/openclaw-onebot/tree/c926fe62db49f6ba66fe67ff0dba240efa8fc9dd)，MIT。outbound.ts::uploadFile保留upload_group_file/upload_private_file原ack；channel.ts:188当前以Date.now补messageId。OpenClaw的deliver-results.ts::observeDeliveryResult只接纳resolveReceiptSourceId成功的结果，无IDack会被丢成adapter_returned_no_identity。
 
-采用时须同时改真实result/receipt类型、该recorder、receipt归一、queue持久owner、delivery-completion与recovery。deliver-queue-execute的onDeliveryResult目前只把result放进内存并调用persistQueuedPostSendState；后者只写markDeliveryPlatformOutcomeUnknown，尚未保存action/ack正文。需在既有delivery-queue-storage/worker的canonical entry/retained receipt按physicalCallId持久accepted operation，再回传产品；平台ID可缺失。recovery按证据跳过已确认的物理call并补交原结果，无ack继续unknown；一个piece成功不能提前完成多call batch。只改插件外层、meta或复用unknown marker仍无法恢复真实ack。完整施工合同归[媒体与材料](../设计/基础设施/媒体与材料基础.md)。
+采用时须同时改真实result/receipt类型、该recorder、receipt归一、queue持久owner、delivery-completion与recovery。deliver-queue-execute的onDeliveryResult目前只把result放进内存并调用persistQueuedPostSendState；后者只写markDeliveryPlatformOutcomeUnknown，尚未保存action/ack正文。需在既有delivery-queue-storage/worker的canonical entry/retained receipt按physicalCallId持久accepted operation，再回传产品；平台ID可缺失。recovery按证据跳过已确认的物理call并补交原结果，无ack继续unknown；一个piece成功不能提前完成多call batch。只改插件外层、meta或复用unknown marker仍无法恢复真实ack。完整施工合同归[媒体与材料](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/媒体与材料基础.md)。
 
-整安装backup已提供commands/backup.ts::backupCreateCommand→infra/backup-create.ts::createBackupArchive，includeWorkspace默认true，agentRoots由backup-shared按全部配置agent发现；backupRestoreCommand验证后解到新staging并拒绝live覆盖。现有参数没有Subject子集。sessions.get仅recent有界内容；普通sessions.delete会archiveTranscript并返回archived路径。单Subject完整session/retained/call/queue/unknown/workspace导出、恢复与物理purge是需要在原SessionManager/backup/lifecycle owner补的窄scope接缝，详见[数据规范](../设计/基础设施/数据生命周期与发行.md)。这些接口尚未作为上游能力提供。
+整安装backup已提供commands/backup.ts::backupCreateCommand→infra/backup-create.ts::createBackupArchive，includeWorkspace默认true，agentRoots由backup-shared按全部配置agent发现；backupRestoreCommand验证后解到新staging并拒绝live覆盖。现有参数没有Subject子集。sessions.get仅recent有界内容；普通sessions.delete会archiveTranscript并返回archived路径。单Subject完整session/retained/call/queue/unknown/workspace导出、恢复与物理purge是需要在原SessionManager/backup/lifecycle owner补的窄scope接缝，详见[数据规范](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/数据生命周期与发行.md)。这些接口尚未作为上游能力提供。
 
 backup-shared的rawCandidates还明确包括credentials/oauth，state本身也可能含auth；BackupCreateOptions没有excludeSecrets。backup-capture-privacy只验证排除private update-captures，不是secret脱敏合同。完整native安装备份必须按含秘密制品显式选择并加密；默认引用模式不能将这种archive标记为secrets.included=false。
 
@@ -301,7 +304,7 @@ LiquidJS 静态变量分析当前为 experimental；可用于编辑预览的提�
 
 ## 10. 已统一的接口与施工文档
 
-本轮研究已落实为三个正式设计，公共值使用[共同值与调用上下文](../设计/基础设施/共同值与调用上下文.md)，配置/网络/身份/数据分别引用其真实 owner：
+本轮研究已落实为三个正式设计，公共值使用[共同值与调用上下文](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/共同值与调用上下文.md)，配置/网络/身份/数据分别引用其真实 owner：
 
 - **Prompt 管理**：list/describe/read revision/save revision/activate/reset/preview；返回 source、digest、当前激活与实际生效 revision、校验问题。统一文件编辑与 API 修改的激活流程。
 - **模型职责配置**：Resource 指实际 Provider/模型/能力/凭据/网络/价目；RolePolicy 指任务、候选资源、选择与推理参数、Prompt 绑定；InvocationSnapshot 指本次真实采用值。配置覆盖与秘密分别管理。
@@ -310,4 +313,4 @@ LiquidJS 静态变量分析当前为 experimental；可用于编辑预览的提�
 - **执行模块与管理宿主**：OpenClaw 哪些源码闭包形成正式依赖，哪些工具/Skills/历史入口暴露给 Hept；AstrBot 复制出的 UI/API 面向我们的 owner，安装、权限、启停、备份与错误状态使用统一产品入口。
 - **实际复制清单**：每个采用模块记录 upstream URL/commit、原文件、许可、保留的能力、替换的依赖与维护位置。复制后直接改正式责任结构，删除被替代接口与消费者，不保留平行旧运行路径。
 
-施工入口：[模型供应与调用](../设计/基础设施/模型供应与调用.md)、[Prompt与上下文](../设计/基础设施/Prompt与上下文.md)、[管理呈现与扩展](../设计/基础设施/管理呈现与扩展.md)。
+施工入口：[模型供应与调用](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/模型供应与调用.md)、[Prompt与上下文](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/Prompt与上下文.md)、[管理呈现与扩展](https://github.com/Heptalogos-Devs/Architecture-Vault/blob/60122d8f4d10e867b47ad14fea2b119274ce473f/设计/基础设施/管理呈现与扩展.md)。
