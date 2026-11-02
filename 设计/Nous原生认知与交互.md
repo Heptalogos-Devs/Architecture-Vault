@@ -203,6 +203,29 @@ cN 是 Runtime 绑定会话内的来源缩写，作用域含 caller 与 Session�
 
 ### 规范操作与不同呈现
 
+#### 共享数据合同与执行责任
+
+MemoryBody、CognitiveRecord、TimePoint、正式引用及公开命令/结果是原生业务的数据合同。它们表达可交换的数据形状和通用值约束，例如时间范围有序、必需字段存在。公共数据形状由对应原生业务维护；认知修改、来源授权、修订冲突、采用策略与事务提交由服务端领域 owner 决定和执行。
+
+公共值模型在 nous_sdk.contracts 保持单一定义。服务端与客户端均可直接使用这些纯 Pydantic 值，不为相同内容再造领域模型、HTTP DTO、SDK DTO 三份转换。SDK 的网络客户端、传输配置与连接生命周期留在客户端模块；导入公共合同不初始化网络客户端，也不加载 Nous 的数据库、执行器或服务组合根。纯值格式化与可读呈现函数可以共用。
+
+外部集成者只需安装 SDK，使用客户端和公开值合同即可连接本地或远端 Nous。SDK 不依赖服务端；服务端领域只消费其中的纯合同，HTTP、SQLAlchemy、DBOS 等执行依赖由服务端自己持有。共享类型与运行客户端按模块责任分开，纯合同随 nous-sdk 分发，当前不新增 contracts 发行包。[Qdrant 本地执行实现](https://github.com/qdrant/qdrant-client/blob/master/qdrant_client/local/local_collection.py)也直接使用其客户端包中的公开数据模型，可作为复用单一数据合同的实际参考。
+
+可信 CallContext 是服务端构造的执行上下文，包含认证身份、来源权限及本次调用范围；EpisodeRebuildIntent、PersonProfileRefreshIntent 等后台 Intent 保存恢复工作所需状态。这些类型归服务端对应 owner，迁移实际使用者后删除 SDK 旧定义与导出。客户端提交公开业务输入，服务端从认证与绑定建立可信上下文。领域异常服务于本体业务决定，公开错误码与负载属于协议合同，客户端异常负责远端调用失败；它们按实际构造与处理责任放置，共享必要错误数据。
+
+#### 本地管理与远程操作
+
+部署与调用按实际用途组织：
+
+- nous init、serve 等本地安装和服务管理直接使用本机实例与原生组合根，完成初始化或启动，不需要先连接一个已运行的 HTTP 服务。
+- 在线 CLI 命令使用 NousClient 连接所选地址，复用认证、序列化、上传下载、错误解释及公开操作。服务位于本机或远端时使用相同调用路径。
+- MCP 面向 Agent 提供紧凑工具，由第一方 MCP 服务使用同一客户端连接 Nous。MCP 可以部署在 Agent 所在设备，认知数据和后台工作仍由所连接的 Nous 持有。
+- HTTP 路由验证和解析公开输入，建立可信上下文，直接调用 Application 中的领域 owner。Cognition、Material、Wave、Runtime 及后台作业通过原生能力协作，不经 NousClient 向本服务再发送一轮 HTTP。
+
+CLI/MCP 作为远程客户端复用 SDK，服务端内部复用领域操作，双方共用纯值合同。这一依赖方向保留一个业务实现与一套客户端传输机制，无需为了让所有入口看起来相同而统一成网络调用。
+
+#### 连续操作与结果
+
 SDK 绑定连接、身份及 Namespace 后调用 remember、ingest、query、read、correct、history、work 和 runtime，返回类型化完整结果；工作会话仅在相关操作绑定。删除同一操作的历史别名和重复读法，客户端不读取本体私有表。
 
 HTTP 使用 /api/knowledge、/api/runtime、/api/manage，分别提供知识操作、真实宿主运行和管理能力。完整 DTO、可读视图与 trace 按需要展开，不建立平行业务实现。
